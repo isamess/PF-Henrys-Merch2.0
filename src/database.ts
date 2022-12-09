@@ -13,7 +13,7 @@ import config from './config';
         console.log('Our glorious Database is connected to:', db.connection.name)
 
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 })()
 
