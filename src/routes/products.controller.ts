@@ -1,11 +1,11 @@
 import {RequestHandler} from 'express'; //el RequestHandler ayuda a que se reconozca el request
 
-export const createProducts: RequestHandler= (req, res)=> {
-    res.json('creating products')
+export const createProduct: RequestHandler= (req, res)=> {
+    res.json('creating product')
 } 
 
 export const getProducts: RequestHandler= (req, res)=> {
-    res.json('getting products')
+    res.json('getting all products')
 }  
 
 export const getProduct: RequestHandler= (req, res)=> {

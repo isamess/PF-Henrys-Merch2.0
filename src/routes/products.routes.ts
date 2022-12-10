@@ -1,11 +1,13 @@
 import {Router} from 'express';
 const router= Router();
 
-import * as productControllers from './products.controllers';  //de esta forma importo todos los controllers a la vez
+import * as productControllers from './products.controller';  //de esta forma importo todos los controllers a la vez
 
 router.get('/products', productControllers.getProducts);
 
-router.post('/products/:id', productControllers.getProduct );
+router.get('/products/:id', productControllers.getProduct);
+
+router.post('/products', productControllers.createProduct );
 
 router.delete('/products/:id', productControllers.deleteProduct);
 
