@@ -7,10 +7,15 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import imgModel from '../src/routes/model';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 
 import productsRoutes from './routes/products.routes'
 const app= express();
+
+mongoose.set('strictQuery', true);
 
 
 import fs from 'fs';
