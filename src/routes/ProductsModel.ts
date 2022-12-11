@@ -1,11 +1,9 @@
 import {Schema, model} from 'mongoose';
 
 
+
 const productSchema= new Schema({
-    id:{
-        type: String,
-        required: true
-    },
+    
     name:{
         type: String,
         required: true,
@@ -32,11 +30,8 @@ color:{
     type:String,
     required: true
 },
-image: {
-    type:Image,
-    required: true
-}
-
+imgUrl: String,
+description: String,
 }, {
     versionKey:false,
     timestamps: true})

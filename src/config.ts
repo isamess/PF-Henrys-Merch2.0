@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.Hello)
-
 export default{
     MONGO_DATABASE: process.env.MONGO_DATABASE || 'henrysmerch-database',
     MONGO_USER: process.env.MONGO_USER ||'admin',                     //usuario por defecto

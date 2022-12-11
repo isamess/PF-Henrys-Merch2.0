@@ -2,10 +2,7 @@ import {Schema, model} from 'mongoose';
 
 
 const paymentSchema= new Schema({
-    id:{
-        type: String,
-        required: true
-    },
+    
     name:{
         type: String,
         required: true,

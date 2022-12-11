@@ -1,5 +1,7 @@
 
 @url= http://localhost:3000
+
+
 GET {{url}}/products
 
 ###
@@ -7,6 +9,16 @@ GET {{url}}/products/1
 
 ###
 POST {{url}}/products
+Content-Type: application/json
+
+{
+    "name": "remeraAmarillaConLogo",
+    "price": 1500,
+    "stock": 100,
+    "category": [Tshirts],
+    "color": "yellow",
+    "image": "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
+}
 
 ###
 DELETE {{url}}/products/1

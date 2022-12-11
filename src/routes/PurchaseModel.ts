@@ -3,12 +3,9 @@ import {Schema, model} from 'mongoose';
 
 const purchaseSchema= new Schema({
 
-    id:{
-        type: String,
-        required: true
-    },
-    id_user:{
-        type: String,
+    
+    _id_user:{
+        type: Object,
         required: true,
     },
     creditCard:{
