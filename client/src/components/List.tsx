@@ -1,5 +1,6 @@
 import './../css/list.css';
 import {NavLink, useParams} from "react-router-dom";
+import {getPublicPath} from "../data/products";
 
 interface Props {
     products: Array<{
@@ -20,14 +21,14 @@ const List = ({ products, cat }:Props) => {
         cat = category;
     }
   return(
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
       {
         products.map(product => {
           if (product.category === cat) {
             return(
               <div className="col">
                 <div className="card my-card" key={product.id}>
-                  <img src={product.imagen} className="card-img-top" alt="..."/>
+                  <img src={getPublicPath(product.imagen)} className="card-img-top" alt="..."/>
                   <div className="card-body">
                     <h5 className="card-title">{product.nombre}</h5>
                     <p className="card-text">{product.descripcion}</p>

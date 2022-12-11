@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Carousel } from "./Carousel";
 import { List } from "./List";
+import { products } from "../data/products";
 
 interface Sub {
     id: number;
@@ -16,105 +17,8 @@ interface Sub {
   interface AppState {
     subs: Array<Sub>;
   }
-  
-  const INITIAL_STATE = [
-    {
-      id: 1,
-      nombre: "Franela",
-      precio: 5.38,
-      descripcion: "Tela algodon",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "home",
-    },
-    {
-      id: 2,
-      nombre: "Taza",
-      precio: 0.96,
-      descripcion: "porcelana",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "home",
-    },
-    {
-      id: 3,
-      nombre: "Agenda",
-      precio: 5.34,
-      descripcion: "Agenda de hojas cocidas",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "top",
-    },
-    {
-      id: 4,
-      nombre: "Termo",
-      precio: 4.85,
-      descripcion: "Acero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "top",
-    },
-    {
-      id: 5,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 6,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 7,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 8,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 9,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 10,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 11,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-    {
-      id: 12,
-      nombre: "Taza de mate",
-      precio: 4.53,
-      descripcion: "Taza de mate enacero inoxidable",
-      imagen: "https://fakeimg.pl/200x150/?text=Product",
-      category: "bottom",
-    },
-  ];
+
+const INITIAL_STATE = products;
 
 function Home() {
 
