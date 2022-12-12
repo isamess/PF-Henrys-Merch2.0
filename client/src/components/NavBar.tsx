@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 interface Categories {
     categories: Array<{
@@ -29,9 +29,10 @@ const NavBar = ({categories}: Categories) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="login">
-                Registrate
-              </a>
+              <NavLink
+                  to="/login"
+                  className={({ isActive }) => isActive ? "nav-link active" : "nav-link" }
+              >Registrate</NavLink>
             </li>
             <li className="nav-item dropdown">
               <a
@@ -62,9 +63,10 @@ const NavBar = ({categories}: Categories) => {
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="profile">
-                Mi Cuenta
-              </a>
+              <NavLink
+                  to={"/profile"}
+                  className="nav-link"
+              >Mi Cuenta</NavLink>
             </li>
           </ul>
 
