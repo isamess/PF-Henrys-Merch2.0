@@ -6,6 +6,8 @@ import { Product } from "./components/Product";
 import {List} from "./components/List";
 import {products} from "./data/products";
 import {categories} from "./data/categories";
+import {RegisterUser} from "./components/RegisterUser";
+import {Profile} from "./components/Profile";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="/category/:category" element={
                 <List products={products}/>
             } />
+            <Route path="/login" element={<RegisterUser/>}/>
+            <Route path="/profile" element={<Profile/>}/>
             <Route path="*" element={<p>404 Not Found</p>} />
           </Routes>
         </div>

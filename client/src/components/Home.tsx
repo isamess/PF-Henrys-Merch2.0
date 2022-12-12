@@ -32,17 +32,17 @@ function Home() {
         <>
             <Carousel/>
             <div className="pt-4">
-              <h2>Home Category</h2> (see all)
+              <h2>Home Category</h2>
               <List products={subs} cat={"home"} />
             </div>
 
             <div className="pt-4">
-              <h2>Bottom Category</h2> (see all)
+              <h2>Bottom Category</h2>
               <List products={subs} cat={"bottom"} />
             </div>
 
             <div className="pt-4">
-              <h2>Top Category</h2> (see all)
+              <h2>Top Category</h2>
               <List products={subs} cat={"top"} />
             </div>
         </>
