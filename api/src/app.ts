@@ -39,7 +39,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
+        cb(null, file.filename + '-' + Date.now())
     }
 });
 
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 // las nuevas imágenes.
 app.post('/', upload.single('image'), (req, res, next) => {
  
-    var obj = {
+    const obj = {
         name: req.body.name,
         desc: req.body.desc,
         img: {
