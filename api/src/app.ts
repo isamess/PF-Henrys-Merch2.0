@@ -24,7 +24,7 @@ require('dotenv/config');
 
 
 
-app.set('port', config.PORT ||3000);  //quiero que se establezca este puerto
+app.set('port', config.PORT ||3001);  //quiero que se establezca este puerto
 app.use(morgan('dev'));   //me muestra la petición que hice en la terminal
 app.use(cors());     //cors me permite a cualquier servidor hacer peticiones
 app.use(express.json()); //para poder entender los obj json cuando hacemos peticiones Post con un dato
@@ -71,8 +71,7 @@ app.post('/', upload.single('image'), (req, res, next) => {
         name: req.body.name,
         desc: req.body.desc,
         img: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: 'image/png'
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), contentType: 'image/png'
         }
     }
     imgModel.create(obj, (err, item) => {
