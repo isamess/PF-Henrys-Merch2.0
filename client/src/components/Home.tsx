@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Carousel } from "./Carousel";
 import { List } from "./List";
 import { products } from "../data/products";
+import Footer from "./Footer/Footer";
 
 interface Sub {
     id: number;
@@ -45,6 +46,8 @@ function Home() {
               <h2>Top Category</h2>
               <List products={subs} cat={"top"} />
             </div>
+
+            <Footer/>
         </>
     );
 }
