@@ -2,6 +2,7 @@ import React from "react";
 import {useParams} from "react-router-dom";
 import {List} from "./List";
 import {getPublicPath, products} from "../data/products";
+import Footer from "./Footer/Footer";
 
 function Product() {
     const {id} = useParams();
@@ -40,6 +41,7 @@ function Product() {
                     <h1 className={"text-center mt-3"}>El producto no existe.</h1>
                 </>
             }
+            <Footer/>
         </>
     );
 }
