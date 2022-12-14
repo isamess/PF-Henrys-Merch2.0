@@ -5,7 +5,7 @@ export const Terminos = () => {
   return (
     <div>
         <div>
-        <p>Vigencia: 12 de Dicimebre, 2022</p>
+        <p>Vigencia: 12 de Diciembre, 2022</p>
         <h2>Términos y condiciones</h2>
         <p>Mercado Libre es una compañía de tecnología que ofrece servicios vinculados principalmente al comercio electrónico y a los pagos digitales.</p>
         <ul>
