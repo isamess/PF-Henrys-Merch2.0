@@ -12,7 +12,7 @@ const useForm = (inputs: any) => {
 };
 
 export const Contacto = () => {
-  const [lista, setLista] = useState<any[]>([]);
+  const [lista, setLista] = useState<any[]>([]);//el hook recibe un array con cualquier tipo de dato
 
   const [input, handlerInputChange, setInput] = useForm({
     nombre: "",
@@ -33,7 +33,7 @@ export const Contacto = () => {
         onSubmit={(e: any) => addComentario(e)}
       >
         <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
+          <label htmlFor="exampleFormControlInput1" className="form-label"> {/*REALIZAR LAS VALIDACIONES CORRESPONDIENTES PARA CADA INPUT*/}
             Nombre:
           </label>
           <input
@@ -72,7 +72,7 @@ export const Contacto = () => {
           className="form-select form-select-sm"
           aria-label=".form-select-sm example"
         >
-          <option selected>¿Que tipo de comentario desea hacer?:</option>
+          <option selected>¿Que tipo de comentario desea hacer?:</option> {/*BUSCAR LA MANERA DE GUARDAR ESTE CAMPO ELEGIDO POR EL CLIENTE EN LA DB, PARA ASI LLEVAR UN CONTROL DE RECLAMOS*/}
           <option value="1">Sugerencia</option>
           <option value="2">Duda</option>
           <option value="3">Reclamo</option>
@@ -82,10 +82,11 @@ export const Contacto = () => {
           </label>
           <textarea className="form-control" placeholder="Ingrese aquí su comentario..." rows={3} />
         </div>
-        <button type="submit" className="btn btn-primary btn-sm">
+        <button type="submit" className="btn btn-primary btn-sm"> {/*FALTA HACER LA FUNCION CONTROLADORA*/}
           ENVIAR
-        </button>
+        </button> {/*IMPLEMENTAR EMAIL.JS O SIMILARES PARA QUE AL APRETAR EL BOTON SE ENVIE UN MAIL A HENRY O ADMIN*/}
       </form>
+      {/*APLICAR ESTILOS*/}
     </div>
   );
 };
