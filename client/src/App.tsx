@@ -10,7 +10,6 @@ import {RegisterUser} from "./components/RegisterUser";
 import {Profile} from "./components/Profile";
 import { Compras } from "./components/Footer/Compras";
 import { Terminos } from "./components/Footer/Terminos";
-import { Cobertura } from "./components/Footer/Cobertura";
 import { Preguntas } from "./components/Footer/Preguntas";
 import { Politicas } from "./components/Footer/Politicas";
 import { Contacto } from "./components/Footer/Contacto";
@@ -31,7 +30,6 @@ function App() {
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/como-comprar" element={<Compras/>}/>
             <Route path="/terminos" element={<Terminos/>}/>
-            <Route path="/cobertura" element={<Cobertura/>}/>
             <Route path="/preguntas" element={<Preguntas/>}/>
             <Route path="/politicas" element={<Politicas/>}/>
             <Route path="/contacto" element={<Contacto/>}/>

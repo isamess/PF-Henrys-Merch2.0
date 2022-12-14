@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from 'emailjs-com';
 
 const useForm = (inputs: any) => {
   //Hook personalizado para el form
@@ -20,6 +21,15 @@ export const Contacto = () => {
     email: "",
     comentarios: "",
   });
+
+  const sendEmail = (e:React.ChangeEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+    
+    emailjs.sendForm("service_piy1sbe", "template_opk1ecv", e.target, "DRImx5IvdrqGW5yoj").then(res =>{
+      alert("Se ha enviado correctamente");
+      console.log(res)
+    })
+  }
 
   const addComentario = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
