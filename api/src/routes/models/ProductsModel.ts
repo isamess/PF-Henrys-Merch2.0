@@ -32,7 +32,7 @@ const productSchema = new Schema({
     favs: Number
   },
   imgUrl: String,
-  description: String
+  details: String
 }, {
   versionKey: false,
   timestamps: true

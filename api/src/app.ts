@@ -6,13 +6,12 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import multer from 'multer'
 import imgModel from './routes/models/imagesModel'
-
 import dotenv from 'dotenv'
-
 import productsRoutes from './routes/products.routes'
-
 import fs from 'fs'
-import path from 'path'
+import path, { dirname } from 'path'
+import uploads from '../src/uploads'
+
 dotenv.config()
 const app = express()
 
@@ -23,18 +22,19 @@ app.set('port', config.PORT || 3001) // quiero que se establezca este puerto
 app.use(morgan('dev')) // me muestra la petición que hice en la terminal
 app.use(cors()) // cors me permite a cualquier servidor hacer peticiones
 app.use(express.json()) // para poder entender los obj json cuando hacemos peticiones Post con un dato
-app.use(express.urlencoded({ extended: false })) // para que pueda entender los campos que llegan desde el formulario
+app.use(express.urlencoded({ extended: true })) // para que pueda entender los campos que llegan desde el formulario
 app.use(bodyParser.json())
 app.set('view engine', 'ejs') // se ve en el vistas carpeta para las plantillas que hacen.
 
 app.use(productsRoutes)
 
+// seteames el  images storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads')
   },
   filename: (req, file, cb) => {
-    cb(null, file.filename + '-' + Date.now())
+    cb(null, file.fieldname + '-' + Date.now())
   }
 })
 
@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
       console.log(err)
       res.status(500).send('An error occurred')
     } else {
-      res.render('imagesPage', { items })
+      res.render('imagesPage', { items }) // o res.render("index")
     }
   })
 })
@@ -65,14 +65,16 @@ app.post('/', upload.single('image'), (req, res, next) => {
     desc: req.body.desc,
     img: {
       // eslint-disable-next-line n/no-path-concat
-      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), contentType: 'image/png'
+      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), 
+      contentType: 'image/png'
     }
   }
   imgModel.create(obj, (err, item) => {
     if (err) {
       console.log(err)
     } else {
-      // item.save();
+      item.save()
+      console.log('Saved to database')
       res.redirect('/')
     }
   })
