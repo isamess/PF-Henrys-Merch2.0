@@ -1,18 +1,18 @@
 import React from "react";
-import {Link, NavLink} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 interface Categories {
-    categories: Array<{
-        name: string,
-    }>
+  categories: Array<{
+    name: string;
+  }>;
 }
 
-const NavBar = ({categories}: Categories) => {
+const NavBar = ({ categories }: Categories) => {
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Logo
+    <nav className="navbar navbar-expand-lg bg-warning py-3 px-2 ">
+      <div className="container-fluid ">
+        <a className="navbar-brand text-light fw-bold" href="#">
+          SoyHenry
         </a>
 
         <button
@@ -30,13 +30,19 @@ const NavBar = ({categories}: Categories) => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
-                  to="/login"
-                  className={({ isActive }) => isActive ? "nav-link active" : "nav-link" }
-              >Registrate</NavLink>
+                to="/login"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link text-light fw-bold active"
+                    : "nav-link text-light"
+                }
+              >
+                Registrate
+              </NavLink>
             </li>
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle text-light"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -44,29 +50,33 @@ const NavBar = ({categories}: Categories) => {
               >
                 Categorías
               </a>
-              <ul className="dropdown-menu">                
-                {
-                    categories.map(category => {
-                        return (
-                            <li key={category.name}>
-                                <Link
-                                    to={`/category/${category.name}`}
-                                    className={"dropdown-item"}
-                                >
-                                  { category.name }
-                                </Link>
-                            </li>
-                        )
-                    })
-                }
+              <ul className="dropdown-menu">
+                {categories.map((category) => {
+                  return (
+                    <li key={category.name}>
+                      <Link
+                        to={`/category/${category.name}`}
+                        className={"dropdown-item"}
+                      >
+                        {category.name}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
 
             <li className="nav-item">
               <NavLink
-                  to={"/profile"}
-                  className="nav-link"
-              >Mi Cuenta</NavLink>
+                to={"/profile"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link text-light fw-bold active"
+                    : "nav-link text-light"
+                }
+              >
+                Mi Cuenta
+              </NavLink>
             </li>
           </ul>
 
@@ -77,9 +87,6 @@ const NavBar = ({categories}: Categories) => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
           </form>
         </div>
       </div>

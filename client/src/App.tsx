@@ -8,6 +8,11 @@ import {products} from "./data/products";
 import {categories} from "./data/categories";
 import {RegisterUser} from "./components/RegisterUser";
 import {Profile} from "./components/Profile";
+import { Compras } from "./components/Footer/Compras";
+import { Terminos } from "./components/Footer/Terminos";
+import { Preguntas } from "./components/Footer/Preguntas";
+import { Politicas } from "./components/Footer/Politicas";
+import { Contacto } from "./components/Footer/Contacto";
 
 function App() {
   return (
@@ -23,6 +28,11 @@ function App() {
             } />
             <Route path="/login" element={<RegisterUser/>}/>
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/como-comprar" element={<Compras/>}/>
+            <Route path="/terminos" element={<Terminos/>}/>
+            <Route path="/preguntas" element={<Preguntas/>}/>
+            <Route path="/politicas" element={<Politicas/>}/>
+            <Route path="/contacto" element={<Contacto/>}/>
             <Route path="*" element={<p>404 Not Found</p>} />
           </Routes>
         </div>

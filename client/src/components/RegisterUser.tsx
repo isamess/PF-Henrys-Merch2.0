@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer/Footer";
 
 function RegisterUser() {
     return (
@@ -14,6 +15,7 @@ function RegisterUser() {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            <Footer/>
         </>
     )
 }
