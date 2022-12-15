@@ -1,5 +1,6 @@
 import mongoose, { ConnectOptions } from 'mongoose'
 import config from './config'
+import dotenv from 'dotenv'
 
 (async () => {
   try {
@@ -7,8 +8,8 @@ import config from './config'
       // user: config.MONGO_USER,          //usuario por defecto de esta DB
     // pass: config.MONGO_PASSWORD
     }
-    const db = await mongoose.connect(`mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@henrycomerce.3etyvbd.mongodb.net/test`, mongooseOptions)
-    console.log('Our glorious Database is connected to:', db.connection.name)
+    const db = await mongoose.connect('mongodb+srv://soyhenryadmin:S9LjV32xOnccepmY@henrycomerce.3etyvbd.mongodb.net/test', mongooseOptions)
+    console.log('Our glorious Database is connected to:')
   } catch (error) {
     console.log(error)
   }

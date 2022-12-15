@@ -24,51 +24,30 @@ app.use(express.urlencoded({ extended: true })) // para que pueda entender los c
 app.use(bodyParser.json())
 app.set('view engine', 'ejs') // se ve en el vistas carpeta para las plantillas que hacen.
 
-// seteames el  images storage
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'uploads')
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.fieldname + '-' + Date.now())
-//   }
-// })
-
-// controlador para la solicitud GET a nuestro servidor. La respuesta muestra una página HTML
-// que muestra todas las imágenes almacenadas en la base de datos y proporciona una interfaz
-// de usuario para cargar nuevas imágenes.
-// const upload = multer({ storage })
-
-// cargamos el modelo de las imágenes
-
 app.get('/products', (req, res) => {
-  product.find({}).then((product) => {
-    res.json(product)
-  })
+  
+  try {
+    product.find({}).then((product) => {
+      res.json(product)
+    })
+  } catch (error) {
+    res.send(error)
+  }
+
 })
 
-// Maneje la solicitud POST que procesa los datos del formulario enviados por el usuario
-// desde nuestra interfaz de usuario HTML. Esta solicitud hará que se carguen
-// las nuevas imágenes.
-// app.post('/', upload.single('image'), (req, res, next) => {
-//   const obj = {
-//     name: req.body.name,
-//     desc: req.body.desc,
-//     img: {
-//       // eslint-disable-next-line n/no-path-concat
-//       data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), 
-//       contentType: 'image/png'
-//     }
-//   }
-//   imgModel.create(obj, (err, item) => {
-//     if (err) {
-//       console.log(err)
-//     } else {
-//       item.save()
-//       console.log('Saved to database')
-//       res.redirect('/')
-//     }
-//   })
-// })
+app.get('/products/:productName', (req, res) => {
+  try {
+  const {productName} = req.params
+
+  product.find({ name: productName }).then((product) => {
+    res.json(product.length > 0 ? product : 'No hay ningun producto con ese nombre')
+  })
+
+  } catch (error) {
+    res.send(error)
+  }
+
+})
 
 export default app
