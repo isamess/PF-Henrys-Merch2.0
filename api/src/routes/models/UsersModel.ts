@@ -1,39 +1,37 @@
 import {Schema, model} from 'mongoose';
 
 
-
-const productSchema= new Schema({
+const userSchema= new Schema({
     
     name:{
         type: String,
         required: true,
         trim: true
     },
-price:{
-
-    type:Number,
+email:{
+    type:String,
     required:true,
+    match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
     trim:true
 },
-stock:{
-    type: Number,
+password:{
+    type: String,
     required:true,
+    match: /(?=.*[a-zA-Z])(?=.*[0-9]+).*/,
+    minlength: 8,
     trim: true
 },
-category:{
-    type: Array,
+adress:{
+    type: String,
     required: true,
-
-
 },
-color:{
+isAdmin:{
     type:String,
     required: true
-},
-imgUrl: String,
-description: String,
+}, 
+
 }, {
     versionKey:false,
     timestamps: true})
 
-    export default model('Products', productSchema)
+    export default model('Users', userSchema)

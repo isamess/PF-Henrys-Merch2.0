@@ -5,9 +5,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import multer from 'multer';
-import imgModel from '../src/routes/model';
-
-import dotenv from 'dotenv';
+import imgModel from './routes/models/imagesModel';
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 

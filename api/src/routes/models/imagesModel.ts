@@ -1,6 +1,6 @@
 import mongoose, { model } from 'mongoose';
  
-const imageSchema = new mongoose.Schema({
+const imgModel = new mongoose.Schema({
     name: String,
     desc: String,
     img:
@@ -12,4 +12,4 @@ const imageSchema = new mongoose.Schema({
  
 //Image is a model which has a schema imageSchema
  
-export default model('Image', imageSchema);
+export default model('Image', imgModel);

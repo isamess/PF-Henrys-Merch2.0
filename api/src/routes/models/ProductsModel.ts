@@ -1,7 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-
-const paymentSchema= new Schema({
+const productSchema= new Schema({
     
     name:{
         type: String,
@@ -29,13 +28,10 @@ color:{
     type:String,
     required: true
 },
-image: {
-    type:Image,
-    required: true
-}
-
+imgUrl: String,
+description: String,
 }, {
     versionKey:false,
     timestamps: true})
 
-    export default model('Payments', paymentSchema)
+    export default model('Products', productSchema)

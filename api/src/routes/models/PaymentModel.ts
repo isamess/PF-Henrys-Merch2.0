@@ -1,40 +1,38 @@
 import {Schema, model} from 'mongoose';
 
 
-const userSchema= new Schema({
-    id:{
-        type: String,
-        required: true
-    },
+const paymentSchema= new Schema({
+    
     name:{
         type: String,
         required: true,
         trim: true
     },
-email:{
-
-    type:String,
+price:{
+    type:Number,
     required:true,
     trim:true
 },
-password:{
-    type: String,
+stock:{
+    type: Number,
     required:true,
     trim: true
 },
-adress:{
-    type: String,
+category:{
+    type: Array,
     required: true,
-
-
 },
-admin:{
+color:{
     type:String,
     required: true
-}, 
+},
+image: {
+    type:Image,
+    required: true
+}
 
 }, {
     versionKey:false,
     timestamps: true})
 
-    export default model('Users', userSchema)
+    export default model('Payments', paymentSchema)
