@@ -1,3 +1,4 @@
+
 import React from "react";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
@@ -99,6 +100,5 @@ export const Contacto = () => {
         <hr />
         <button>Send</button>
       </form>
-    </div>
-  );
-};
+      
+      </div>)}

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { RequestHandler } from 'express' // el RequestHandler ayuda a que se reconozca el request
 import Products from './models/ProductsModel'
+=======
+import {RequestHandler} from 'express'; //el RequestHandler ayuda a que se reconozca el request
+import Products from './models/ProductsModel';
+>>>>>>> f6fb8f0773d9d2031a59b8294887fc90015fa553
 
 export const createProduct: RequestHandler = async (req, res) => {
   const productFound = await Products.findOne({ product: req.body.product })
