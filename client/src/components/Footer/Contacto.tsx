@@ -44,26 +44,43 @@ export const Contacto = () => {
     <div className="div-form">
       <h1 className="title-form">Contáctanos!</h1>
       <form className="" onSubmit={sendEmail}>
-    
-     {errors.user_name ? (
-          <div className="col-md-4">
-          <label htmlFor="validationServerUsername" className="form-label">Nombre y Apellido</label>
-          <div className="input-group has-validation">
-            <input type="text" className="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" onChange={handleChange} required/>
-            <div id="validationServerUsernameFeedback" className="invalid-feedback">
+       
+
+        {errors.user_name ? (
+          <div className="col-md-6">
+            <label htmlFor="validationServer03" className="form-label">
+              Nombre y Apellido
+            </label>
+            <input
+              type="text"
+              name="user_name"
+              className="form-control is-invalid"
+              value={input.user_name}
+              onChange={handleChange}
+              id="validationServer03"
+              aria-describedby="validationServer03Feedback"
+              required
+            />
+            <div id="validationServer03Feedback" className="invalid-feedback">
               {errors.user_name}
             </div>
           </div>
-        </div>
-        )   : (
-          <div className="col-md-4">
-    <label htmlFor="validationServer01" className="form-label">Nombre y Apellido</label>
-    <input type="text" className="form-control is-valid" id="validationServer01" value={input.user_name} onChange={handleChange} required />
-    <div className="valid-feedback">
-      Campos completados correctamente
-    </div>
-  </div>
-        )}
+        ) : ( <div className="col-md-4">
+        <label htmlFor="validationServer01" className="form-label">
+          Nombre y Apellido
+        </label>
+        <input
+          type="text"
+          name="user_name"
+          className={input.user_name.length !== 0 ? "form-control is-valid" : ""}
+          id="validationServer01"
+          value={input.user_name}
+          onChange={handleChange}
+          required
+        />
+        <div className="valid-feedback">Campos completados correctamente!</div>
+      </div>)}
+
         <hr />
 
         <label>Email</label>
