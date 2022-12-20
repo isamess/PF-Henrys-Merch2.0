@@ -1,4 +1,3 @@
-
 import React from "react";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
@@ -9,8 +8,9 @@ export const Contacto = () => {
   const [input, setInput] = useState({
     user_name: "",
     user_email: "",
-    user_message: "",
   });
+
+  
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     setInput({
@@ -45,8 +45,6 @@ export const Contacto = () => {
     <div className="div-form">
       <h1 className="title-form">Contáctanos!</h1>
       <form className="" onSubmit={sendEmail}>
-       
-
         {errors.user_name ? (
           <div className="col-md-6">
             <label htmlFor="validationServer03" className="form-label">
@@ -66,26 +64,74 @@ export const Contacto = () => {
               {errors.user_name}
             </div>
           </div>
-        ) : ( <div className="col-md-4">
-        <label htmlFor="validationServer01" className="form-label">
-          Nombre y Apellido
-        </label>
-        <input
-          type="text"
-          name="user_name"
-          className={input.user_name.length !== 0 ? "form-control is-valid" : ""}
-          id="validationServer01"
-          value={input.user_name}
-          onChange={handleChange}
-          required
-        />
-        <div className="valid-feedback">Campos completados correctamente!</div>
-      </div>)}
+        ) : (
+          <div className="col-md-4">
+            <label htmlFor="validationServer01" className="form-label">
+              Nombre y Apellido
+            </label>
+            <input
+              type="text"
+              name="user_name"
+              className={
+                input.user_name.length !== 0
+                  ? "form-control is-valid"
+                  : "form-control"
+              }
+              id="validationServer01"
+              value={input.user_name}
+              onChange={handleChange}
+              required
+            />
+            <div className="valid-feedback">
+              Campos completados correctamente!
+            </div>
+          </div>
+        )}
 
         <hr />
 
-        <label>Email</label>
-        <input type="email" name="user_email" />
+        {errors.user_email ? (
+          <div className="col-md-6">
+            <label htmlFor="validationServer03" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="user_email"
+              className="form-control is-invalid"
+              value={input.user_email}
+              onChange={handleChange}
+              id="validationServer03"
+              aria-describedby="validationServer03Feedback"
+              required
+            />
+            <div id="validationServer03Feedback" className="invalid-feedback">
+              {errors.user_email}
+            </div>
+          </div>
+        ) : (
+          <div className="col-md-4">
+            <label htmlFor="validationServer01" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="user_email"
+              className={
+                input.user_email.length !== 0
+                  ? "form-control is-valid"
+                  : "form-control"
+              }
+              id="validationServer01"
+              value={input.user_email}
+              onChange={handleChange}
+              required
+            />
+            <div className="valid-feedback">
+              Campos completados correctamente!
+            </div>
+          </div>
+        )}
         <hr />
         <select className="form-select" aria-label="Default select example">
           <option selected>Open this select menu</option>
@@ -95,10 +141,16 @@ export const Contacto = () => {
         </select>
         <hr />
 
-        <label></label>
-        <textarea name="user_message" id="" cols={30} rows={10}></textarea>
+        <textarea
+          className="form-control"
+          id="validationTextarea"
+          placeholder="Required example textarea"
+          required
+        ></textarea>
+        
         <hr />
         <button>Send</button>
       </form>
-      
-      </div>)}
+    </div>
+  );
+};
