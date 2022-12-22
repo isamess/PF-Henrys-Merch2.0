@@ -1,102 +1,156 @@
-import React, { useState } from "react";
-import emailjs from 'emailjs-com';
-
-const useForm = (inputs: any) => {
-  //Hook personalizado para el form
-  const [input, setInput] = useState(inputs);
-
-  const handlerInputChange = ({ target }: any) => {
-    setInput({ ...input, [target.name]: target.value });
-  };
-
-  return [input, handlerInputChange, setInput];
-};
+import React from "react";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
+import { validate } from "./Validaciones";
 
 export const Contacto = () => {
-  const [lista, setLista] = useState<any[]>([]);//el hook recibe un array con cualquier tipo de dato
-
-  const [input, handlerInputChange, setInput] = useForm({
-    nombre: "",
-    apellido: "",
-    email: "",
-    comentarios: "",
+  const [errors, setErrors] = useState<any>({});
+  const [input, setInput] = useState({
+    user_name: "",
+    user_email: "",
   });
 
-  const sendEmail = (e:React.ChangeEvent<HTMLFormElement>) =>{
-    e.preventDefault();
-    
-    emailjs.sendForm("service_piy1sbe", "template_opk1ecv", e.target, "DRImx5IvdrqGW5yoj").then(res =>{
-      alert("Se ha enviado correctamente");
-      console.log(res)
-    })
+  
+
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
+    setInput({
+      ...input,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+
+    setErrors(
+      validate({
+        ...input,
+        [e.currentTarget.name]: e.currentTarget.value,
+      })
+    );
   }
 
-  const addComentario = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLista([...lista, input]);
-    setInput({ nombre: "", apellido: "", email: "" });
+
+    emailjs
+      .sendForm(
+        "service_iptjdll",
+        "template_opk1ecv",
+        e.currentTarget,
+        "DRImx5IvdrqGW5yoj"
+      )
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+    e.currentTarget.reset();
   };
+
   return (
-    <div className="d-flex flex-column mb-3">
-      <form
-        className="bg-success p-2 text-dark bg-opacity-10 mt-auto"
-        onSubmit={(e: any) => addComentario(e)}
-      >
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label"> {/*REALIZAR LAS VALIDACIONES CORRESPONDIENTES PARA CADA INPUT*/}
-            Nombre:
-          </label>
-          <input
-            name="nombre"
-            className="form-control"
-            placeholder="Nombre..."
-            onChange={handlerInputChange}
-            value={input.nombre}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Apellido:
-          </label>
-          <input
-            name="apellido"
-            className="form-control"
-            placeholder="Apellido..."
-            onChange={handlerInputChange}
-            value={input.apellido}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Ingrese su email:
-          </label>
-          <input
-            name="email"
-            className="form-control"
-            placeholder="Email..."
-            onChange={handlerInputChange}
-            value={input.email}
-          />
-        </div>
-        <select
-          className="form-select form-select-sm"
-          aria-label=".form-select-sm example"
-        >
-          <option selected>¿Que tipo de comentario desea hacer?:</option> {/*BUSCAR LA MANERA DE GUARDAR ESTE CAMPO ELEGIDO POR EL CLIENTE EN LA DB, PARA ASI LLEVAR UN CONTROL DE RECLAMOS*/}
-          <option value="1">Sugerencia</option>
-          <option value="2">Duda</option>
-          <option value="3">Reclamo</option>
+    <div className="div-form">
+      <h1 className="title-form">Contáctanos!</h1>
+      <form className="" onSubmit={sendEmail}>
+        {errors.user_name ? (
+          <div className="col-md-6">
+            <label htmlFor="validationServer03" className="form-label">
+              Nombre y Apellido
+            </label>
+            <input
+              type="text"
+              name="user_name"
+              className="form-control is-invalid"
+              value={input.user_name}
+              onChange={handleChange}
+              id="validationServer03"
+              aria-describedby="validationServer03Feedback"
+              required
+            />
+            <div id="validationServer03Feedback" className="invalid-feedback">
+              {errors.user_name}
+            </div>
+          </div>
+        ) : (
+          <div className="col-md-4">
+            <label htmlFor="validationServer01" className="form-label">
+              Nombre y Apellido
+            </label>
+            <input
+              type="text"
+              name="user_name"
+              className={
+                input.user_name.length !== 0
+                  ? "form-control is-valid"
+                  : "form-control"
+              }
+              id="validationServer01"
+              value={input.user_name}
+              onChange={handleChange}
+              required
+            />
+            <div className="valid-feedback">
+              Campos completados correctamente!
+            </div>
+          </div>
+        )}
+
+        <hr />
+
+        {errors.user_email ? (
+          <div className="col-md-6">
+            <label htmlFor="validationServer03" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="user_email"
+              className="form-control is-invalid"
+              value={input.user_email}
+              onChange={handleChange}
+              id="validationServer03"
+              aria-describedby="validationServer03Feedback"
+              required
+            />
+            <div id="validationServer03Feedback" className="invalid-feedback">
+              {errors.user_email}
+            </div>
+          </div>
+        ) : (
+          <div className="col-md-4">
+            <label htmlFor="validationServer01" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="user_email"
+              className={
+                input.user_email.length !== 0
+                  ? "form-control is-valid"
+                  : "form-control"
+              }
+              id="validationServer01"
+              value={input.user_email}
+              onChange={handleChange}
+              required
+            />
+            <div className="valid-feedback">
+              Campos completados correctamente!
+            </div>
+          </div>
+        )}
+        <hr />
+        <select className="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
         </select>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
-          </label>
-          <textarea className="form-control" placeholder="Ingrese aquí su comentario..." rows={3} />
-        </div>
-        <button type="submit" className="btn btn-primary btn-sm"> {/*FALTA HACER LA FUNCION CONTROLADORA*/}
-          ENVIAR
-        </button> {/*IMPLEMENTAR EMAIL.JS O SIMILARES PARA QUE AL APRETAR EL BOTON SE ENVIE UN MAIL A HENRY O ADMIN*/}
+        <hr />
+
+        <textarea
+          className="form-control"
+          id="validationTextarea"
+          placeholder="Required example textarea"
+          required
+        ></textarea>
+        
+        <hr />
+        <button>Send</button>
       </form>
-      {/*APLICAR ESTILOS*/}
     </div>
   );
 };

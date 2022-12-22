@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^3.10.0",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -10,9 +11,13 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
+<<<<<<< HEAD
     "axios": "^1.2.1",
     "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.10.2",
+=======
+    "@types/react-router-dom": "^5.3.3",
+>>>>>>> 5927ec9fd23af79454ed8cb26d09bb121bb5deef
     "emailjs-com": "^3.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^1.5.2",
@@ -20,9 +25,13 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-toolkit": "^1.1.2",
+=======
+    "save": "^2.9.0",
+>>>>>>> 5927ec9fd23af79454ed8cb26d09bb121bb5deef
     "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
   },

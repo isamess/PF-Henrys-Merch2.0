@@ -1,5 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
+
+export default {
 
 export default{
     MONGO_DATABASE: process.env.MONGO_DATABASE || 'henrysmerch-database',
@@ -10,10 +12,4 @@ export default{
 
 }
 
-
-
-
-
-
-
-//este arch me sirve para guardar algunas props de mi aplicación
+// este arch me sirve para guardar algunas props de mi aplicación
