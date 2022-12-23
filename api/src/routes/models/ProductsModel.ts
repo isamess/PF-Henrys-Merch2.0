@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Schema, model } from 'mongoose'
 
 const productSchema = new Schema({
@@ -40,42 +39,3 @@ const productSchema = new Schema({
 })
 
 export default model('Products', productSchema)
-=======
-import {Schema, model} from 'mongoose';
-
-const productSchema= new Schema({
-    
-    name:{
-        type: String,
-        required: true,
-        trim: true
-    },
-price:{
-
-    type:Number,
-    required:true,
-    trim:true
-},
-stock:{
-    type: Number,
-    required:true,
-    trim: true
-},
-category:{
-    type: Array,
-    required: true,
-
-
-},
-color:{
-    type:String,
-    required: true
-},
-imgUrl: String,
-description: String,
-}, {
-    versionKey:false,
-    timestamps: true})
-
-    export default model('Products', productSchema)
->>>>>>> f6fb8f0773d9d2031a59b8294887fc90015fa553

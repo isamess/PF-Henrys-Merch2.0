@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import express from 'express'
 import morgan from 'morgan'
 import config from './config'
@@ -13,18 +12,6 @@ import product from './routes/models/ProductsModel'
 
 dotenv.config()
 const app = express()
-=======
-import express from 'express';
-import morgan from 'morgan';
-import config from './config';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import multer from 'multer';
-import imgModel from './routes/models/imagesModel';
-import * as dotenv from 'dotenv';
-dotenv.config();
->>>>>>> f6fb8f0773d9d2031a59b8294887fc90015fa553
 
 mongoose.set('strictQuery', true)
 require('dotenv/config')
