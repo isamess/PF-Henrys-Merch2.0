@@ -94,7 +94,11 @@ function Cart() {
                   </button>
                 </div>
                 <div className="cart-product-total-price">
-                  ${cartItem.precio * cartItem.cartQuantity}
+                  $
+                  {Math.round(
+                    (cartItem.precio * cartItem.cartQuantity + Number.EPSILON) *
+                      100
+                  ) / 100}
                 </div>
               </div>
             ))}

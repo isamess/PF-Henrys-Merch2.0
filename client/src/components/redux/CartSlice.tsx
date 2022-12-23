@@ -90,7 +90,8 @@ const cartSlice = createSlice({
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal: any, cartItem: any) => {
           const { precio, cartQuantity } = cartItem;
-          const itemTotal = precio * cartQuantity;
+          const itemTotal =
+            Math.round((precio * cartQuantity + Number.EPSILON) * 100) / 100;
 
           cartTotal.total += itemTotal;
           cartTotal.quantity += cartQuantity;

@@ -29,6 +29,11 @@ const List = ({ products, cat }: Props) => {
     dispatch(addToCart(product));
   };
 
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
       {products.map((product) => {
@@ -45,14 +50,24 @@ const List = ({ products, cat }: Props) => {
                   <h5 className="card-title">{product.nombre}</h5>
                   <p className="card-text">{product.descripcion}</p>
                   <p className="card-text">${product.precio}</p>
-                  <button onClick={() => handleAddCart(product)}>Add+</button>
-
-                  <NavLink
-                    to={`/product/${product.id}`}
-                    className="btn btn-secondary"
+                  <button
+                    className="btn btn-secondry"
+                    onClick={() => handleAddCart(product)}
                   >
-                    Ver Producto
-                  </NavLink>
+                    Add+
+                  </button>
+
+                  <button
+                    className="btn btn-secondry"
+                    onClick={() => topFunction()}
+                  >
+                    <NavLink
+                      to={`/product/${product.id}`}
+                      className="btn btn-secondary"
+                    >
+                      Ver Producto
+                    </NavLink>
+                  </button>
                 </div>
               </div>
             </div>
