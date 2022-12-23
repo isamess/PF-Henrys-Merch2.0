@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
 import { validate } from "./Validaciones";
 
 export const Contacto = () => {
@@ -9,8 +8,6 @@ export const Contacto = () => {
     user_name: "",
     user_email: "",
   });
-
-  
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     setInput({
@@ -36,8 +33,8 @@ export const Contacto = () => {
         e.currentTarget,
         "DRImx5IvdrqGW5yoj"
       )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response: any) => console.log(response))
+      .catch((error: any) => console.log(error));
     e.currentTarget.reset();
   };
 
@@ -147,7 +144,7 @@ export const Contacto = () => {
           placeholder="Required example textarea"
           required
         ></textarea>
-        
+
         <hr />
         <button>Send</button>
       </form>

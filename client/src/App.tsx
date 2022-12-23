@@ -1,13 +1,13 @@
-// import "./App.css";
+import "./App.css";
 import { Home } from "./components/Home";
 import { NavBar } from "./components/NavBar";
-import {HashRouter, Routes, Route} from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { Product } from "./components/Product";
-import {List} from "./components/List";
-import {products} from "./data/products";
-import {categories} from "./data/categories";
-import {RegisterUser} from "./components/RegisterUser";
-import {Profile} from "./components/Profile";
+import { List } from "./components/List";
+import { products } from "./data/products";
+import { categories } from "./data/categories";
+import { RegisterUser } from "./components/RegisterUser";
+import { Profile } from "./components/Profile";
 import { Compras } from "./components/Footer/Compras";
 import { Terminos } from "./components/Footer/Terminos";
 import { Preguntas } from "./components/Footer/Preguntas";
@@ -21,24 +21,25 @@ function App() {
         <div>
           <NavBar categories={categories} />
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/product/:id" element={<Product/>}/>
-            <Route path="/category/:category" element={
-                <List products={products}/>
-            } />
-            <Route path="/login" element={<RegisterUser/>}/>
-            <Route path="/profile" element={<Profile/>}/>
-            <Route path="/como-comprar" element={<Compras/>}/>
-            <Route path="/terminos" element={<Terminos/>}/>
-            <Route path="/preguntas" element={<Preguntas/>}/>
-            <Route path="/politicas" element={<Politicas/>}/>
-            <Route path="/contacto" element={<Contacto/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route
+              path="/category/:category"
+              element={<List products={products} />}
+            />
+            <Route path="/login" element={<RegisterUser />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/como-comprar" element={<Compras />} />
+            <Route path="/terminos" element={<Terminos />} />
+            <Route path="/preguntas" element={<Preguntas />} />
+            <Route path="/politicas" element={<Politicas />} />
+            <Route path="/contacto" element={<Contacto />} />
             <Route path="*" element={<p>404 Not Found</p>} />
           </Routes>
         </div>
         {/* TODO */}
         {/* FOOTER */}
-      </div> 
+      </div>
     </HashRouter>
   );
 }
