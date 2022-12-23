@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stat } from "fs";
 import { toast } from "react-toastify";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 type InitialState = {
   cartItems: Array<any>;
