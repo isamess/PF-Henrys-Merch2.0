@@ -76,10 +76,10 @@ function Cart() {
                     <div className="cart-product">
                       <img
                         src={getPublicPath(cartItem.imagen)}
-                        alt={cartItem.name}
+                        alt={cartItem.nombre}
                       />
                       <div>
-                        <h3>{cartItem.name}</h3>
+                        <h3>{cartItem.nombre}</h3>
                         <p>{cartItem.descripcion}</p>
                         <button onClick={() => handleRemoveFromCart(cartItem)}>
                           Eliminar

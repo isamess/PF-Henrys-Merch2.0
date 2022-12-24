@@ -108,7 +108,7 @@ const NavBar = ({ categories }: Categories) => {
               aria-label="Search"
             />
           </form>
-          <button className="mx-3 btn bg-secondary text-white">Enter</button>
+          <button className="mx-3 btn btn-secondary text-white">Enter</button>
         </div>
       </div>
     </nav>
