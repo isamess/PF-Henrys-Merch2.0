@@ -50,12 +50,7 @@ const List = ({ products, cat }: Props) => {
                   <h5 className="card-title">{product.nombre}</h5>
                   <p className="card-text">{product.descripcion}</p>
                   <p className="card-text">${product.precio}</p>
-                  <button
-                    className="btn btn-secondry"
-                    onClick={() => handleAddCart(product)}
-                  >
-                    Add+
-                  </button>
+                  <button onClick={() => handleAddCart(product)}>Add+</button>
 
                   <button
                     className="btn btn-secondry"

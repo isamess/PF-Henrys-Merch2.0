@@ -12,7 +12,7 @@ const NavBar = ({ categories }: Categories) => {
   const { cartTotalQuantity } = useSelector((state: any) => state.cart);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-warning py-3 px-2 ">
+    <nav className="navbar navbar-expand-lg bg-warning py-3 px-2 sticky-top">
       <div className="container-fluid ">
         <a className="navbar-brand text-light fw-bold" href="#">
           SoyHenry
