@@ -1,4 +1,4 @@
-import React from "react";
+import "../css/navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -12,9 +12,9 @@ const NavBar = ({ categories }: Categories) => {
   const { cartTotalQuantity } = useSelector((state: any) => state.cart);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-warning py-3 px-2 sticky-top">
-      <div className="container-fluid ">
-        <a className="navbar-brand text-light fw-bold" href="#">
+    <nav className="navbar navbar-expand-lg bg-warning py-3 px-2">
+      <div className="container-fluid">
+        <a className="navbar-logo" href="#">
           SoyHenry
         </a>
 
@@ -36,8 +36,8 @@ const NavBar = ({ categories }: Categories) => {
                 to="/login"
                 className={({ isActive }) =>
                   isActive
-                    ? "nav-link text-light fw-bold active"
-                    : "nav-link text-light"
+                    ? "nav-link text-black fw-bold active"
+                    : "nav-link text-black"
                 }
               >
                 Registrate
@@ -45,7 +45,7 @@ const NavBar = ({ categories }: Categories) => {
             </li>
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle text-light"
+                className="nav-link dropdown-toggle text-black"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -53,13 +53,13 @@ const NavBar = ({ categories }: Categories) => {
               >
                 Categorías
               </a>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu border border-dark bg-warning ">
                 {categories.map((category) => {
                   return (
                     <li key={category.name}>
                       <Link
                         to={`/category/${category.name}`}
-                        className={"dropdown-item"}
+                        className="dropdown-item "
                       >
                         {category.name}
                       </Link>
@@ -74,8 +74,8 @@ const NavBar = ({ categories }: Categories) => {
                 to={"/profile"}
                 className={({ isActive }) =>
                   isActive
-                    ? "nav-link text-light fw-bold active"
-                    : "nav-link text-light"
+                    ? "nav-link text-black fw-bold active"
+                    : "nav-link text-black"
                 }
               >
                 Mi Cuenta
@@ -108,6 +108,7 @@ const NavBar = ({ categories }: Categories) => {
               aria-label="Search"
             />
           </form>
+          <button className="mx-3 btn bg-secondary text-white">Enter</button>
         </div>
       </div>
     </nav>

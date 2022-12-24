@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { validate } from "./Validaciones";
+import Footer from "./Footer";
 
 export const Contacto = () => {
   const [errors, setErrors] = useState<any>({});
@@ -39,9 +40,9 @@ export const Contacto = () => {
   };
 
   return (
-    <div className="div-form">
-      <h1 className="title-form">Contáctanos!</h1>
-      <form className="" onSubmit={sendEmail}>
+    <div className="cart-window">
+      <h1 className="d-inline-flex p-2 justify-content-center">Contáctanos!</h1>
+      <form className="cart-size" onSubmit={sendEmail}>
         {errors.user_name ? (
           <div className="col-md-6">
             <label htmlFor="validationServer03" className="form-label">
@@ -147,7 +148,9 @@ export const Contacto = () => {
 
         <hr />
         <button>Send</button>
+        <h2></h2>
       </form>
+      <Footer />
     </div>
   );
 };

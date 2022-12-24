@@ -23,30 +23,26 @@ import { NotFound } from "./components/NotFound";
 function App() {
   return (
     <HashRouter>
-      <div className="App">
-        <div>
-          <ToastContainer />
-          <NavBar categories={categories} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route
-              path="/category/:category"
-              element={<List products={products} />}
-            />
-            <Route path="/login" element={<RegisterUser />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/como-comprar" element={<Compras />} />
-            <Route path="/terminos" element={<Terminos />} />
-            <Route path="/preguntas" element={<Preguntas />} />
-            <Route path="/politicas" element={<Politicas />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-        {/* TODO */}
-        {/* FOOTER */}
+      <div>
+        <ToastContainer />
+        <NavBar categories={categories} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route
+            path="/category/:category"
+            element={<List products={products} />}
+          />
+          <Route path="/login" element={<RegisterUser />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/como-comprar" element={<Compras />} />
+          <Route path="/terminos" element={<Terminos />} />
+          <Route path="/preguntas" element={<Preguntas />} />
+          <Route path="/politicas" element={<Politicas />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </HashRouter>
   );

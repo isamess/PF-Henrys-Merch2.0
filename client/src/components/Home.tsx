@@ -30,19 +30,30 @@ function Home() {
 
   return (
     <>
-      <div className="container-fluid">
-        <Carousel />
+      <div className="container-fluid pb-5">
+        <div className="d-flex my-5">
+          <Carousel />
+        </div>
         <div className="pt-4">
-          <h2>Home Category</h2>
+          <h2 className="border border-top border-secondary mx-5 mb-5"></h2>
+          <h2 className="d-flex p-2 justify-content-center pb-3">
+            Home Category
+          </h2>
           <List products={subs} cat={"home"} />
         </div>
         <div className="pt-4">
-          <h3>Bottom Category</h3>
+          <h2 className="border border-top border-secondary m-5"></h2>
+          <h3 className="d-flex p-2 justify-content-center pb-3">
+            Bottom Category
+          </h3>
           <List products={subs} cat={"bottom"} />
         </div>
 
         <div className="pt-4">
-          <h3>Top Category</h3>
+          <h2 className="border border-top border-secondary m-5"></h2>
+          <h3 className="d-flex p-2 justify-content-center pb-3">
+            Top Category
+          </h3>
           <List products={subs} cat={"top"} />
         </div>
       </div>

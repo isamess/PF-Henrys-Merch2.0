@@ -39,7 +39,7 @@ const List = ({ products, cat }: Props) => {
       {products.map((product) => {
         if (product.category === cat) {
           return (
-            <div className="col">
+            <div className="d-flex justify-content-center">
               <div className="card my-card" key={product.id}>
                 <img
                   src={getPublicPath(product.imagen)}
