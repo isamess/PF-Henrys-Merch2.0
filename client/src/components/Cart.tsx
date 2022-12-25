@@ -49,7 +49,7 @@ function Cart() {
                   width="20"
                   height="20"
                   fill="currentColor"
-                  className="bi bi-arrow-left-circle"
+                  className="bi bi-arrow-left-circle mx-3"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -133,7 +133,7 @@ function Cart() {
                         width="20"
                         height="20"
                         fill="currentColor"
-                        className="bi bi-arrow-left-circle"
+                        className="bi bi-arrow-left-circle mx-3"
                         viewBox="0 0 16 16"
                       >
                         <path

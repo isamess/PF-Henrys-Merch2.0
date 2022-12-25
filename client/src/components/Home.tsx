@@ -4,6 +4,8 @@ import { Carousel } from "./Carousel";
 import { List } from "./List";
 import { products } from "../data/products";
 import Footer from "./Footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { getTotal } from "./redux/CartSlice";
 
 interface Sub {
   id: number;
@@ -22,11 +24,17 @@ interface AppState {
 const INITIAL_STATE = products;
 
 function Home() {
+  const cart = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch();
   const [subs, SetSubs] = useState<AppState["subs"]>([]);
 
   useEffect(() => {
     SetSubs(INITIAL_STATE);
   }, []);
+
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart, dispatch]);
 
   return (
     <>
