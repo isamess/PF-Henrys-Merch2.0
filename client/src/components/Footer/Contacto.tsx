@@ -147,7 +147,7 @@ export const Contacto = () => {
         ></textarea>
 
         <hr />
-        <button>Send</button>
+        <button className="mx-3 btn btn-secondary text-white mb-5">Send</button>
         <h2></h2>
       </form>
       <Footer />

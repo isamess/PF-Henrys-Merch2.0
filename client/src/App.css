@@ -1,3 +1,13 @@
+.register-container {
+  margin: 2rem 16rem 2rem 16rem;
+}
+
+.register-button {
+  display: flex;
+  grid-template-columns: 1rem;
+  justify-content: center;
+}
+
 .cart-window {
   display: grid;
   width: 98.93vw;
