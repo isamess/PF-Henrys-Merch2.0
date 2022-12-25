@@ -117,7 +117,12 @@ function Cart() {
                 <div className="cart-checkout">
                   <div className="subtotal">
                     <span>Subtotal</span>
-                    <span className="amount">${cart.cartTotalAmount}</span>
+                    <span className="amount">
+                      $
+                      {Math.round(
+                        (cart.cartTotalAmount + Number.EPSILON) * 100
+                      ) / 100}
+                    </span>
                   </div>
                   <p>Los impuestos se calculan en el checkout</p>
                   <button>Pagar</button>
