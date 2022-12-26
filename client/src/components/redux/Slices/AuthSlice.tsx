@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { Action } from "@remix-run/router";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
