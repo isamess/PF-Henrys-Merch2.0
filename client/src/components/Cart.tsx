@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getPublicPath } from "../data/products";
 import Footer from "./Footer/Footer";
 import {
@@ -9,11 +9,13 @@ import {
   increaseQuantity,
   clearCart,
   getTotal,
-} from "./redux/CartSlice";
+} from "./redux/Slices/CartSlice";
 
 function Cart() {
   const cart = useSelector((state: any) => state.cart);
+  const auth = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTotal());
@@ -125,7 +127,14 @@ function Cart() {
                     </span>
                   </div>
                   <p>Los impuestos se calculan en el checkout</p>
-                  <button>Pagar</button>
+                  {auth._id ? (
+                    <button>Pagar</button>
+                  ) : (
+                    <button onClick={() => navigate("/login")}>
+                      Login para pagar
+                    </button>
+                  )}
+
                   <div className="continue-shopping">
                     <Link to="/">
                       <svg

@@ -1,6 +1,8 @@
 import "../css/navbar.css";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "./redux/Slices/AuthSlice";
+import { toast } from "react-toastify";
 
 interface Categories {
   categories: Array<{
@@ -10,6 +12,8 @@ interface Categories {
 
 const NavBar = ({ categories }: Categories) => {
   const { cartTotalQuantity } = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch();
+  const auth = useSelector((state: any) => state.auth);
 
   return (
     <nav className="navbar navbar-expand-lg bg-warning py-3 px-2">
@@ -30,20 +34,11 @@ const NavBar = ({ categories }: Categories) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive
-                    ? "nav-link text-black fw-bold active"
-                    : "nav-link text-black"
-                }
-              >
-                Registrate
-              </NavLink>
-            </li>
-            <li className="nav-item dropdown">
+          <ul
+            className="navbar-nav me-auto mb-2 mb-lg-0"
+            key="category-container"
+          >
+            <li className="nav-item dropdown" key="category-title">
               <a
                 className="nav-link dropdown-toggle text-black"
                 href="#"
@@ -53,7 +48,10 @@ const NavBar = ({ categories }: Categories) => {
               >
                 Categorías
               </a>
-              <ul className="dropdown-menu border border-dark bg-warning ">
+              <ul
+                className="dropdown-menu border border-dark bg-warning "
+                key="category-list"
+              >
                 {categories.map((category) => {
                   return (
                     <li key={category.name}>
@@ -69,7 +67,7 @@ const NavBar = ({ categories }: Categories) => {
               </ul>
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item" key="my-account">
               <NavLink
                 to={"/profile"}
                 className={({ isActive }) =>
@@ -99,7 +97,51 @@ const NavBar = ({ categories }: Categories) => {
               </div>
             </Link>
           </ul>
-
+          <div className="mx-3">
+            {auth._id ? (
+              <button
+                className="btn border-none bg-none text-black"
+                onClick={() => {
+                  dispatch(logoutUser(null));
+                  toast.warning("Logged out", { position: "bottom-left" });
+                }}
+              >
+                Logout
+              </button>
+            ) : (
+              <div>
+                <ul
+                  className="navbar-nav me-auto mb-2 mb-lg-0"
+                  key="login-list"
+                >
+                  <li className="nav-item" key="login">
+                    <NavLink
+                      to="/login"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "nav-link text-black fw-bold active"
+                          : "nav-link text-black"
+                      }
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                  <li className="nav-item" key="register">
+                    <NavLink
+                      to="/register"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "nav-link text-black fw-bold active"
+                          : "nav-link text-black"
+                      }
+                    >
+                      Registrarse
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
           <form className="d-flex" role="search">
             <input
               className="form-control me-2"

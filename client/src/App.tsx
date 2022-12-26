@@ -10,7 +10,6 @@ import { Product } from "./components/Product";
 import { List } from "./components/List";
 import { products } from "./data/products";
 import { categories } from "./data/categories";
-import { RegisterUser } from "./components/RegisterUser";
 import { Profile } from "./components/Profile";
 import { Compras } from "./components/Footer/Compras";
 import { Terminos } from "./components/Footer/Terminos";
@@ -19,6 +18,8 @@ import { Politicas } from "./components/Footer/Politicas";
 import { Contacto } from "./components/Footer/Contacto";
 import { Cart } from "./components/Cart";
 import { NotFound } from "./components/NotFound";
+import { Login } from "./components/Login";
+import { RegisterUser } from "./components/RegisterUser";
 
 function App() {
   return (
@@ -33,7 +34,8 @@ function App() {
             path="/category/:category"
             element={<List products={products} />}
           />
-          <Route path="/login" element={<RegisterUser />} />
+          <Route path="/register" element={<RegisterUser />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/como-comprar" element={<Compras />} />
           <Route path="/terminos" element={<Terminos />} />

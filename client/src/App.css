@@ -1,5 +1,19 @@
+.register-card {
+  justify-self: center;
+  width: 80vw;
+  min-width: 40rem;
+}
+
 .register-container {
-  margin: 2rem 16rem 2rem 16rem;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.register-password {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .register-button {

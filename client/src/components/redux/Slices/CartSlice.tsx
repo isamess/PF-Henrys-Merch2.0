@@ -49,10 +49,6 @@ const cartSlice = createSlice({
 
       state.cartItems = nextCartItems;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-
-      // toast.info(`${action.payload.nombre} fue removido del carro`, {
-      //   position: "bottom-left",
-      // });
     },
     decreaseQuantity(state, action: PayloadAction<any>) {
       const itemIndex = state.cartItems.findIndex(
@@ -69,10 +65,6 @@ const cartSlice = createSlice({
 
         state.cartItems = nextCartItems;
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-
-        // toast.info(`${action.payload.nombre} fue removido del carro`, {
-        //   position: "bottom-left",
-        // });
       }
     },
     increaseQuantity(state, action: PayloadAction<any>) {
