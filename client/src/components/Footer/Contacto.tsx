@@ -147,7 +147,6 @@ export const Contacto = () => {
         ></textarea>
 
         <hr />
-<<<<<<< HEAD
         
         {!errors.user_name && !errors.user_email ? ( 
             <button type="submit" className="btn btn-outline-warning" > 
@@ -158,10 +157,6 @@ export const Contacto = () => {
               <span>Enviar comentario</span>
             </button>
           )}
-=======
-        <button className="mx-3 btn btn-secondary text-white mb-5">Send</button>
-        <h2></h2>
->>>>>>> e0d7dc18dabfbec56391f97cbc4993435033c532
       </form>
       <Footer />
     </div>
