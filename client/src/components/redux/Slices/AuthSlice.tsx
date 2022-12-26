@@ -8,11 +8,7 @@ interface InitialState {
   email: string;
   _id: string;
   registerStatus: string;
-<<<<<<< HEAD
   registerError: string; 
-=======
-  registerError: string;
->>>>>>> e0d7dc18dabfbec56391f97cbc4993435033c532
   loginStatus: string;
   loginError: string;
   userLoaded: boolean;

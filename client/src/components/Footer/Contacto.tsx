@@ -9,6 +9,14 @@ export const Contacto = () => {
     user_name: "",
     user_email: "",
   });
+  const [text, setText] = useState({user_message: ""})
+
+  function handleText(e: React.ChangeEvent<HTMLTextAreaElement>){
+    setText({
+      ...text,
+      [e.currentTarget.name] : e.currentTarget.value,
+    })
+  }
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     setInput({
@@ -141,6 +149,9 @@ export const Contacto = () => {
 
         <textarea
           className="form-control"
+          name="user_message"
+          value={text.user_message}
+          onChange={handleText}
           id="validationTextarea"
           placeholder="Ingrese su comentario..."
           required
