@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
 import { validate } from "./Validaciones";
+import Footer from "./Footer";
 
 export const Contacto = () => {
   const [errors, setErrors] = useState<any>({});
@@ -34,15 +34,15 @@ export const Contacto = () => {
         e.currentTarget,
         "DRImx5IvdrqGW5yoj"
       )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response: any) => console.log(response))
+      .catch((error: any) => console.log(error));
     e.currentTarget.reset();
   };
 
   return (
-    <div className="div-form">
-      <h1 className="title-form">Contáctanos!</h1>
-      <form className="" onSubmit={sendEmail}>
+    <div className="cart-window">
+      <h1 className="d-inline-flex p-2 justify-content-center">Contáctanos!</h1>
+      <form className="cart-size" onSubmit={sendEmail}>
         {errors.user_name ? (
           <div className="col-md-6">
             <label htmlFor="validationServer03" className="form-label">
@@ -94,7 +94,7 @@ export const Contacto = () => {
             Email
           </label>
           <input
-            type="text"
+            type="text" 
             name="user_email"
             className="form-control is-invalid"
             value={input.user_email}
@@ -147,7 +147,7 @@ export const Contacto = () => {
         ></textarea>
 
         <hr />
-        <div id="liveAlertPlaceholder">Comentario enviado correctamente!</div>
+        
         {!errors.user_name && !errors.user_email ? ( 
             <button type="submit" className="btn btn-outline-warning" > 
               <span>Enviar comentario</span>
@@ -158,6 +158,7 @@ export const Contacto = () => {
             </button>
           )}
       </form>
+      <Footer />
     </div>
   );
 };

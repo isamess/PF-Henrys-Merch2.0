@@ -1,4 +1,3 @@
-import React from "react";
 import Footer from "./Footer";
 
 export const Compras = () => {
@@ -38,7 +37,7 @@ export const Compras = () => {
           </h3>
         </li>
       </ul>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
