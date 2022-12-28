@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
 import { validate } from "./Validaciones";
+import Footer from "./Footer";
 
 export const Contacto = () => {
   const [errors, setErrors] = useState<any>({});
@@ -9,8 +9,14 @@ export const Contacto = () => {
     user_name: "",
     user_email: "",
   });
+  const [text, setText] = useState({user_message: ""})
 
-  
+  function handleText(e: React.ChangeEvent<HTMLTextAreaElement>){
+    setText({
+      ...text,
+      [e.currentTarget.name] : e.currentTarget.value,
+    })
+  }
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     setInput({
@@ -36,15 +42,15 @@ export const Contacto = () => {
         e.currentTarget,
         "DRImx5IvdrqGW5yoj"
       )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response: any) => console.log(response))
+      .catch((error: any) => console.log(error));
     e.currentTarget.reset();
   };
 
   return (
-    <div className="div-form">
-      <h1 className="title-form">Contáctanos!</h1>
-      <form className="" onSubmit={sendEmail}>
+    <div className="cart-window">
+      <h1 className="d-inline-flex p-2 justify-content-center">Contáctanos!</h1>
+      <form className="cart-size" onSubmit={sendEmail}>
         {errors.user_name ? (
           <div className="col-md-6">
             <label htmlFor="validationServer03" className="form-label">
@@ -92,23 +98,23 @@ export const Contacto = () => {
 
         {errors.user_email ? (
           <div className="col-md-6">
-            <label htmlFor="validationServer03" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              name="user_email"
-              className="form-control is-invalid"
-              value={input.user_email}
-              onChange={handleChange}
-              id="validationServer03"
-              aria-describedby="validationServer03Feedback"
-              required
-            />
-            <div id="validationServer03Feedback" className="invalid-feedback">
-              {errors.user_email}
-            </div>
+          <label htmlFor="validationServer03" className="form-label">
+            Email
+          </label>
+          <input
+            type="text" 
+            name="user_email"
+            className="form-control is-invalid"
+            value={input.user_email}
+            onChange={handleChange}
+            id="validationServer03"
+            aria-describedby="validationServer03Feedback"
+            required
+          />
+          <div id="validationServer03Feedback" className="invalid-feedback">
+            {errors.user_email}
           </div>
+        </div>
         ) : (
           <div className="col-md-4">
             <label htmlFor="validationServer01" className="form-label">
@@ -134,23 +140,36 @@ export const Contacto = () => {
         )}
         <hr />
         <select className="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option selected>¿Que tipo de comentario desea realizar?</option>
+          <option value="1">Sugerencia</option>
+          <option value="2">Consultas</option>
+          <option value="3">Reclamos</option>
         </select>
         <hr />
 
         <textarea
           className="form-control"
+          name="user_message"
+          value={text.user_message}
+          onChange={handleText}
           id="validationTextarea"
-          placeholder="Required example textarea"
+          placeholder="Ingrese su comentario..."
           required
         ></textarea>
-        
+
         <hr />
-        <button>Send</button>
+        
+        {!errors.user_name && !errors.user_email ? ( 
+            <button type="submit" className="btn btn-outline-warning" > 
+              <span>Enviar comentario</span>
+            </button>
+          ) : (
+            <button type="button" className="btn btn-secondary" disabled>
+              <span>Enviar comentario</span>
+            </button>
+          )}
       </form>
+      <Footer />
     </div>
   );
 };

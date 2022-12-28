@@ -4,11 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-<<<<<<< HEAD
 import {store} from './app/store'
-=======
-
->>>>>>> 5927ec9fd23af79454ed8cb26d09bb121bb5deef
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
