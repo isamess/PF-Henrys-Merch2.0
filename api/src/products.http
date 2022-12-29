@@ -1,7 +1,7 @@
 
-@url= http://localhost:3000
+@url= http://localhost:3001
 
-
+//Probamos las peticiones http a mi API con la extension Rest Client de VSC
 GET {{url}}/products
 
 ###
