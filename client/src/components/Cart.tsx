@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getPublicPath } from "../data/products";
 import Footer from "./Footer/Footer";
+import PayButton from "./PayButton";
 import {
   removeFromCart,
   decreaseQuantity,
   increaseQuantity,
   clearCart,
   getTotal,
-} from "./redux/Slices/CartSlice";
+} from "./redux/slices/CartSlice";
 
 function Cart() {
   const cart = useSelector((state: any) => state.cart);
@@ -128,7 +129,7 @@ function Cart() {
                   </div>
                   <p>Los impuestos se calculan en el checkout</p>
                   {auth._id ? (
-                    <button>Pagar</button>
+                    <PayButton cartItems={cart.cartItems} />
                   ) : (
                     <button onClick={() => navigate("/login")}>
                       Login para pagar

@@ -20,6 +20,7 @@ import { Cart } from "./components/Cart";
 import { NotFound } from "./components/NotFound";
 import { Login } from "./components/Login";
 import { RegisterUser } from "./components/RegisterUser";
+import { CheckoutSuccess } from "./components/CheckoutSuccess";
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
           <Route path="/politicas" element={<Politicas />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

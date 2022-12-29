@@ -1,13 +1,13 @@
 import "../css/navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "./redux/Slices/AuthSlice";
+import { logoutUser } from "./redux/slices/AuthSlice";
 import { toast } from "react-toastify";
 
 interface Categories {
   categories: Array<{
     name: string;
-  }>; 
+  }>;
 }
 
 const NavBar = ({ categories }: Categories) => {

@@ -5,7 +5,7 @@ import { List } from "./List";
 import { products } from "../data/products";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getTotal } from "./redux/Slices/CartSlice";
+import { getTotal } from "./redux/slices/CartSlice";
 
 interface Sub {
   id: number;
