@@ -54,14 +54,14 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/politicas" className="nav-link">
+              <Link to="/políticas" className="nav-link">
                 Políticas
               </Link>
             </li>
           </ul>
         </div>
         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h3>Contactanos!</h3>
+            <h3>Contáctanos!</h3>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                 <li>
                 <NavLink to="/contacto" className="nav-link">Sugerencias, dudas y consultas</NavLink>
@@ -74,7 +74,7 @@ export default function Footer() {
 {/** xxxxxxxxxxxx */}
 <div className= "container" >
       <div className= "col-md-5 col-lg-5 col-xl-5 mx-auto mt-5 mb-5 d-flex justify-content-center">
-      <ul className="list-group list-group-horizontal ">
+      <ul className="list-group list-group-horizontal list-unstyled">
           <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning ">
             <a href="https://www.linkedin.com/school/soyhenry/" >
                 <i className="bi bi-linkedin text-dark" ></i></a>

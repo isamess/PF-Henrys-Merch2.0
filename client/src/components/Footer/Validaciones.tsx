@@ -14,6 +14,11 @@ export function validate(input: any ) {
   else if (!input.user_email) errors.user_email = "Este campo es obligatorio";
 
   
+  else if (!input.user_email ) errors.user_email = "Este campo es obligatorio";
+ 
+  //----------------------------------------------------------------
+  else if (!input.user_message || input.user_message < 30)
+    errors.user_message = "Este campo debe contener mas de 30 caracteres";
 
   return errors;
 }

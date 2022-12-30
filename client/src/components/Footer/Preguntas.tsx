@@ -18,18 +18,18 @@ export const Preguntas = () => {
         </p>
       </div>
       <div>
-        <h4>¿Cuales son los medios de pago disponibles?</h4>
+        <h4>¿Cuáles son los medios de pago disponibles?</h4>
         <ul>
             <li>Tarjeta de crédito: Aprovechá las cuotas sin interés vigentes.</li>
-            <li>Mercado Pago: Aplican todas las promociones disponibles en Mercado Pago.</li>
-            <li>Efectivo: Podes abonar en cualquier sucursal de Rapipago, Pago Fácil o Carga Virtual seleccionando Mercado Pago y obetiendo el cupón de pago al finalizar la compra.</li>
+           
+            <li>Efectivo: Podes abonar en cualquier sucursal de Rapipago, Pago Fácil o Carga Virtual seleccionando Henry's Merch y obetiendo el cupón de pago al finalizar la compra.</li>
             <li>Modo: podes abonar seleccionando la opción y serás redirigido a MODO o a tu HomeBanking. Debes estar adherido a MODO.</li>
             <li>GoCuotas: Posibilidad de abonar con tarjeta de débito en cuotas.</li>
         </ul>
     
       </div>
       <div>
-        <h4>¿Cómo se si mi pago fue aprobado?</h4>
+        <h4>¿Cómo sé si mi pago fue aprobado?</h4>
         <p>Una vez que tu pago fue acreditado recibirás un correo electrónico con la confirmación, luego de esto iniciaremos el proceso de facturación y despacho.</p>
       </div>
       <div>

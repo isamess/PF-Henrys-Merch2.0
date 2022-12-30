@@ -37,6 +37,10 @@ function Home() {
           <List products={subs} cat={"home"} />
         </div>
 
+        <div className="pt-4">
+          <h3>Bottom Category</h3>
+          <List products={subs} cat={"bottom"} />
+        </div>
     return (
       
         <div className= "container-fluid">

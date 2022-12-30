@@ -15,7 +15,7 @@ Content-Type: application/json
     "name": "remeraAmarillaConLogo",
     "price": 1500,
     "stock": 100,
-    "category": [Tshirts],
+    "category": "remeras",
     "color": "yellow",
     "image": "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
 }

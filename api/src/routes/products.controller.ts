@@ -25,14 +25,15 @@ export const getProduct: RequestHandler = async (req, res) => {
   return res.json(productFound)
 }
 
-export const deleteProduct: RequestHandler = async (req, res) => {
-  const productDeleted = await Products.findById(req.params.id)
-  if (!productDeleted) return res.status(204).json()
-  return res.json(productDeleted)
-}
 
 export const updateProduct: RequestHandler = async (req, res) => {
   const productUpdated = await Products.findByIdAndUpdate(req.params.id, req.body, { new: true })
   if (!productUpdated) return res.status(204).json()
   res.json(productUpdated)
+}
+
+export const deleteProduct: RequestHandler = async (req, res) => {
+  const productDeleted = await Products.findById(req.params.id)
+  if (!productDeleted) return res.status(204).json()
+  return res.json(productDeleted)
 }
