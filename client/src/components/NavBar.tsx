@@ -18,7 +18,7 @@ const NavBar = ({ categories }: Categories) => {
   return (
     <nav className="navbar navbar-expand-lg bg-warning py-3 px-2">
       <div className="container-fluid">
-        <a className="navbar-logo" href="#">
+        <a className="navbar-logo" href="/">
           SoyHenry
         </a>
 

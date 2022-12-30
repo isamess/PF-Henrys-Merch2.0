@@ -121,13 +121,13 @@ function RegisterUser() {
               />
             </div>
           </div>
-          <div className="d-flex justify-content-center font-italic text-danger ">
+          <div className="d-flex justify-content-center font-italic text-danger mt-5">
             {auth.registerStatus === "rejected" ? (
               <p>{auth.registerError}</p>
             ) : null}
           </div>
           <div className="register-button">
-            <button type="submit" className="btn btn-primary mb-5 ">
+            <button type="submit" className="btn btn-primary">
               {auth.registerStatus === "pending" ? "submiting" : "Submit"}
             </button>
           </div>
