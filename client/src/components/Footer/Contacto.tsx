@@ -9,13 +9,13 @@ export const Contacto = () => {
     user_name: "",
     user_email: "",
   });
-  const [text, setText] = useState({user_message: ""})
+  const [text, setText] = useState({ user_message: "" });
 
-  function handleText(e: React.ChangeEvent<HTMLTextAreaElement>){
+  function handleText(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText({
       ...text,
-      [e.currentTarget.name] : e.currentTarget.value,
-    })
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
   }
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
@@ -98,23 +98,23 @@ export const Contacto = () => {
 
         {errors.user_email ? (
           <div className="col-md-6">
-          <label htmlFor="validationServer03" className="form-label">
-            Email
-          </label>
-          <input
-            type="text" 
-            name="user_email"
-            className="form-control is-invalid"
-            value={input.user_email}
-            onChange={handleChange}
-            id="validationServer03"
-            aria-describedby="validationServer03Feedback"
-            required
-          />
-          <div id="validationServer03Feedback" className="invalid-feedback">
-            {errors.user_email}
+            <label htmlFor="validationServer03" className="form-label">
+              Email
+            </label>
+            <input
+              type="text"
+              name="user_email"
+              className="form-control is-invalid"
+              value={input.user_email}
+              onChange={handleChange}
+              id="validationServer03"
+              aria-describedby="validationServer03Feedback"
+              required
+            />
+            <div id="validationServer03Feedback" className="invalid-feedback">
+              {errors.user_email}
+            </div>
           </div>
-        </div>
         ) : (
           <div className="col-md-4">
             <label htmlFor="validationServer01" className="form-label">
@@ -158,16 +158,16 @@ export const Contacto = () => {
         ></textarea>
 
         <hr />
-        
-        {!errors.user_name && !errors.user_email ? ( 
-            <button type="submit" className="btn btn-outline-warning" > 
-              <span>Enviar comentario</span>
-            </button>
-          ) : (
-            <button type="button" className="btn btn-secondary" disabled>
-              <span>Enviar comentario</span>
-            </button>
-          )}
+
+        {!errors.user_name && !errors.user_email ? (
+          <button type="submit" className="btn btn-outline-warning mb-5">
+            <span>Enviar comentario</span>
+          </button>
+        ) : (
+          <button type="button" className="btn btn-secondary mb-5" disabled>
+            <span>Enviar comentario</span>
+          </button>
+        )}
       </form>
       <Footer />
     </div>

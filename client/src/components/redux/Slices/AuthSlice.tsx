@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
 interface InitialState {
   token: string | null;
@@ -8,7 +9,7 @@ interface InitialState {
   email: string;
   _id: string;
   registerStatus: string;
-  registerError: string; 
+  registerError: string;
   loginStatus: string;
   loginError: string;
   userLoaded: boolean;

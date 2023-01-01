@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "./Footer/Footer";
-import { registerUser } from "./redux/Slices/AuthSlice";
+import { registerUser } from "./redux/slices/AuthSlice";
 import { useAppDispatch } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -121,13 +121,13 @@ function RegisterUser() {
               />
             </div>
           </div>
-          <div className="d-flex justify-content-center font-italic text-danger ">
+          <div className="d-flex justify-content-center font-italic text-danger mt-5">
             {auth.registerStatus === "rejected" ? (
               <p>{auth.registerError}</p>
             ) : null}
           </div>
           <div className="register-button">
-            <button type="submit" className="btn btn-primary mb-5 ">
+            <button type="submit" className="btn btn-primary">
               {auth.registerStatus === "pending" ? "submiting" : "Submit"}
             </button>
           </div>

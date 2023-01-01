@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { Home } from "./components/Home";
@@ -20,33 +20,38 @@ import { Cart } from "./components/Cart";
 import { NotFound } from "./components/NotFound";
 import { Login } from "./components/Login";
 import { RegisterUser } from "./components/RegisterUser";
+import { CheckoutSuccess } from "./components/CheckoutSuccess";
 
 function App() {
   return (
-    <HashRouter>
-      <div>
-        <ToastContainer />
-        <NavBar categories={categories} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route
-            path="/category/:category"
-            element={<List products={products} />}
-          />
-          <Route path="/register" element={<RegisterUser />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/como-comprar" element={<Compras />} />
-          <Route path="/terminos" element={<Terminos />} />
-          <Route path="/preguntas" element={<Preguntas />} />
-          <Route path="/politicas" element={<Politicas />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </HashRouter>
+    <div>
+      <BrowserRouter>
+        <div>
+          <ToastContainer />
+          <NavBar categories={categories} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route
+              path="/category/:category"
+              element={<List products={products} />}
+            />
+            <Route path="/register" element={<RegisterUser />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/como-comprar" element={<Compras />} />
+            <Route path="/terminos" element={<Terminos />} />
+            <Route path="/preguntas" element={<Preguntas />} />
+            <Route path="/politicas" element={<Politicas />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout-success" element={<CheckoutSuccess />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
   );
 }
 
