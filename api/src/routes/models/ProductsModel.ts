@@ -5,10 +5,10 @@ const productSchema = new Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    unique: true
   },
   price: {
-
     type: Number,
     required: true,
     trim: true
@@ -31,9 +31,16 @@ const productSchema = new Schema({
     votes: Number,
     favs: Number
   },
-  imgUrl: String,
-  details: String
-}, {
+  image:{
+    public_id: String,
+    secure_url: String
+  },
+  description: {
+    type:String,
+    trim: true
+  }
+}, 
+{
   versionKey: false,
   timestamps: true
 })
