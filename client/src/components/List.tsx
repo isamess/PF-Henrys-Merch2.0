@@ -36,7 +36,7 @@ const List = ({ products, cat }: Props) => {
 
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
-      {products.map((product) => {
+      {products.map((product: any) => {
         if (product.category === cat) {
           return (
             <div className="d-flex justify-content-center">
@@ -72,7 +72,7 @@ const List = ({ products, cat }: Props) => {
               </div>
             </div>
           );
-        }
+        } else return <></>;
       })}
     </div>
   );

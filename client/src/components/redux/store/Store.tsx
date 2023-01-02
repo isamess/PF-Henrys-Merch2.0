@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import AuthReducer, { loadUser } from "../slices/AuthSlice";
 import cartReducer, { getTotal } from "../slices/CartSlice";
-import { registerUser } from "../slices/AuthSlice";
+// import { registerUser } from "../slices/AuthSlice"; no esta en uso
 
 export const store = configureStore({
   reducer: {

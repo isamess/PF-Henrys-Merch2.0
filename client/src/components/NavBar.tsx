@@ -41,7 +41,7 @@ const NavBar = ({ categories }: Categories) => {
             <li className="nav-item dropdown" key="category-title">
               <a
                 className="nav-link dropdown-toggle text-black"
-                href="#"
+                href="/"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
