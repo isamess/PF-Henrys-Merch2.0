@@ -8,7 +8,7 @@ import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 // import fs from 'fs'
 // import path, { dirname } from 'path'
-import product from "./routes/models/ProductsModel";
+import product from "./models/Products";
 import connectDB from "./database";
 const register = require("./routes/register");
 const login = require("./routes/login");
