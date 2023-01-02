@@ -12,7 +12,9 @@ import product from "./routes/models/ProductsModel";
 import connectDB from "./database";
 const register = require("./routes/register");
 const login = require("./routes/login");
-const stripe = require("./routes/payment");
+// const paypal = require("./routes/paypmentPP");
+// const mercadoPago = require("./routes/paymentMp");
+// const stripe = require("./routes/paymentStripe");
 
 dotenv.config();
 const app = express();
@@ -32,7 +34,9 @@ app.set("view engine", "ejs"); // se ve en el vistas carpeta para las plantillas
 
 app.use("/api/register", register);
 app.use("/api/login", login);
-app.use("/api/stripe", stripe);
+// app.use("/api/paypal", paypal);
+// app.use("/api/mercadopago", mercadoPago);
+// app.use("/api/stripe", stripe);
 
 app.get("/products", (req, res) => {
   try {
