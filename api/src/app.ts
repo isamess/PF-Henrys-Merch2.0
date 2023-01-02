@@ -8,7 +8,7 @@ import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 // import fs from 'fs'
 // import path, { dirname } from 'path'
-import product from "./routes/models/ProductsModel";
+import product from "./models/products";
 import connectDB from "./database";
 const register = require("./routes/register");
 const login = require("./routes/login");
@@ -40,7 +40,7 @@ app.use("/api/login", login);
 
 app.get("/products", (req, res) => {
   try {
-    product.find({}).then((product) => {
+    product.find({}).then((product: any) => {
       res.json(product);
     });
   } catch (error) {
@@ -52,7 +52,7 @@ app.get("/products/:productName", (req, res) => {
   try {
     const { productName } = req.params;
 
-    product.find({ name: productName }).then((product) => {
+    product.find({ name: productName }).then((product: any) => {
       res.json(
         product.length > 0 ? product : "No hay ningun producto con ese nombre"
       );

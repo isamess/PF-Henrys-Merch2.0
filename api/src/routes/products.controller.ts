@@ -1,6 +1,6 @@
 import { RequestHandler } from "express"; // el RequestHandler ayuda a que se reconozca el request
-import Products from "./models/ProductsModel";
 const { isAdmin } = require("../middleware/auth");
+import Products from "../models/products";
 
 // export const createProduct: RequestHandler = isAdmin(
 //   async (req: any, res: any) => {
