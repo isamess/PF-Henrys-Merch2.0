@@ -2,7 +2,7 @@ import "./../css/list.css";
 import { NavLink, useParams } from "react-router-dom";
 import { getPublicPath } from "../data/products";
 import { useDispatch } from "react-redux";
-import { addToCart } from "./redux/slices/CartSlice";
+import { addToCart } from "./redux/Slices/CartSlice";
 
 interface Props {
   products: Array<{
