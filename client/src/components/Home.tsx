@@ -43,23 +43,20 @@ function Home() {
           <Carousel />
         </div>
         <div className="pt-4">
-          <h2 className="border border-top border-secondary mx-5 mb-5"></h2>
-          <h2 className="d-flex p-2 justify-content-center pb-3">
+          <h2 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
             Home Category
           </h2>
           <List products={subs} cat={"home"} />
         </div>
         <div className="pt-4">
-          <h2 className="border border-top border-secondary m-5"></h2>
-          <h3 className="d-flex p-2 justify-content-center pb-3">
+          <h3 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
             Bottom Category
           </h3>
           <List products={subs} cat={"bottom"} />
         </div>
 
         <div className="pt-4">
-          <h2 className="border border-top border-secondary m-5"></h2>
-          <h3 className="d-flex p-2 justify-content-center pb-3">
+          <h3 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
             Top Category
           </h3>
           <List products={subs} cat={"top"} />

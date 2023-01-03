@@ -11,6 +11,7 @@ function Profile() {
                 src="https://fakeimg.pl/200x150/?text=PhotoProfile"
                 height="150"
                 width="150"
+                alt="profile"
               />
               <span className="name mt-3">Maria Guevara</span>
               <span className="idd">mariaguevara@henry.com</span>

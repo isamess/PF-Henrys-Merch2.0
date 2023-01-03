@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify"; falta colocarlo
 
 interface InitialState {
   token: string | null;
