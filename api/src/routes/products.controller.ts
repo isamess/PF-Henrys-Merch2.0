@@ -1,26 +1,8 @@
 import { RequestHandler } from "express"; // el RequestHandler ayuda a que se reconozca el request
-<<<<<<< HEAD
-import Products from "./models/ProductsModel";
+import Products from "../models/products";
 import { uploadImage, deleteImage } from "../utils/cloudinary";
 import fs from 'fs-extra'; //fs-extra me ayuda a eliminar archivos y soporta promesas
 
-=======
-const { isAdmin } = require("../middleware/auth");
-import Products from "../models/products";
-
-// export const createProduct: RequestHandler = isAdmin(
-//   async (req: any, res: any) => {
-//     const productFound = await Products.findOne({ product: req.body.product });
-//     if (productFound) {
-//       return res.status(301).json({ message: "That product already exists" });
-//     }
-//     const product = new Products(req.body);
-
-//     const savedProduct = await product.save(); // se guarda en la DB
-//     res.json(savedProduct);
-//   }
-// ); falta completar el middleware
->>>>>>> 302d40c4b91cae37b02edd0dbc7eed091e25da9c
 
 //TODO: get all products
 export const getProducts: RequestHandler = async (req, res) => {

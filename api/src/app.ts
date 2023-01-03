@@ -5,13 +5,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
-<<<<<<< HEAD
-import product from "./routes/models/ProductsModel";
-// import connectDB from "./database";
-const register = require("./routes/register");
-const login = require("./routes/login");
-// const stripe = require("./routes/payment");
-=======
 // import fs from 'fs'
 // import path, { dirname } from 'path'
 import product from "./models/products";
@@ -21,7 +14,6 @@ const login = require("./routes/login");
 // const paypal = require("./routes/paypmentPP");
 // const mercadoPago = require("./routes/paymentMp");
 // const stripe = require("./routes/paymentStripe");
->>>>>>> 302d40c4b91cae37b02edd0dbc7eed091e25da9c
 
 dotenv.config();
 const app = express();
@@ -43,11 +35,6 @@ app.set("view engine", "ejs"); // se ve en el vistas carpeta para las plantillas
 
 app.use("/api/register", register);
 app.use("/api/login", login);
-<<<<<<< HEAD
-=======
-// app.use("/api/paypal", paypal);
-// app.use("/api/mercadopago", mercadoPago);
->>>>>>> 302d40c4b91cae37b02edd0dbc7eed091e25da9c
 // app.use("/api/stripe", stripe);
 
 app.get("/products", (req, res) => {
