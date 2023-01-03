@@ -31,7 +31,7 @@ const Carousel = () => {
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
-            src="https://res.cloudinary.com/henryscloud/image/upload/v1672631702/PF%20soyhenry/Gorros/gorro-Visera-Rocket-Negro_kz3bc0.png/200x100/?text=Promotion"
+            src="https://res.cloudinary.com/henryscloud/image/upload/v1672631733/PF%20soyhenry/Remeras/remeraRoja-Logo_bttk1j.png"
             className="d-block w-100"
             alt="gorros"
           />

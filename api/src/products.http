@@ -16,7 +16,10 @@ Content-Type: application/json
     "price": 1500,
     "category": "Remeras",
     "color": "amarillo",
-    "image": "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
+    "image": {
+        "public_id":
+    }
+    "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
 }
 
 ###

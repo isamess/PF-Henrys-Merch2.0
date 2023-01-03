@@ -10,7 +10,7 @@ cloudinary.config ({
 
 })
 
-
+//TODO: subir imágenes con cloudinary
 export async function uploadImage(filePath: any){
     return await cloudinary.uploader.upload(filePath,{
     folder: 'henryscloud'
@@ -18,6 +18,6 @@ export async function uploadImage(filePath: any){
 )}
 
 //TODO: elimino imágenes de cloudinary de archivos eliminados
-export async function deleteImage(public_id){
+export async function deleteImage(public_id: string){
     return await cloudinary.uploader.destroy(public_id)
 }

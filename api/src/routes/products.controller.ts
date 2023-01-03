@@ -33,7 +33,7 @@ export const createProduct: RequestHandler = async (req, res) => {
 
     const {name, description, price, category, color} =  req.body;
     const product = new Products({name, description, price, category, color});
-    const {image}= req.files;
+    const {image}= req.files;  //files:objeto que me da express upload
     const fileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
     if (!fileTypes.includes(image.mimetype)) return res.send('Image formats supported: JPG, PNG, JPEG');  
 
