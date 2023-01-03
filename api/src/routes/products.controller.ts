@@ -2,18 +2,18 @@ import { RequestHandler } from "express"; // el RequestHandler ayuda a que se re
 const { isAdmin } = require("../middleware/auth");
 import Products from "../models/products";
 
-// export const createProduct: RequestHandler = isAdmin(
-//   async (req: any, res: any) => {
-//     const productFound = await Products.findOne({ product: req.body.product });
-//     if (productFound) {
-//       return res.status(301).json({ message: "That product already exists" });
-//     }
-//     const product = new Products(req.body);
+export const createProduct: RequestHandler = isAdmin(
+  async (req: any, res: any) => {
+    const productFound = await Products.findOne({ product: req.body.product });
+    if (productFound) {
+      return res.status(301).json({ message: "That product already exists" });
+    }
+    const product = new Products(req.body);
 
-//     const savedProduct = await product.save(); // se guarda en la DB
-//     res.json(savedProduct);
-//   }
-// ); falta completar el middleware
+    const savedProduct = await product.save(); // se guarda en la DB
+    res.json(savedProduct);
+  }
+);
 
 export const getProducts: RequestHandler = async (req, res) => {
   try {

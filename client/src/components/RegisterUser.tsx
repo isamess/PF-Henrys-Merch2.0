@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Footer from "./Footer/Footer";
-import { registerUser } from "./redux/slices/AuthSlice";
+import { registerUser } from "../redux/slices/AuthSlice";
 import { useAppDispatch } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 
