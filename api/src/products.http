@@ -1,22 +1,21 @@
 
-@url= http://localhost:3000
+@url= http://localhost:3001
 
 
 GET {{url}}/products
 
 ###
-GET {{url}}/products/1
+GET {{url}}/products/63af64b85b6378162ac7cdde
 
 ###
 POST {{url}}/products
 Content-Type: application/json
 
 {
-    "name": "remeraAmarillaConLogo",
+    "name": "remera de Prueba",
     "price": 1500,
-    "stock": 100,
-    "category": [Tshirts],
-    "color": "yellow",
+    "category": "Remeras",
+    "color": "amarillo",
     "image": "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
 }
 
