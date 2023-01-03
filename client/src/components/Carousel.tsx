@@ -1,4 +1,20 @@
-import React from "react";
+// const INITIAL_STATE = [
+//   {
+//     id: 1,
+//     nombre: "Franela",
+//     precio: 5.38,
+//     descripcion: "Tela algodon",
+//     imagen:
+//       "https://media.istockphoto.com/id/1151955707/es/foto/plantilla-de-camiseta-negra-de-hombre-en-blanco-de-dos-lados-de-forma-natural-en-maniqu%C3%AD.jpg?s=170667a&w=0&k=20&c=7qEuwWaJXJOPB1tFkJwFuRFIN86HQKaBvX6MC15R75U=",
+//   },
+//   {
+//     id: 2,
+//     nombre: "Taza",
+//     precio: 0.96,
+//     descripcion: "porcelana",
+//     imagen:
+//       "https://media.istockphoto.com/id/821282266/es/foto/blanco-taza-aislada.jpg?s=612x612&w=0&k=20&c=5AXTocHRgcXlxKaHEHdUFRgj4QQ1m6FTiyltedW1Oog=",
+//   },
 
 // const INITIAL_STATE = [
 //   {
@@ -94,21 +110,21 @@ const Carousel = () => {
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
-            src="https://fakeimg.pl/200x100/?text=Promotion"
+            src="https://res.cloudinary.com/henryscloud/image/upload/v1672631682/PF%20soyhenry/Agendas/Agenda-Henry-Azul_u9tkdr.png/200x100/?text=Promotion"
             className="d-block w-100"
             alt="gorros"
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://fakeimg.pl/200x100/?text=Promotion"
+            src="https://res.cloudinary.com/henryscloud/image/upload/v1672631692/PF%20soyhenry/FundasDispositivos/Funda-Notebook-LoveHenry-Verde_qfan73.png/200x100/?text=Promotion"
             className="d-block w-100"
             alt="fundas"
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://fakeimg.pl/200x100/?text=Promotion"
+            src="https://res.cloudinary.com/henryscloud/image/upload/v1672631733/PF%20soyhenry/Remeras/remeraRoja-Logo_bttk1j.png/200x100/?text=Promotion"
             className="d-block w-100"
             alt="pads"
           />

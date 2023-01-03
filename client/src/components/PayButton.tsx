@@ -6,7 +6,7 @@ const PayButton = ({ cartItems }: any) => {
 
   const handleCheckout = () => {
     const url: string =
-      "http://localhost:3001/api/mercadopago/create-checkout-session";
+      "http://localhost:3001/api/stripe/create-checkout-session";
     axios
       .post(url, {
         cartItems,

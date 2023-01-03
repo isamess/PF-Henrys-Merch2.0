@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Footer from "./Footer/Footer";
 import { registerUser } from "./redux/slices/AuthSlice";
 import { useAppDispatch } from "../hooks/hooks";
