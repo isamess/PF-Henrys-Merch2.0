@@ -4,7 +4,7 @@ import { List } from "./List";
 import { getPublicPath, products } from "../data/products";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getTotal } from "./redux/slices/CartSlice";
+import { addToCart, getTotal } from "./redux/Slices/CartSlice";
 
 function Product() {
   const cart = useSelector((state: any) => state.cart);
