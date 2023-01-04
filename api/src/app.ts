@@ -4,7 +4,6 @@ import config from "./config";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose, { connect } from "mongoose";
-// import multer from 'multer'
 import dotenv from "dotenv";
 // import fs from 'fs'
 // import path, { dirname } from 'path'
@@ -12,14 +11,12 @@ import product from "./models/products";
 import connectDB from "./database";
 const register = require("./routes/register");
 const login = require("./routes/login");
-// const paypal = require("./routes/paypmentPP");
-// const mercadoPago = require("./routes/paymentMp");
 const stripe = require("./routes/paymentStripe");
 
 dotenv.config();
 const app = express();
 
-connectDB();
+// connectDB();
 
 mongoose.set("strictQuery", true);
 require("dotenv/config");
@@ -34,8 +31,6 @@ app.set("view engine", "ejs"); // se ve en el vistas carpeta para las plantillas
 
 app.use("/api/register", register);
 app.use("/api/login", login);
-// app.use("/api/paypal", paypal);
-// app.use("/api/mercadopago", mercadoPago);
 app.use("/api/stripe", stripe);
 
 app.get("/products", (req, res) => {

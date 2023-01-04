@@ -103,7 +103,7 @@ const NavBar = ({ categories }: Categories) => {
                 className="btn border-none bg-none text-black"
                 onClick={() => {
                   dispatch(logoutUser(null));
-                  toast.warning("Logged out", { position: "bottom-left" });
+                  toast.warning("Logged out", { position: "top-right" });
                 }}
               >
                 Logout

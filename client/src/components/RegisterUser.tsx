@@ -4,6 +4,7 @@ import Footer from "./Footer/Footer";
 import { registerUser } from "../redux/slices/AuthSlice";
 import { useAppDispatch } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function RegisterUser() {
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ function RegisterUser() {
 
   useEffect(() => {
     if (auth._id) {
-      navigate("/cart");
+      navigate("/");
     }
   }, [auth._id, navigate]);
 
@@ -127,7 +128,7 @@ function RegisterUser() {
             ) : null}
           </div>
           <div className="register-button">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary mb-5">
               {auth.registerStatus === "pending" ? "submiting" : "Submit"}
             </button>
           </div>
