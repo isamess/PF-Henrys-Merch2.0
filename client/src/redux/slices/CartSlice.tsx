@@ -29,14 +29,14 @@ const cartSlice = createSlice({
         toast.info(
           `Aumentó la cantidad del producto ${action.payload.nombre}`,
           {
-            position: "bottom-left",
+            position: "top-right",
           }
         );
       } else {
         const tempProduct = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(tempProduct);
         toast.info(`${action.payload.nombre} agregado`, {
-          position: "bottom-left",
+          position: "top-right",
         });
       }
 
