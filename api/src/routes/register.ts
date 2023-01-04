@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-const { User } = require("./models/UsersModel");
+const { User } = require("../models/users");
 const genAuthToken = require("../utils/genAuthToken");
 import { Router } from "express";
 

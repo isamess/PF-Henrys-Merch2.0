@@ -10,7 +10,7 @@ import {
   increaseQuantity,
   clearCart,
   getTotal,
-} from "./redux/Slices/CartSlice";
+} from "../redux/slices/CartSlice";
 
 function Cart() {
   const cart = useSelector((state: any) => state.cart);
