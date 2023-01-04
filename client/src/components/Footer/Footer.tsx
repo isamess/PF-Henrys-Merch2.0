@@ -20,7 +20,7 @@ export default function Footer() {
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
             <li className="nav-item">
               <a href="https://www.soyhenry.com/about-us" className="nav-link">
-                ¿Quienes somos?
+                ¿Quiénes somos?
               </a>
             </li>
             <li className="nav-item">

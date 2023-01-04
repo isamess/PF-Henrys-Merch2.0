@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Carousel } from "./Carousel";
+import  Carousel  from "./Carousel";
 import { List } from "./List";
 import { products } from "../data/products";
 import Footer from "./Footer/Footer";
