@@ -10,7 +10,7 @@ const PayButton = ({ cartItems }: any) => {
     axios
       .post(url, {
         cartItems,
-        userId: user,
+        userId: user._id,
       })
       .then((res) => {
         if (res.data.url) {

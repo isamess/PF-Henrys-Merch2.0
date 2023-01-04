@@ -3,6 +3,7 @@ import config from "./config";
 import dotenv from "dotenv";
 
 dotenv.config();
+
 const dataBase = (async () => {
   try {
     const mongooseOptions: ConnectOptions = {
