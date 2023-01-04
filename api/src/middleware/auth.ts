@@ -2,7 +2,7 @@ import { RequestHandler, Request } from "express";
 const jwt = require("jsonwebtoken");
 
 const auth = (req: any, res: any, next: any) => {
-  const token: any = req.get("x-auth-token");
+  const token: any = req.headers("x-auth-token");
 
   if (!token)
     return res.status(401).send("No puede entras, no está autenticado");

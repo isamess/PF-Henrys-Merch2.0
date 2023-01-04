@@ -8,15 +8,12 @@ import dotenv from "dotenv";
 // import fs from 'fs'
 // import path, { dirname } from 'path'
 import product from "./models/products";
-import connectDB from "./database";
 const register = require("./routes/register");
 const login = require("./routes/login");
-const stripe = require("./routes/paymentStripe");
+const stripe = require("./routes/stripe");
 
 dotenv.config();
 const app = express();
-
-// connectDB();
 
 mongoose.set("strictQuery", true);
 require("dotenv/config");
@@ -24,6 +21,7 @@ require("dotenv/config");
 app.set("port", config.PORT || 3001); // quiero que se establezca este puerto
 app.use(morgan("dev")); // me muestra la petición que hice en la terminal
 app.use(cors()); // cors me permite a cualquier servidor hacer peticiones
+app.use("/api/stripe/webhook", express.raw({ type: "*/*" }));
 app.use(express.json()); // para poder entender los obj json cuando hacemos peticiones Post con un dato
 app.use(express.urlencoded({ extended: true })); // para que pueda entender los campos que llegan desde el formulario
 app.use(bodyParser.json());
