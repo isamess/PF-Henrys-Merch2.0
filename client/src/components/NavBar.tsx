@@ -99,15 +99,24 @@ const NavBar = ({ categories }: Categories) => {
           </ul>
           <div className="mx-3">
             {auth._id ? (
-              <button
-                className="btn border-none bg-none text-black"
-                onClick={() => {
-                  dispatch(logoutUser(null));
-                  toast.warning("Logged out", { position: "top-right" });
-                }}
-              >
-                Logout
-              </button>
+              <div className="cart-window">
+                <div className="d-flex text-black">
+                  <div className="btn border-none bg-none">
+                    <Link to="admin" className="text-black">
+                      Admin
+                    </Link>
+                  </div>
+                  <div
+                    className="btn border-none bg-none text-black"
+                    onClick={() => {
+                      dispatch(logoutUser(null));
+                      toast.warning("Logged out", { position: "top-right" });
+                    }}
+                  >
+                    Logout
+                  </div>
+                </div>
+              </div>
             ) : (
               <div>
                 <ul

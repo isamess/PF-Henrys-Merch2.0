@@ -21,6 +21,10 @@ import { NotFound } from "./components/NotFound";
 import { Login } from "./components/Login";
 import { RegisterUser } from "./components/RegisterUser";
 import { CheckoutSuccess } from "./components/CheckoutSuccess";
+import CreatProduct from "./components/admin/CreateProduct";
+import Dashboard from "./components/admin/Dashboard";
+import Products from "./components/admin/Products";
+import Summary from "./components/admin/Summary";
 
 function App() {
   return (
@@ -45,6 +49,11 @@ function App() {
             <Route path="/politicas" element={<Politicas />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/admin" element={<Dashboard />}>
+              <Route path="products" element={<Products />} />
+              <Route path="summary" element={<Summary />} />
+            </Route>
+            <Route path="/create-product" element={<CreatProduct />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
 
             <Route path="*" element={<NotFound />} />
