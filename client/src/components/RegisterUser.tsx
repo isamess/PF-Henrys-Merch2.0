@@ -38,7 +38,7 @@ function RegisterUser() {
 
   return (
     <>
-      <form className={"cart-window"} onSubmit={handleSubmit}>
+      <form className="cart-window" onSubmit={handleSubmit}>
         <div>
           <h2 className="text-center font-weight-400 font-size-20 mt-5">
             Crea tu cuenta

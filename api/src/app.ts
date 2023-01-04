@@ -11,6 +11,7 @@ import product from "./models/products";
 const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
+const products = require("./routes/productsController");
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.set("view engine", "ejs"); // se ve en el vistas carpeta para las plantillas
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/stripe", stripe);
+app.use("/api/products", products);
 
 app.get("/products", (req, res) => {
   try {

@@ -23,3 +23,5 @@ export async function uploadImage(filePath: any) {
 export async function deleteImage(public_id: any) {
   return await cloudinary.uploader.destroy(public_id);
 }
+
+export default cloudinary;

@@ -31,7 +31,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    admin: {
+    iAdmin: {
       type: Boolean,
       default: false,
     },
