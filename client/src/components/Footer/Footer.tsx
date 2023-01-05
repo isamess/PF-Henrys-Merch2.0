@@ -1,10 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/style-prop-object */
-import React from "react"
-import { Link, NavLink } from "react-router-dom"
-
-
-
+import { Link, NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -12,8 +8,14 @@ export default function Footer() {
       <div className="container text-center text-md-left mx-100%">
         <div className="row text-center text-md-left ">
           <div>
-        <img src= "https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png"  width= "180px" height={"auto"} className=" bg-black" alt="logo" />
-        <h6 className= "text-white" >Invertimos en tu educación</h6>
+            <img
+              src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png"
+              width="180px"
+              height={"auto"}
+              className=" bg-black"
+              alt="logo"
+            />
+            <h6 className="text-white">Invertimos en tu educación</h6>
           </div>
         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
           <h3 className="">Nosotros</h3>
@@ -63,57 +65,56 @@ export default function Footer() {
         <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
             <h3>Contactanos!</h3>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-                <li>
-                <NavLink to="/contacto" className="nav-link">Sugerencias, dudas y consultas</NavLink>
-                </li>
+              <li>
+                <NavLink to="/contacto" className="nav-link">
+                  Sugerencias, dudas y consultas
+                </NavLink>
+              </li>
             </ul>
-            
-            </div>
+          </div>
         </div>
       </div>
-{/** xxxxxxxxxxxx */}
-<div className= "container" >
-      <div className= "col-md-5 col-lg-5 col-xl-5 mx-auto mt-5 mb-5 d-flex justify-content-center">
-      <ul className="list-group list-group-horizontal ">
-          <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning ">
-            <a href="https://www.linkedin.com/school/soyhenry/" >
-                <i className="bi bi-linkedin text-dark" ></i></a>
-          </li>
+      {/** xxxxxxxxxxxx */}
+      <div className="container">
+        <div className="col-md-5 col-lg-5 col-xl-5 mx-auto mt-5 mb-5 d-flex justify-content-center">
+          <ul className="list-group list-group-horizontal ">
+            <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning ">
+              <a href="https://www.linkedin.com/school/soyhenry/">
+                <i className="bi bi-linkedin text-dark"></i>
+              </a>
+            </li>
 
-          <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
-            <a href="https://www.instagram.com/soyhenry_ok">
+            <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
+              <a href="https://www.instagram.com/soyhenry_ok">
                 <i className="bi bi-instagram text-dark"></i>
-            </a>
-          </li>
-          
-          <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
-            <a href="https://www.twitter.com/soyhenry_ok">
+              </a>
+            </li>
+
+            <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
+              <a href="https://www.twitter.com/soyhenry_ok">
                 <i className="bi bi-twitter text-dark"></i>
-            </a>
-          </li>
+              </a>
+            </li>
 
-          <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
-            <a href="https://www.youtube.com/channel/UCyPi0AHwcuCP-QJxrxq-f2Q">
+            <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
+              <a href="https://www.youtube.com/channel/UCyPi0AHwcuCP-QJxrxq-f2Q">
                 <i className="bi bi-youtube text-dark"></i>
-            </a>
-        </li>
+              </a>
+            </li>
 
-        <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
-            <a href="https://www.facebook.com/HENRY-108437840594440/">
+            <li className="list-group-item flex-fill mx-5 rounded-circle bg-warning">
+              <a href="https://www.facebook.com/HENRY-108437840594440/">
                 <i className="bi bi-facebook text-dark"></i>
-            </a>
-        </li>
-
-    </ul>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
-</div>
-
-      <div className= "container text-center">
+      <div className="container text-center">
         <h6>Hecho con 💛por alumn@s de Henry</h6>
         <h6>Henry © 2022 | Todos los derechos reservados</h6>
       </div>
     </footer>
   );
 }
-

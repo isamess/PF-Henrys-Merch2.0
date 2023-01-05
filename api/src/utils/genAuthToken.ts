@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const genAuthToken = (user: any) => {
+  console.log(user, "genauth");
   const secretKey: any = `${process.env.JWT_SECRET_KEY}`;
 
   const token = jwt.sign(
