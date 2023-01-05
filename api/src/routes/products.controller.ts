@@ -29,14 +29,6 @@ export const getProduct: RequestHandler = async (req, res) => {
 
 export const createProduct: RequestHandler = async (req, res) => {
   try {
-    const { name, description, price, category, color } = req.body;
-    const product = new Products({ name, description, price, category, color });
-    const { image }: any = req.files;
-    const fileTypes = ["image/jpeg", "image/png", "image/jpg"];
-    if (!fileTypes.includes(image.mimetype))
-      return res.send("Image formats supported: JPG, PNG, JPEG");
-
-<<<<<<< HEAD
     const {name, description, price, category, color} =  req.body;
     const product = new Products({name, description, price, category, color});
     const {image}= req.files;  //files:objeto que me da express upload
@@ -50,15 +42,6 @@ export const createProduct: RequestHandler = async (req, res) => {
         public_id: result.public_id,  //propiedades que me da Cloudinary
         secure_url: result.secure_url  //imagen que se sube a Cloudinary
       }
-=======
-    //comprobación si lo que se sube es una imagen y la sube a Cloudinary
-    if (req.files?.image) {
-      const result = await uploadImage(image.tempFilePath);
-      product.image = {
-        public_id: result.public_id, //propiedades que me da Cloudinary
-        secure_url: result.secure_url, //imagen que se sube a Cloudinary
-      };
->>>>>>> 8b17a266ec20689239c8c51df7dfc6610c7be5e6
       //elimino los archivos temporales de uploads
       await fs.unlink(image.tempFilePath);
     }
