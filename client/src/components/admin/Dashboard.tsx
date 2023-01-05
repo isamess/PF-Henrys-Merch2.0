@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const user = useSelector((state: any) => state.auth);
+  const auth = useSelector((state: any) => state.auth);
 
-  if (!user.isAdmin)
+  if (!auth.isAdmin)
     return (
       <div className="not-found">
         <p>Aceso denegado</p>;
