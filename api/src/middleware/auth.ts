@@ -1,20 +1,18 @@
-import { RequestHandler, Request } from "express";
 const jwt = require("jsonwebtoken");
 
 const auth = (req: any, res: any, next: any) => {
-  const token: any = req.headers("x-auth-token");
+  const token: any = req.header("x-auth-token");
 
   if (!token)
-    return res.status(401).send("No puede entras, no está autenticado");
+    return res.status(401).send("No puede entrar, no está autenticado");
   try {
-    const secretKey: any = `${process.env.JWT_SECRET_KEY}`;
+    const secretKey: any = process.env.JWT_SECRET_KEY;
     const user: any = jwt.verify(token, secretKey);
-
     req.user = user;
 
     next();
-  } catch (err: any) {
-    res.status(400).send("No puede entras, token inválido");
+  } catch (ex: any) {
+    res.status(400).send("No puede entrar, token inválido");
   }
 };
 
@@ -23,9 +21,9 @@ const isAdmin = (req: any, res: any, next: any) => {
     if (req.user.isAdmin) {
       next();
     } else {
-      res.status(403).send("No puede entras, no está autorizado");
+      res.status(403).send("No puede entrar, no está autorizado");
     }
   });
 };
 
-module.exports = { auth, isAdmin };
+export { auth, isAdmin };

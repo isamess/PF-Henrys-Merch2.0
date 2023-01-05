@@ -5,7 +5,7 @@ function NotFound() {
     <div className="cart-window">
       <div className="not-found">
         <h2>404</h2>
-        <p>Page not</p>
+        <p>Page not found</p>
       </div>
       <Footer />
     </div>

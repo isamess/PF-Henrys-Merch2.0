@@ -21,37 +21,43 @@ import { NotFound } from "./components/NotFound";
 import { Login } from "./components/Login";
 import { RegisterUser } from "./components/RegisterUser";
 import { CheckoutSuccess } from "./components/CheckoutSuccess";
+import CreateProduct from "./components/admin/CreateProduct";
+import Dashboard from "./components/admin/Dashboard";
+import Products from "./components/admin/Products";
+import Summary from "./components/admin/Summary";
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <div>
-          <ToastContainer />
-          <NavBar categories={categories} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route
-              path="/category/:category"
-              element={<List products={products} />}
-            />
-            <Route path="/register" element={<RegisterUser />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/como-comprar" element={<Compras />} />
-            <Route path="/terminos" element={<Terminos />} />
-            <Route path="/preguntas" element={<Preguntas />} />
-            <Route path="/politicas" element={<Politicas />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout-success" element={<CheckoutSuccess />} />
+    <BrowserRouter>
+      <ToastContainer />
+      <NavBar categories={categories} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route
+          path="/category/:category"
+          element={<List products={products} />}
+        />
+        <Route path="/register" element={<RegisterUser />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/como-comprar" element={<Compras />} />
+        <Route path="/terminos" element={<Terminos />} />
+        <Route path="/preguntas" element={<Preguntas />} />
+        <Route path="/politicas" element={<Politicas />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/admin" element={<Dashboard />}>
+          <Route path="products" element={<Products />}>
+            <Route path="create-product" element={<CreateProduct />} />
+          </Route>
+          <Route path="summary" element={<Summary />} />
+        </Route>
+        <Route path="/checkout-success" element={<CheckoutSuccess />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

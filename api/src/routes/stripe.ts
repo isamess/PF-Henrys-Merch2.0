@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import Order from "../models/order";
 
 const express = require("express");
@@ -112,15 +111,13 @@ const createOrder = async (customer: any, data: any) => {
   try {
     const saveOrder: any = await newOrder.save();
 
-    console.log("processed Order", saveOrder);
+    console.log("Orden procesada", saveOrder);
   } catch (err: any) {
     console.log(err);
   }
 };
 
 //Stripe webhook
-
-// let endpointSecret: string;
 
 const endpointSecret: string =
   "whsec_e213ca11a5b195000074381413b16fafecffc92422039b118c0aeeb6b3782c23";
@@ -134,24 +131,19 @@ router.post(
     let data: any;
     let eventType;
 
-    if (endpointSecret) {
-      let event;
+    let event;
 
-      try {
-        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-        console.log("Webhook verified");
-      } catch (err: any) {
-        console.log(`Webhook Error: ${err.message}`);
-        res.status(400).send(`Webhook Error: ${err.message}`);
-        return;
-      }
-
-      data = event.data.object;
-      eventType = event.type;
-    } else {
-      data = req.body.data.object;
-      eventType = req.body.type;
+    try {
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      console.log("Webhook verified");
+    } catch (err: any) {
+      console.log(`Webhook Error: ${err.message}`);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
     }
+
+    data = event.data.object;
+    eventType = event.type;
 
     //Handle the event
 

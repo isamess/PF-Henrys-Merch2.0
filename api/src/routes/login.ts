@@ -3,11 +3,10 @@ const Joi = require("joi");
 const { User } = require("../models/users");
 const genAuthToken = require("../utils/genAuthToken");
 import { Router } from "express";
-import router from "./products.routes";
 
-const reouter = Router();
+const router = Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: any, res: any) => {
   const schema = Joi.object({
     email: Joi.string().required().email(),
     password: Joi.string().min(8).required(),
