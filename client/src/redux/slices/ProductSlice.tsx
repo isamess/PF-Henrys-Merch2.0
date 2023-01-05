@@ -4,22 +4,20 @@ import axios from "axios";
 interface InitialState {
   loading: boolean;
   products: Array<any>;
-  error: string; // creto que seria mejor llamarle algo asi como fetchStatus (pending, success, rejected)
+  fetchStatus: string; 
 }
 
 const initialState: InitialState = {
   loading: false,
   products: [],
-  error: "",
+  fetchStatus: "",
 };
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (values: string | any, { rejectWithValue }: any) => {
+  async ({ rejectWithValue }: any) => {
     try {
-      const products = await axios
-        .get("http://localhost:3001/products")
-        .then((response) => response.data); // si usas await no es necesario then/catch si lo neceswitas se usa trycatch
+      const products = await axios.get("http://localhost:3001/products")
 
       return products;
     } catch (err: any) {
@@ -35,11 +33,14 @@ const productSlice = createSlice({
   reducers: {
     getProducts(state, action: PayloadAction<any>) {
       const products = state.products;
-      if (products) { //si no hay productos no guarda el nuevo?
+      if (!products) { //si no hay productos no guarda el nuevo?
         return {
           ...state,
           products: action.payload,
         };
+      }
+      else{
+        console.log("Los productos ya estan cargados")
       }
     },
   },
@@ -58,7 +59,7 @@ const productSlice = createSlice({
             ...state,
             loading: false,
             products: action.payload,
-            error: "", 
+            fetchStatus: "", 
           };
         } else {
           return state;
@@ -72,7 +73,7 @@ const productSlice = createSlice({
           ...state,
           loading: false,
           products: [],
-          error: "rejected",
+          fetchStatus: "rejected",
         };
       }
     );
