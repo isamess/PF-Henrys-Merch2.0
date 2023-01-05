@@ -3,8 +3,8 @@ import axios from "axios";
 
 interface InitialState {
   loading: boolean;
-  products: any;
-  error: string;
+  products: Array<any>;
+  error: string; // creto que seria mejor llamarle algo asi como fetchStatus (pending, success, rejected)
 }
 
 const initialState: InitialState = {
@@ -19,7 +19,7 @@ export const fetchProducts = createAsyncThunk(
     try {
       const products = await axios
         .get("http://localhost:3001/products")
-        .then((response) => response.data);
+        .then((response) => response.data); // si usas await no es necesario then/catch si lo neceswitas se usa trycatch
 
       return products;
     } catch (err: any) {
@@ -35,7 +35,7 @@ const productSlice = createSlice({
   reducers: {
     getProducts(state, action: PayloadAction<any>) {
       const products = state.products;
-      if (products) {
+      if (products) { //si no hay productos no guarda el nuevo?
         return {
           ...state,
           products: action.payload,
@@ -58,7 +58,7 @@ const productSlice = createSlice({
             ...state,
             loading: false,
             products: action.payload,
-            error: "",
+            error: "", 
           };
         } else {
           return state;
