@@ -1,6 +1,16 @@
+import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+  const user = useSelector((state: any) => state.auth);
+
+  if (!user.isAdmin)
+    return (
+      <div className="not-found">
+        <p>Aceso denegado</p>;
+      </div>
+    );
+
   return (
     <div className="d-flex h-5">
       <div className="side-nav">

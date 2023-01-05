@@ -8,7 +8,6 @@ const auth = (req: any, res: any, next: any) => {
   try {
     const secretKey: any = process.env.JWT_SECRET_KEY;
     const user: any = jwt.verify(token, secretKey);
-
     req.user = user;
 
     next();
@@ -22,7 +21,7 @@ const isAdmin = (req: any, res: any, next: any) => {
     if (req.user.isAdmin) {
       next();
     } else {
-      res.status(403).send("No puede entras, no está autorizado");
+      res.status(403).send("No puede entrar, no está autorizado");
     }
   });
 };

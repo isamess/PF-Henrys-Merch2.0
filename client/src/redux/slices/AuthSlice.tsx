@@ -8,6 +8,7 @@ interface InitialState {
   name: string;
   email: string;
   _id: string;
+  isAdmin: string;
   registerStatus: string;
   registerError: string;
   loginStatus: string;
@@ -20,6 +21,7 @@ const initialState: InitialState = {
   name: "",
   email: "",
   _id: "",
+  isAdmin: "",
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -83,6 +85,7 @@ const authiSlice = createSlice({
           email: user.email,
           adress: user.adress,
           _id: user._id,
+          isAdmin: user.isAdmin,
           registerStatus: "sucess",
         };
       }
@@ -96,6 +99,7 @@ const authiSlice = createSlice({
         name: "",
         email: "",
         _id: "",
+        isAdmin: "",
         userLoaded: true,
       };
     },
@@ -120,6 +124,7 @@ const authiSlice = createSlice({
             email: user.email,
             adress: user.adress,
             _id: user._id,
+            isAdmin: user.isAdmin,
             registerStatus: "sucess",
           };
         } else {
@@ -156,6 +161,7 @@ const authiSlice = createSlice({
             email: user.email,
             adress: user.adress,
             _id: user._id,
+            isAdmin: user.isAdmin,
             registerStatus: "sucess",
           };
         } else {

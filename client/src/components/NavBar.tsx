@@ -104,11 +104,13 @@ const NavBar = ({ categories }: Categories) => {
               {auth._id ? (
                 <div>
                   <div className="d-flex text-black">
-                    <div className="btn border-none bg-none">
-                      <Link to="/admin/summary" className="text-black">
-                        Admin
-                      </Link>
-                    </div>
+                    {auth.isAdmin ? (
+                      <div className="btn border-none bg-none">
+                        <Link to="/admin/summary" className="text-black">
+                          Admin
+                        </Link>
+                      </div>
+                    ) : null}
                     <div
                       className="btn border-none bg-none text-black"
                       onClick={() => {

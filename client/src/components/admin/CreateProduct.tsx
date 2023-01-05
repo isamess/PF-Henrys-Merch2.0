@@ -5,6 +5,7 @@ import { productsCreate } from "../../redux/slices/ProductsSlice";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
+
   const [productImg, setProductImg] = useState("");
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
