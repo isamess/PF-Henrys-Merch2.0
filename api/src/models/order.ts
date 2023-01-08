@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const mogoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const orderSchema = new Schema(
   {
