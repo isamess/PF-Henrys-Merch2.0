@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node index.ts",
-    "start": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "start": "node index.ts"
   },
   "keywords": [],
   "author": "pf-soyhenry-g2",
