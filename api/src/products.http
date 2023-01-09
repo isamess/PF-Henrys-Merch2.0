@@ -10,7 +10,6 @@ GET {{url}}/products/63af64b85b6378162ac7cdde
 ###
 POST {{url}}/products
 Content-Type: application/json
-
 {
     "name": "remera de Prueba",
     "price": 1500,

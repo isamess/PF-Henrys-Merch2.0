@@ -1,4 +1,4 @@
-import {Schema, model, PaginateModel, Document} from 'mongoose'
+import {Schema, model, Document} from 'mongoose'
 const mongoosePaginate= require ('mongoose-paginate-v2')
 import {category} from '../utils/types'
 
@@ -22,4 +22,4 @@ const categorySchema = new Schema({
   
   
   
-  export const Category = new (model(CategoryDocument, PaginateModel<CategoryDocument>))('Categories', categorySchema, 'categories');
+ export const Category= model("Category", categorySchema)

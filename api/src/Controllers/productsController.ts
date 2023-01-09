@@ -11,8 +11,8 @@ export const getProducts: RequestHandler = async (req, res) => {
   try {
     const products = await Products.find();
     return res.json(products);
-  } catch (error) {
-    return res.status(500).json(error);
+  } catch (error: any) {
+    res.status(500).json({error_message: error.message})
   }
 };
 
@@ -25,8 +25,8 @@ export const getProduct: RequestHandler = async (req, res) => {
         message: "Product doesn't exist",
       });
     return res.json(product);
-  } catch (error) {
-    return res.status(500).json(error);
+  } catch (error: any) {
+    res.status(500).json({error_message: error.message})
   }
 };
 
