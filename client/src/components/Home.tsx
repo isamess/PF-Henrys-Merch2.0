@@ -29,10 +29,10 @@ function Home() {
                   key={category._id}
                 >
                   <a
-                    className="d-flex p-2 justify-content-center pb-3"
+                    className="d-flex p-2 justify-content-center pb-3 text-black"
                     href={`/category/${category.category}`}
                   >
-                    {category.category}
+                    <h3>{category.category}</h3>
                   </a>
                   <List category={category.category} />
                 </div>
