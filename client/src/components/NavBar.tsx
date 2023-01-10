@@ -4,16 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/slices/AuthSlice";
 import { toast } from "react-toastify";
 
-interface Categories {
-  categories: Array<{
-    name: string;
-  }>;
-}
-
-const NavBar = ({ categories }: Categories) => {
-  const { cartTotalQuantity } = useSelector((state: any) => state.cart);
+const NavBar = () => {
   const dispatch = useDispatch();
-  const auth = useSelector((state: any) => state.auth);
+  const { cartTotalQuantity }: any = useSelector((state: any) => state.cart);
+  const auth: any = useSelector((state: any) => state.auth);
+  const { categories }: any = useSelector((state: any) => state.products);
 
   return (
     <div className="nav-bar">
@@ -54,14 +49,14 @@ const NavBar = ({ categories }: Categories) => {
                   key="category-list"
                 >
                   <div className="categories">
-                    {categories.map((category) => {
+                    {categories.map((category: any, index: any) => {
                       return (
-                        <li key={category.name}>
+                        <li key={index}>
                           <Link
-                            to={`/category/${category.name}`}
+                            to={`/category/${category.category}`}
                             className="dropdown-item "
                           >
-                            {category.name}
+                            {category.category}
                           </Link>
                         </li>
                       );

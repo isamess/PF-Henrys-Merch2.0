@@ -1,20 +1,23 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-// import { toast } from "react-toastify"; falta colocarlo
+import { toast } from "react-toastify";
+import { url } from "./api";
 
-interface InitialState {
+type InitialState = {
   token: string | null;
   name: string;
   email: string;
   _id: string;
   isAdmin: string;
+  users: Array<any>;
   registerStatus: string;
   registerError: string;
+  userStatus: string;
   loginStatus: string;
   loginError: string;
   userLoaded: boolean;
-}
+};
 
 const initialState: InitialState = {
   token: localStorage.getItem("token"),
@@ -22,8 +25,10 @@ const initialState: InitialState = {
   email: "",
   _id: "",
   isAdmin: "",
+  users: [],
   registerStatus: "",
   registerError: "",
+  userStatus: "",
   loginStatus: "",
   loginError: "",
   userLoaded: false,
@@ -33,7 +38,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values: any, { rejectWithValue }: any) => {
     try {
-      const token = await axios.post("http://localhost:3001/api/register", {
+      const token = await axios.post(`${url}/register`, {
         name: values.name,
         email: values.email,
         password: values.password,
@@ -54,7 +59,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (values: any, { rejectWithValue }: any) => {
     try {
-      const token = await axios.post("http://localhost:3001/api/login", {
+      const token = await axios.post(`${url}/login`, {
         email: values.email,
         password: values.password,
       });
@@ -69,7 +74,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-const authiSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -117,6 +122,10 @@ const authiSlice = createSlice({
         if (action.payload) {
           const user: any = jwtDecode(action.payload);
 
+          toast.info(`${user.name} se ha registrado correctamente`, {
+            position: "top-right",
+          });
+
           return {
             ...state,
             token: action.payload,
@@ -154,6 +163,10 @@ const authiSlice = createSlice({
         if (action.payload) {
           const user: any = jwtDecode(action.payload);
 
+          toast.info(`${user.name} ha ingresado`, {
+            position: "top-right",
+          });
+
           return {
             ...state,
             token: action.payload,
@@ -182,6 +195,6 @@ const authiSlice = createSlice({
   },
 });
 
-export const { loadUser, logoutUser } = authiSlice.actions;
+export const { loadUser, logoutUser } = authSlice.actions;
 
-export default authiSlice.reducer;
+export default authSlice.reducer;

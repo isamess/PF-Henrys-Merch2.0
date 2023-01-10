@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getPublicPath } from "../data/products";
 import Footer from "./Footer/Footer";
 import PayButton from "./PayButton";
 import {
@@ -75,21 +74,18 @@ function Cart() {
               </div>
               <div className="cart-items">
                 {cart.cartItems?.map((cartItem: any) => (
-                  <div className="cart-item" key={cartItem.id}>
+                  <div className="cart-item" key={cartItem._id}>
                     <div className="cart-product">
-                      <img
-                        src={getPublicPath(cartItem.imagen)}
-                        alt={cartItem.nombre}
-                      />
+                      <img src={cartItem.image} alt={cartItem.name} />
                       <div>
-                        <h3>{cartItem.nombre}</h3>
-                        <p>{cartItem.descripcion}</p>
+                        <h3>{cartItem.name}</h3>
+                        {/* <p>{cartItem.desc}</p> */}
                         <button onClick={() => handleRemoveFromCart(cartItem)}>
                           Eliminar
                         </button>
                       </div>
                     </div>
-                    <div className="cart-product-price">${cartItem.precio}</div>
+                    <div className="cart-product-price">${cartItem.price}</div>
                     <div className="cart-product-quantity">
                       <button onClick={() => handleDecreaseQuantity(cartItem)}>
                         -
@@ -100,12 +96,7 @@ function Cart() {
                       </button>
                     </div>
                     <div className="cart-product-total-price">
-                      $
-                      {Math.round(
-                        (cartItem.precio * cartItem.cartQuantity +
-                          Number.EPSILON) *
-                          100
-                      ) / 100}
+                      ${(cartItem.price * cartItem.cartQuantity).toFixed(2)}
                     </div>
                   </div>
                 ))}
@@ -121,10 +112,7 @@ function Cart() {
                   <div className="subtotal">
                     <span>Subtotal</span>
                     <span className="amount">
-                      $
-                      {Math.round(
-                        (cart.cartTotalAmount + Number.EPSILON) * 100
-                      ) / 100}
+                      ${cart.cartTotalAmount.toFixed(2)}
                     </span>
                   </div>
                   <p>Los impuestos se calculan en el checkout</p>
