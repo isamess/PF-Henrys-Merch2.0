@@ -1,7 +1,10 @@
 import { Schema, model } from "mongoose";
 
+<<<<<<< HEAD
 const mongoose = require("mongoose");
 
+=======
+>>>>>>> 2f50176e047bf2db67fa25fd0ca4ecefd081d6b0
 const orderSchema = new Schema(
   {
     userId: {
@@ -10,24 +13,16 @@ const orderSchema = new Schema(
     },
     customerId: { type: String },
     paymentIntentId: { type: String },
-    products: [
-      {
-        id: { type: String },
-        name: { type: String },
-        brand: { type: String },
-        desc: { type: String },
-        price: { type: String },
-        image: { type: String },
-        cartQuantity: { type: String },
-      },
-    ],
+    products: [],
     subtotal: { type: Number, require: true },
     total: { type: Number, require: true },
     shipping: { type: Object, require: true },
-    deliver_status: { type: String, default: "pending" },
+    delivery_status: { type: String, default: "pending" },
     payment_status: { type: String, require: true },
   },
   { timestamps: true }
 );
 
-export default model("Order", orderSchema);
+const Order = model("Order", orderSchema);
+
+exports.Order = Order;

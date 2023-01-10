@@ -31,7 +31,10 @@ const productSchema = new Schema(
     },
     image: {
       type: String,
+<<<<<<< HEAD
       public_id:{type: String},
+=======
+>>>>>>> 2f50176e047bf2db67fa25fd0ca4ecefd081d6b0
       required: true,
     },
     desc: {

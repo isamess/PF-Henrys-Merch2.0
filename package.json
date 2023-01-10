@@ -2,10 +2,5 @@
   "devDependencies": {
     "@types/node": "^18.11.15"
   },
-  "dependencies": {
-    "axios": "^1.2.1",
-    "bootstrap-icons": "^1.10.2",
-    "jwt-decode": "^3.1.2",
-    "react-toastify": "^9.1.1"
-  }
+  "dependencies": {}
 }

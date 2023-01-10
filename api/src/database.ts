@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+//data base local
+
 const dataBase = (async () => {
   try {
     const mongooseOptions: ConnectOptions = {
@@ -20,7 +22,20 @@ const dataBase = (async () => {
   }
 })();
 
+//database deploy
 
+// const dataBase = (async () => {
+//   try {
+//     const mongooseOptions: ConnectOptions = {
+//       user: config.MONGO_USER, //usuario por defecto de esta DB
+//       pass: config.MONGO_PASSWORD,
+//     };
+//     const db = await mongoose.connect(config.MONGO_DEPLOY!);
+//     console.log("Our glorious Database is connected to:", db.connection.name);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// })();
 
 // aquí se conecta a la base de datos con las variables de entorno de config.ts
 

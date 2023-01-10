@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { Home } from "./components/Home";
@@ -25,19 +25,24 @@ import CreateProduct from "./components/admin/CreateProduct";
 import Dashboard from "./components/admin/Dashboard";
 import Products from "./components/admin/Products";
 import Summary from "./components/admin/Summary";
+import Users from "./components/admin/Users";
+import Orders from "./components/admin/Orders";
+import ProductsList from "./components/admin/list/ProductsList";
+import OrdersList from "./components/admin/list/OrdersList";
+import AdminProduct from "./components/details/Products";
+import Order from "./components/details/Order";
+import UserProfile from "./components/details/User";
+import ProductsByCategory from "./components/ProductsByCategory";
 
 function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <NavBar categories={categories} />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
-        <Route
-          path="/category/:category"
-          element={<List products={products} />}
-        />
+        <Route path="/category/:category" element={<ProductsByCategory />} />
         <Route path="/register" element={<RegisterUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
@@ -47,11 +52,19 @@ function App() {
         <Route path="/politicas" element={<Politicas />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/admin-product/:id" element={<AdminProduct />} />
+        <Route path="/admin-order/:id" element={<Order />} />
+        <Route path="/admin-user/:id" element={<UserProfile />} />
         <Route path="/admin" element={<Dashboard />}>
           <Route path="products" element={<Products />}>
+            <Route index element={<ProductsList />} />
             <Route path="create-product" element={<CreateProduct />} />
           </Route>
           <Route path="summary" element={<Summary />} />
+          <Route path="ordenes" element={<Orders />}>
+            <Route index element={<OrdersList />} />
+          </Route>
+          <Route path="usuarios" element={<Users />} />
         </Route>
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
 

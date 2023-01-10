@@ -4,18 +4,10 @@ import fileUpload from "express-fileupload"; //este middleware de express nos si
 import * as productControllers from "../Controllers/productsController"; // de esta forma importo todos los controllers a la vez
 
 const router = Router();
-router.get("/", productControllers.getProducts);
 
-router.get("/:id", productControllers.getProduct);
+// router.get("/", productControllers.getProducts);
 
-// router.post(
-//   "/",
-//   fileUpload({
-//     useTempFiles: true, //middleware para guardar las imágenes temporalmente en nuestro proyecto
-//     tempFileDir: "/uploads/", //carpeta que se crea sólo cuando se suben archivos(luego borraremos los temps)
-//   }),
-//   productControllers.createProduct
-// );
+// router.get("/:id", productControllers.getProductId);
 
 router.delete("/:id", productControllers.deleteProduct);
 
