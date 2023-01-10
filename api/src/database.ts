@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+//data base local
+
 const dataBase = (async () => {
   try {
     const mongooseOptions: ConnectOptions = {
@@ -19,6 +21,8 @@ const dataBase = (async () => {
     console.log(error);
   }
 })();
+
+//database deploy
 
 // const dataBase = (async () => {
 //   try {
