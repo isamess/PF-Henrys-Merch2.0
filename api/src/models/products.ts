@@ -30,7 +30,7 @@ const productSchema = new Schema(
       favs: Number,
     },
     image: {
-      type: Object,
+      type: String,
       required: true,
     },
     desc: {

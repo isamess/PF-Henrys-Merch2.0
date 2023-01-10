@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getPublicPath } from "../data/products";
 import Footer from "./Footer/Footer";
 import PayButton from "./PayButton";
 import {
@@ -77,10 +76,7 @@ function Cart() {
                 {cart.cartItems?.map((cartItem: any) => (
                   <div className="cart-item" key={cartItem._id}>
                     <div className="cart-product">
-                      <img
-                        src={getPublicPath(cartItem.imgUrl)}
-                        alt={cartItem.name}
-                      />
+                      <img src={cartItem.image} alt={cartItem.name} />
                       <div>
                         <h3>{cartItem.name}</h3>
                         {/* <p>{cartItem.desc}</p> */}

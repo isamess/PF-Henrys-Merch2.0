@@ -20,27 +20,44 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action: PayloadAction<any>) {
-      const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload._id
-      );
-
-      if (itemIndex >= 0) {
-        state.cartItems[itemIndex].cartQuantity += 1;
-        toast.info(
-          `Aumentó la cantidad del producto ${action.payload.nombre}`,
-          {
-            position: "top-right",
-          }
-        );
-      } else {
-        const tempProduct = { ...action.payload, cartQuantity: 1 };
-        state.cartItems.push(tempProduct);
-        toast.info(`${action.payload.nombre} agregado`, {
+      if (action.payload.stock === 0) {
+        toast.error(`No hay stock suficiente de ${action.payload.name}`, {
           position: "top-right",
         });
+      } else {
+        const itemIndex = state.cartItems.findIndex(
+          (item) => item._id === action.payload._id
+        );
+        if (action.payload.stock > 0) {
+          if (itemIndex < 0) {
+            const tempProduct = { ...action.payload, cartQuantity: 1 };
+            state.cartItems.push(tempProduct);
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+            toast.info(`${action.payload.name} agregado`, {
+              position: "top-right",
+            });
+          } else if (
+            state.cartItems[itemIndex].stock >
+            state.cartItems[itemIndex].cartQuantity
+          ) {
+            state.cartItems[itemIndex].cartQuantity += 1;
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+            toast.info(
+              `Aumentó la cantidad del producto ${action.payload.name}`,
+              {
+                position: "top-right",
+              }
+            );
+          } else {
+            toast.error(
+              `El stock es insuficiente para agregar más ${action.payload.name}`,
+              {
+                position: "top-right",
+              }
+            );
+          }
+        }
       }
-
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     removeFromCart(state, action: PayloadAction<any>) {
       const nextCartItems: Array<any> = state.cartItems.filter(
@@ -71,8 +88,18 @@ const cartSlice = createSlice({
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      state.cartItems[itemIndex].cartQuantity += 1;
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      console.log(action.payload.cartQuantity);
+      if (state.cartItems[itemIndex].stock > action.payload.cartQuantity) {
+        state.cartItems[itemIndex].cartQuantity += 1;
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      } else {
+        toast.error(
+          `El stock es insuficiente para agregar más ${action.payload.name}`,
+          {
+            position: "top-right",
+          }
+        );
+      }
     },
     clearCart(state) {
       state.cartItems = [];
@@ -81,9 +108,8 @@ const cartSlice = createSlice({
     getTotal(state) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal: any, cartItem: any) => {
-          const { precio, cartQuantity } = cartItem;
-          const itemTotal =
-            Math.round((precio * cartQuantity + Number.EPSILON) * 100) / 100;
+          const { price, cartQuantity } = cartItem;
+          const itemTotal = price * cartQuantity;
 
           cartTotal.total += itemTotal;
           cartTotal.quantity += cartQuantity;

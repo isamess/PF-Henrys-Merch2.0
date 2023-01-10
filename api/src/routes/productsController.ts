@@ -58,19 +58,51 @@ router.post("/", isAdmin, async (req: any, res: any) => {
   }
 });
 
-export const updateProduct: RequestHandler = async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
+  if (req.body.productImg) {
+    try {
+      const destroyResponse: any = await cloudinary.uploader.destroy(
+        req.body.product.image.public_id
+      );
+
+      if (destroyResponse) {
+        const uploadResponse = await cloudinary.uploader.upload(
+          req.body.productImg,
+          {
+            upload_preset: "online-shop",
+          }
+        );
+        if (uploadResponse) {
+          const updatedResponse: any = await Products.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: {
+                ...req.body.product,
+                image: uploadResponse,
+              },
+            },
+            { new: true }
+          );
+          res.status(200).send(updatedResponse);
+        }
+      }
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
   try {
-    const productUpdated = await Products.findByIdAndUpdate(
+    const updatedProducts = await Products.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { $set: req.body.product },
       { new: true }
     );
-    if (!productUpdated) return res.status(204).json();
-    res.json(productUpdated);
-  } catch (error) {
-    return res.status(500).json(error);
+
+    res.status(200).send(updatedProducts);
+  } catch (err: any) {
+    return res.status(500).send(err);
   }
-};
+});
 
 export const deleteProduct: RequestHandler = async (req, res) => {
   try {
@@ -88,7 +120,7 @@ export const deleteProduct: RequestHandler = async (req, res) => {
 
 //copia para poder borrar tambien la imagen de cloudinary y el formato para usar middlewar
 
-router.delete("/:id"),
+router.delete("delete/:id"),
   isAdmin,
   async (req: any, res: any) => {
     try {
@@ -120,12 +152,10 @@ router.post("/category", isAdmin, async (req: any, res: any) => {
   const { createCategory } = req.body;
 
   try {
-    console.log(createCategory);
     const category: any = new Category({
       category: createCategory,
     });
 
-    console.log(category);
     const savedCategory: any = await category.save();
 
     res.status(200).send(savedCategory);

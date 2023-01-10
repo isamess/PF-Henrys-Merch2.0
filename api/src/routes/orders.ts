@@ -37,6 +37,22 @@ router.get("/stats", isAdmin, async (req: any, res: any) => {
   }
 });
 
+router.get("/total-income", isAdmin, async (req: any, res: any) => {
+  try {
+    const income: any = await Order.aggregate([
+      {
+        $project: {
+          sales: "$total",
+        },
+      },
+    ]);
+
+    res.status(200).send(income);
+  } catch (err: any) {
+    res.status(500).send(err);
+  }
+});
+
 router.get("/income/stats", isAdmin, async (req: any, res: any) => {
   const previousMonth: any = moment()
     .month(moment().month() - 1)

@@ -11,6 +11,8 @@ type InitialState = {
   products: Array<any>;
   productsStatus: "" | null;
   categoryStatus: any;
+  deleteStatus: any;
+  editStatus: any;
 };
 
 const initialState: InitialState = {
@@ -21,6 +23,8 @@ const initialState: InitialState = {
   products: [],
   productsStatus: null,
   categoryStatus: null,
+  deleteStatus: null,
+  editStatus: null,
 };
 
 export const productsCreate: any = createAsyncThunk(
@@ -29,6 +33,23 @@ export const productsCreate: any = createAsyncThunk(
     try {
       const response = await axios.post(
         `${url}/products`,
+        values,
+        setHeaders()
+      );
+      return response.data;
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.response?.data);
+    }
+  }
+);
+
+export const productsEdit: any = createAsyncThunk(
+  "products/productsEdit",
+  async (values: any) => {
+    try {
+      const response = await axios.put(
+        `${url}/products/${values.product._id}`,
         values,
         setHeaders()
       );
@@ -49,6 +70,23 @@ export const categoryCreate: any = createAsyncThunk(
         values,
         setHeaders()
       );
+      return response.data;
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.response?.data);
+    }
+  }
+);
+
+export const productDelete: any = createAsyncThunk(
+  "products/productsDelete",
+  async (id: any) => {
+    try {
+      const response = await axios.delete(
+        `${url}/products/delete/${id}`,
+        setHeaders()
+      );
+
       return response.data;
     } catch (err: any) {
       console.log(err);
@@ -94,6 +132,7 @@ const productsSlice = createSlice({
     [categoryCreate.fullfiled]: (state, action: PayloadAction<any>) => {
       state.categories.push(action.payload);
       state.categoryStatus = "success";
+      toast.success("Se ha creado la categoria");
     },
     [categoryCreate.rejected]: (state, action: PayloadAction<any>) => {
       state.categoryStatus = "rejected";
@@ -124,9 +163,37 @@ const productsSlice = createSlice({
     [productsCreate.fullfiled]: (state, action: PayloadAction<any>) => {
       state.items.push(action.payload);
       state.createStatus = "success";
+      toast.success("Se ha creado el producto");
     },
-    [productsCreate.rejected]: (state, action: PayloadAction<any>) => {
-      state.createStatus = "rejected";
+    [productsEdit.pending]: (state, action: PayloadAction<any>) => {
+      state.editStatus = "pending";
+    },
+    [productsEdit.fullfiled]: (state, action: PayloadAction<any>) => {
+      const updatedProducts = state.items.map((product: any) =>
+        product._id === action.payload ? action.payload : product
+      );
+
+      state.items = updatedProducts;
+      state.editStatus = "success";
+      toast.info("Se ha atualizado el producto");
+    },
+    [productsEdit.rejected]: (state, action: PayloadAction<any>) => {
+      state.editStatus = "rejected";
+    },
+    [productDelete.pending]: (state, action: PayloadAction<any>) => {
+      state.deleteStatus = "pending";
+    },
+    [productDelete.fullfiled]: (state, action: PayloadAction<any>) => {
+      const newList = state.items.filter(
+        (item: any) => item._id !== action.payload
+      );
+
+      state.items = newList;
+      state.deleteStatus = "success";
+      toast.error("Se ha eliminado el producto");
+    },
+    [productDelete.rejected]: (state, action: PayloadAction<any>) => {
+      state.deleteStatus = "rejected";
     },
   },
 });

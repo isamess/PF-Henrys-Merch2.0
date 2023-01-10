@@ -31,7 +31,7 @@ function RegisterUser() {
       for (let i = 0; i < name.length; i++) {
         name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1);
       }
-      console.log(name.join(" "));
+
       setUser({ ...user, name: String(name.join(" ")) });
 
       dispatch(registerUser(user));

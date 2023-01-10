@@ -14,13 +14,13 @@ const CreateProduct = () => {
     dispatch(categoryFetch());
   }, [dispatch]);
 
-  const [productImg, setProductImg] = useState("");
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [desc, setDesc] = useState("");
-  const [price, setPrice] = useState("");
-  // const [color, setColor] = useState("");
-  const [createCategory, setCreateCategory] = useState("");
+  const [productImg, setProductImg] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  // const [color, setColor] = useState<string>("");
+  const [createCategory, setCreateCategory] = useState<string>("");
 
   const handleProductImageUpload = (e: any) => {
     const file: any = e.target.files[0];
@@ -96,7 +96,7 @@ const CreateProduct = () => {
             ))}
           </select>
           <input
-            type="text"
+            type="number"
             required
             placeholder="precio"
             onChange={(e) => setPrice(e.target.value)}

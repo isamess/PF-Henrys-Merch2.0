@@ -1,27 +1,36 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { productsFetch } from "../../../redux/slices/ProductsSlice";
+import {
+  productDelete,
+  productsFetch,
+} from "../../../redux/slices/ProductsSlice";
+import EditProduct from "../summary-component/EditProduct";
 
 export default function ProductsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { products }: any = useSelector((state: any) => state.products);
+  const [image, setImage] = useState<Array<string>>([]);
 
   useEffect(() => {
     dispatch(productsFetch());
   }, [dispatch]);
+
+  const handleDelete = (id: any) => {
+    dispatch(productDelete(id));
+  };
 
   const rows: any =
     products &&
     products.map((item: any) => {
       return {
         id: item._id,
-        imageUrl: item.imgUrl,
+        imageUrl: item.image,
         pName: item.name,
-        // pDesc: item.description,
+        pDesc: item.desc ? item.desc : null,
         price: item.price.toFixed(2).toLocaleString(),
         stock: item.stock,
       };
@@ -69,7 +78,13 @@ export default function ProductsList() {
       renderCell: (params: any) => {
         return (
           <div className="list-actions">
-            <button className="bg-danger  ">Eliminar</button>
+            <button
+              className="bg-danger"
+              onClick={() => handleDelete(params.row.id)}
+            >
+              Eliminar
+            </button>
+            <EditProduct prodId={params.row.id} />
             <button
               className="bg-success text-white"
               onClick={() => navigate(`/admin-product/${params.row.id}`)}

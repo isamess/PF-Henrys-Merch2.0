@@ -1,19 +1,13 @@
 import "./../css/list.css";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/CartSlice";
-import { productsFetch } from "../redux/slices/ProductsSlice";
 
 //PASO LAS PROPS
 const List = (category: any) => {
   const dispatch = useDispatch();
   const { products }: any = useSelector((state: any) => state.products);
   const categoryName: any = category.category;
-
-  useEffect(() => {
-    dispatch(productsFetch());
-  }, [dispatch]);
 
   const handleAddCart = (product: any) => {
     dispatch(addToCart(product));
@@ -30,7 +24,7 @@ const List = (category: any) => {
         product.category[0] === categoryName ? (
           <div className="d-flex justify-content-center" key={product._id}>
             <div className="card my-card">
-              <img src={product.imgUrl} className="card-img-top" alt="..." />
+              <img src={product.image} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 {/* <p className="card-text">{product.desc}</p> */}

@@ -16,8 +16,6 @@ function Product() {
   const [product, setProduct] = useState<any>([]);
   const [loading, seteLoading] = useState<boolean>(false);
 
-  console.log(product);
-
   useEffect(() => {
     seteLoading(true);
 
@@ -36,7 +34,7 @@ function Product() {
     }
 
     fetchData();
-  }, []);
+  }, [params.id]);
 
   const handleAddCart = (product: any) => {
     dispatch(addToCart(product));
@@ -58,7 +56,7 @@ function Product() {
             <div className="col m-0 p-0"></div>
             <div className="col">
               <img
-                src={product[0].imgUrl}
+                src={product[0].image}
                 style={{ height: "500px" }}
                 alt="..."
               />
@@ -91,9 +89,9 @@ function Product() {
 
           <div className="mt-5 mb-5">
             <h4 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
-              Productos relacionados ({product.category})
+              Productos relacionados {product[0].category[0]}
             </h4>
-            <List products={product} category={product.category} />
+            <List category={product[0].category[0]} />
           </div>
         </div>
       ) : (

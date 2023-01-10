@@ -1,3 +1,5 @@
+import { any } from "joi";
+
 const { Order } = require("../models/order");
 const express = require("express");
 const Stripe = require("stripe");
@@ -9,25 +11,27 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req: any, res: any) => {
+  const { cartItems }: any = req.body;
+
   const customer: any = await stripe.customers.create({
     metadata: {
-      userId: req.body.userId,
+      user_Id: req.body.user_Id,
     },
   });
 
-  const line_items: any = req.body.cartItems.map((item: any) => {
+  const line_items: any = req.body.cartItems?.map((item: any) => {
     return {
       price_data: {
         currency: "usd",
         product_data: {
-          name: item.nombre,
-          images: [item.imagen.url],
-          description: item.descripcion,
+          name: item.name,
+          images: [item.image],
+          description: item.desc,
           metadata: {
-            id: item.id,
+            id: item._id,
           },
         },
-        unit_amount: (item.precio * 100).toFixed(0),
+        unit_amount: (item.price * 100).toFixed(0),
       },
       quantity: item.cartQuantity,
     };
@@ -95,7 +99,7 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
 //Create Order
 const createOrder = async (customer: any, data: any, lineItems: any) => {
   const newOrder = new Order({
-    userId: customer.metadata.userId,
+    userId: customer.metadata.user_Id,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
     products: lineItems.data,
@@ -149,9 +153,9 @@ router.post(
         .retrieve(data.customer)
         .then((customer: any) => {
           stripe.checkout.sessions.listLineItems(
-            data,
+            data.id,
             {},
-            function (err: any, lineItems: Object) {
+            function (err: any, lineItems: any) {
               console.log("line_items", lineItems);
 
               createOrder(customer, data, lineItems);

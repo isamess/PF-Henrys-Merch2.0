@@ -1,7 +1,5 @@
 import { Schema, model } from "mongoose";
 
-const mogoose = require("mongoose");
-
 const orderSchema = new Schema(
   {
     userId: {

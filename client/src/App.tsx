@@ -38,7 +38,7 @@ function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <NavBar categories={categories} />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />

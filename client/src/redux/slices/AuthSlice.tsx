@@ -2,19 +2,22 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
+import { url } from "./api";
 
-interface InitialState {
+type InitialState = {
   token: string | null;
   name: string;
   email: string;
   _id: string;
   isAdmin: string;
+  users: Array<any>;
   registerStatus: string;
   registerError: string;
+  userStatus: string;
   loginStatus: string;
   loginError: string;
   userLoaded: boolean;
-}
+};
 
 const initialState: InitialState = {
   token: localStorage.getItem("token"),
@@ -22,8 +25,10 @@ const initialState: InitialState = {
   email: "",
   _id: "",
   isAdmin: "",
+  users: [],
   registerStatus: "",
   registerError: "",
+  userStatus: "",
   loginStatus: "",
   loginError: "",
   userLoaded: false,
@@ -33,7 +38,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values: any, { rejectWithValue }: any) => {
     try {
-      const token = await axios.post("http://localhost:3001/api/register", {
+      const token = await axios.post(`${url}/register`, {
         name: values.name,
         email: values.email,
         password: values.password,
@@ -54,7 +59,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (values: any, { rejectWithValue }: any) => {
     try {
-      const token = await axios.post("http://localhost:3001/api/login", {
+      const token = await axios.post(`${url}/login`, {
         email: values.email,
         password: values.password,
       });

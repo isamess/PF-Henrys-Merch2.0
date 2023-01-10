@@ -1,9 +1,9 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Orders = () => {
   return (
     <>
-      Orde
+      Ordenes
       <Outlet />
     </>
   );

@@ -1,9 +1,12 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Users = () => {
-  const navigate = useNavigate();
-
-  return <>Users</>;
+  return (
+    <>
+      Usuarios
+      <Outlet />
+    </>
+  );
 };
 
 export default Users;

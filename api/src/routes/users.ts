@@ -36,4 +36,13 @@ router.get("/stats", isAdmin, async (req: any, res: any) => {
   }
 });
 
+router.get("/find", async (req: any, res: any) => {
+  try {
+    const user: any = await User.find();
+    res.status(200).send(user);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
 module.exports = router;
