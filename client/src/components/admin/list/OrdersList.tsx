@@ -1,17 +1,19 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import moment from "moment";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ordersEdit, ordersFetch } from "../../../redux/slices/OrdersSlice";
 
 export default function OrdersList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { list }: any = useSelector((state: any) => state.orders);
 
   useEffect(() => {
     dispatch(ordersFetch());
-  }, [dispatch]);
+  }, [list, dispatch]);
 
   const handleDispatch = (id: any) => {
     dispatch(
@@ -78,7 +80,7 @@ export default function OrdersList() {
     {
       field: "date",
       headerName: "Fecha",
-      width: 80,
+      width: 120,
     },
     {
       field: "actions",
@@ -100,12 +102,19 @@ export default function OrdersList() {
             >
               Delivey
             </button>
-            <button className="bg-success text-white">Ver</button>
+            <button
+              className="bg-success text-white"
+              onClick={() => navigate(`/admin-order/${params.row.id}`)}
+            >
+              Ver
+            </button>
           </div>
         );
       },
     },
   ];
+
+  console.log(list[0]);
 
   return (
     <div style={{ height: 400, width: "100%" }}>

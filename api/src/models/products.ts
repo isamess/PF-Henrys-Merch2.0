@@ -19,15 +19,8 @@ const productSchema = new Schema(
       trim: true,
     },
     category: {
-      type: Array,
-      required: true,
-    },
-    color: {
       type: String,
-    },
-    meta: {
-      votes: Number,
-      favs: Number,
+      required: true,
     },
     image: {
       type: String,
@@ -40,7 +33,6 @@ const productSchema = new Schema(
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 );
 

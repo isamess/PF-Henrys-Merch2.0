@@ -20,7 +20,7 @@ function RegisterUser() {
     name: "",
     email: "",
     password: "",
-    adress: "",
+    address: "",
     repassword: "",
   });
 
@@ -80,10 +80,10 @@ function RegisterUser() {
             <input
               type="text"
               className="form-control mb-3"
-              id="adress"
+              id="address"
               placeholder="dirección"
               onChange={(e: any) =>
-                setUser({ ...user, adress: e.target.value })
+                setUser({ ...user, address: e.target.value })
               }
             />
           </div>

@@ -8,10 +8,10 @@ const AdminProduct = () => {
   const params: any = useParams();
 
   const [product, setProduct] = useState<any>({});
-  const [loading, seteLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    seteLoading(true);
+    setLoading(true);
 
     async function fetchData() {
       try {
@@ -24,7 +24,7 @@ const AdminProduct = () => {
       } catch (err: any) {
         console.log(err);
       }
-      seteLoading(false);
+      setLoading(false);
     }
 
     fetchData();

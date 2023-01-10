@@ -104,19 +104,19 @@ router.put("/:id", isAdmin, async (req, res) => {
   }
 });
 
-export const deleteProduct: RequestHandler = async (req, res) => {
-  try {
-    const product = await Products.findByIdAndDelete(req.params.id);
-    if (!product)
-      return res.status(404).json({ message: "Product doesn't exist" });
-    if (product.image?.public_id) {
-      await deleteImage(product.image.public_id);
-    }
-    return res.json(product);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-};
+// export const deleteProduct: RequestHandler = async (req, res) => {
+//   try {
+//     const product = await Products.findByIdAndDelete(req.params.id);
+//     if (!product)
+//       return res.status(404).json({ message: "Product doesn't exist" });
+//     if (product.image?.public_id) {
+//       await deleteImage(product.image.public_id);
+//     }
+//     return res.json(product);
+//   } catch (error) {
+//     return res.status(500).json(error);
+//   }
+// };
 
 //copia para poder borrar tambien la imagen de cloudinary y el formato para usar middlewar
 

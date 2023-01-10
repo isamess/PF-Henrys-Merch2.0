@@ -665,3 +665,23 @@
   margin: 0.5rem 0;
   width: 35%;
 }
+
+.o-button {
+  padding: 9px 12px;
+  border-radius: 5px;
+  font-weight: 400;
+  letter-spacing: 1.15px;
+  background-color: #4b70e2;
+  color: #f9f9f9;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0.5rem 1rem;
+  flex: 1;
+}
+
+.order-view-container {
+  display: flex;
+  max-width: 100%;
+  margin-top: 2rem;
+}

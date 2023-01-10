@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const Orders = () => {
   return (
     <>
-      Ordenes
+      <div className="admin-header">Ordenes</div>
       <Outlet />
     </>
   );
