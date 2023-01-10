@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-// import { toast } from "react-toastify"; falta colocarlo
+import { toast } from "react-toastify";
 
 interface InitialState {
   token: string | null;
@@ -69,7 +69,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-const authiSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -117,6 +117,10 @@ const authiSlice = createSlice({
         if (action.payload) {
           const user: any = jwtDecode(action.payload);
 
+          toast.info(`${user.name} se ha registrado correctamente`, {
+            position: "top-right",
+          });
+
           return {
             ...state,
             token: action.payload,
@@ -154,6 +158,10 @@ const authiSlice = createSlice({
         if (action.payload) {
           const user: any = jwtDecode(action.payload);
 
+          toast.info(`${user.name} ha ingresado`, {
+            position: "top-right",
+          });
+
           return {
             ...state,
             token: action.payload,
@@ -182,6 +190,6 @@ const authiSlice = createSlice({
   },
 });
 
-export const { loadUser, logoutUser } = authiSlice.actions;
+export const { loadUser, logoutUser } = authSlice.actions;
 
-export default authiSlice.reducer;
+export default authSlice.reducer;

@@ -25,6 +25,13 @@ import CreateProduct from "./components/admin/CreateProduct";
 import Dashboard from "./components/admin/Dashboard";
 import Products from "./components/admin/Products";
 import Summary from "./components/admin/Summary";
+import Users from "./components/admin/Users";
+import Orders from "./components/admin/Orders";
+import ProductsList from "./components/admin/list/ProductsList";
+import OrdersList from "./components/admin/list/OrdersList";
+import AdminProduct from "./components/details/Products";
+import Order from "./components/details/Order";
+import UserProfile from "./components/details/User";
 
 function App() {
   return (
@@ -47,11 +54,19 @@ function App() {
         <Route path="/politicas" element={<Politicas />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/admin-product/:id" element={<AdminProduct />} />
+        <Route path="/admin-order/:id" element={<Order />} />
+        <Route path="/admin-user/:id" element={<UserProfile />} />
         <Route path="/admin" element={<Dashboard />}>
           <Route path="products" element={<Products />}>
+            <Route index element={<ProductsList />} />
             <Route path="create-product" element={<CreateProduct />} />
           </Route>
           <Route path="summary" element={<Summary />} />
+          <Route path="ordenes" element={<Orders />}>
+            <Route index element={<OrdersList />} />
+          </Route>
+          <Route path="usuarios" element={<Users />} />
         </Route>
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
 

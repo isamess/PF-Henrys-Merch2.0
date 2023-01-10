@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
+import { FaUser, FaStore, FaClipboard, FaTachometerAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const auth = useSelector((state: any) => state.auth);
@@ -7,12 +8,12 @@ const Dashboard = () => {
   if (!auth.isAdmin)
     return (
       <div className="not-found">
-        <p>Aceso denegado</p>;
+        <p>Acceso denegado</p>;
       </div>
     );
 
   return (
-    <div className="d-flex h-5">
+    <div className="dashboard">
       <div className="side-nav">
         <h3>Quick Links</h3>
         <NavLink
@@ -21,7 +22,7 @@ const Dashboard = () => {
           }
           to={"/admin/summary"}
         >
-          Summary
+          <FaTachometerAlt /> Summary
         </NavLink>
         <NavLink
           className={({ isActive }) =>
@@ -29,7 +30,23 @@ const Dashboard = () => {
           }
           to={"/admin/products"}
         >
-          Products
+          <FaStore /> Products
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "link-active" : "link-inactive"
+          }
+          to={"/admin/ordenes"}
+        >
+          <FaClipboard /> Ordenes
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "link-active" : "link-inactive"
+          }
+          to={"/admin/usuarios"}
+        >
+          <FaUser /> Usuarios
         </NavLink>
       </div>
       <div className="content">

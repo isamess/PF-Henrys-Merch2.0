@@ -4,7 +4,6 @@ import Footer from "./Footer/Footer";
 import { registerUser } from "../redux/slices/AuthSlice";
 import { useAppDispatch } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function RegisterUser() {
   const dispatch = useAppDispatch();
@@ -28,13 +27,18 @@ function RegisterUser() {
   function handleSubmit(e: any) {
     e.preventDefault();
     if (user.password === user.repassword) {
+      const name: Array<string> = user.name.split(" ");
+      for (let i = 0; i < name.length; i++) {
+        name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1);
+      }
+      console.log(name.join(" "));
+      setUser({ ...user, name: String(name.join(" ")) });
+
       dispatch(registerUser(user));
     } else {
       alert("La claves no coinciden");
     }
   }
-
-  console.log(user);
 
   return (
     <>

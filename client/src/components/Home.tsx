@@ -1,36 +1,25 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Carousel } from "./Carousel";
 import { List } from "./List";
-import { products } from "../data/products";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotal } from "../redux/slices/CartSlice";
-
-interface Sub {
-  id: number;
-  nombre: string;
-  precio: number;
-  descripcion: string;
-  imagen: string;
-  category: string;
-}
-
-//COLOCO MIS ESTADOS
-interface AppState {
-  subs: Array<Sub>;
-}
-
-const INITIAL_STATE = products;
+import { categoryFetch, productsFetch } from "../redux/slices/ProductsSlice";
 
 function Home() {
-  const cart = useSelector((state: any) => state.cart);
   const dispatch = useDispatch();
-  const [subs, SetSubs] = useState<AppState["subs"]>([]);
+
+  const cart = useSelector((state: any) => state.cart);
+  const { categories }: any = useSelector((state: any) => state.products);
+  const { products }: any = useSelector((state: any) => state.products);
 
   useEffect(() => {
-    SetSubs(INITIAL_STATE);
-  }, []);
+    dispatch(productsFetch());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(categoryFetch());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getTotal());
@@ -42,25 +31,18 @@ function Home() {
         <div className="d-flex my-5">
           <Carousel />
         </div>
-        <div className="pt-4">
-          <h2 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
-            Home Category
-          </h2>
-          <List products={subs} cat={"home"} />
-        </div>
-        <div className="pt-4">
-          <h3 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
-            Bottom Category
-          </h3>
-          <List products={subs} cat={"bottom"} />
-        </div>
-
-        <div className="pt-4">
-          <h3 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
-            Top Category
-          </h3>
-          <List products={subs} cat={"top"} />
-        </div>
+        {categories
+          ? categories.map((category: any) => {
+              return (
+                <div className="pt-4" key={category._id}>
+                  <h2 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
+                    {category.category}
+                  </h2>
+                  <List products={products} category={category.category} />
+                </div>
+              );
+            })
+          : null}
       </div>
       <Footer />
     </>

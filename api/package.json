@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/express-fileupload": "^1.4.1",
     "@types/fs-extra": "^9.0.13",
+    "@types/recharts": "^1.8.24",
     "axios": "^1.2.1",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
@@ -28,6 +29,7 @@
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
     "mercadopago": "^1.5.14",
+    "moment": "^2.29.4",
     "mongoose": "^6.8.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",

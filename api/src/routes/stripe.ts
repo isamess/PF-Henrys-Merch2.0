@@ -1,5 +1,4 @@
-import Order from "../models/order";
-
+const { Order } = require("../models/order");
 const express = require("express");
 const Stripe = require("stripe");
 
@@ -13,22 +12,22 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
   const customer: any = await stripe.customers.create({
     metadata: {
       userId: req.body.userId,
-      cart: JSON.stringify(req.body.cartItems),
     },
   });
-  const line_items = req.body.cartItems.map((item: any) => {
+
+  const line_items: any = req.body.cartItems.map((item: any) => {
     return {
       price_data: {
         currency: "usd",
         product_data: {
           name: item.nombre,
-          images: [item.imagen],
+          images: [item.imagen.url],
           description: item.descripcion,
           metadata: {
             id: item.id,
           },
         },
-        unit_amount: item.precio * 100,
+        unit_amount: (item.precio * 100).toFixed(0),
       },
       quantity: item.cartQuantity,
     };
@@ -94,14 +93,12 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
 });
 
 //Create Order
-const createOrder = async (customer: any, data: any) => {
-  const items = JSON.parse(customer.metadata.cart);
-
+const createOrder = async (customer: any, data: any, lineItems: any) => {
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
-    products: items,
+    products: lineItems.data,
     subtotal: data.amount_subtotal,
     total: data.amount_total,
     shipping: data.customer_details,
@@ -151,7 +148,15 @@ router.post(
       stripe.customers
         .retrieve(data.customer)
         .then((customer: any) => {
-          createOrder(customer, data);
+          stripe.checkout.sessions.listLineItems(
+            data,
+            {},
+            function (err: any, lineItems: Object) {
+              console.log("line_items", lineItems);
+
+              createOrder(customer, data, lineItems);
+            }
+          );
         })
         .catch((err: any) => {
           console.log(err.message);

@@ -12,6 +12,8 @@ const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
 const products = require("./routes/productsController");
+const users = require("./routes/users");
+const orders = require("./routes/orders");
 
 dotenv.config();
 const app = express();
@@ -26,12 +28,15 @@ app.use("/api/stripe/webhook", express.raw({ type: "*/*" }));
 app.use(express.json({ limit: "10mb" })); // para poder entender los obj json cuando hacemos peticiones Post con un dato
 app.use(express.urlencoded({ extended: true, limit: "10mb" })); // para que pueda entender los campos que llegan desde el formulario
 app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 app.set("view engine", "ejs"); // se ve en el vistas carpeta para las plantillas que hacen.
 
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/stripe", stripe);
 app.use("/api/products", products);
+app.use("/api/users", users);
+app.use("/api/orders", orders);
 
 app.get("/products", (req, res) => {
   try {
