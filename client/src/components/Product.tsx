@@ -1,18 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { List } from "./List";
-import { getPublicPath, products } from "../data/products";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, getTotal } from "../redux/slices/CartSlice";
+import axios from "axios";
+import { url, setHeaders } from "../redux/slices/api";
 
 function Product() {
-  const cart = useSelector((state: any) => state.cart);
   const dispatch = useDispatch();
+  const params = useParams();
 
-  const { id } = useParams();
-  // TODO
-  const product = products.find((p) => p.id.toString() === id);
+  const cart = useSelector((state: any) => state.cart);
+
+  const [product, setProduct] = useState<any>([]);
+  const [loading, seteLoading] = useState<boolean>(false);
+
+  console.log(product);
+
+  useEffect(() => {
+    seteLoading(true);
+
+    async function fetchData() {
+      try {
+        const res: any = await axios.get(
+          `${url}/products/find/${params.id}`,
+          setHeaders()
+        );
+
+        setProduct([res.data]);
+      } catch (err: any) {
+        console.log(err);
+      }
+      seteLoading(false);
+    }
+
+    fetchData();
+  }, []);
 
   const handleAddCart = (product: any) => {
     dispatch(addToCart(product));
@@ -24,28 +48,33 @@ function Product() {
 
   return (
     <>
-      {typeof product !== "undefined" && (
+      {loading ? (
+        <div className="not-found">
+          <h2>Cargando ...</h2>
+        </div>
+      ) : product[0] ? (
         <div className="cart-window">
           <div className="row align-items-center mt-5">
             <div className="col m-0 p-0"></div>
             <div className="col">
               <img
-                src={getPublicPath(product.imagen)}
+                src={product[0].imgUrl}
                 style={{ height: "500px" }}
                 alt="..."
               />
             </div>
             <div className="col w-100 d-grid h-75 gap-3">
               <p className="fs-4">
-                <span className="fw-bold">Nombre:</span> {product.nombre}
+                <span className="fw-bold">Nombre:</span> {product[0].name}
               </p>
               <p className="fs-4">
-                <span className="fw-bold">Precio:</span> ${product.precio}
+                <span className="fw-bold">Precio:</span> $
+                {product[0].price?.toFixed(2).toLocaleString()}
               </p>
-              <p className="fs-4">
+              {/* <p className="fs-4">
                 <span className="fw-bold">Detalle del Producto:</span>{" "}
-                {product.descripcion}
-              </p>
+                {product.des}
+              </p> */}
               <div className="d-flex">
                 <button
                   className="btn btn-primary me-2"
@@ -64,13 +93,11 @@ function Product() {
             <h4 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
               Productos relacionados ({product.category})
             </h4>
-            <List products={products} cat={product.category} />
+            <List products={product} category={product.category} />
           </div>
         </div>
-      )}
-
-      {typeof product === "undefined" && (
-        <h1 className={"text-center mt-3"}>El producto no existe.</h1>
+      ) : (
+        <h3 className={"not-found"}>El producto no existe.</h3>
       )}
       <Footer />
     </>

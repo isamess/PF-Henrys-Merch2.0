@@ -34,11 +34,14 @@ function Home() {
         {categories
           ? categories.map((category: any) => {
               return (
-                <div className="pt-4" key={category._id}>
-                  <h2 className="d-flex p-2 justify-content-center pb-3 border-top border-secondary m-5">
+                <div
+                  className="pt-4 border-top border-secondary m-5"
+                  key={category._id}
+                >
+                  <h2 className="d-flex p-2 justify-content-center pb-3  ">
                     {category.category}
                   </h2>
-                  <List products={products} category={category.category} />
+                  <List category={category.category} />
                 </div>
               );
             })

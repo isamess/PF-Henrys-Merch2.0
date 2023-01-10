@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { Home } from "./components/Home";
@@ -32,6 +32,7 @@ import OrdersList from "./components/admin/list/OrdersList";
 import AdminProduct from "./components/details/Products";
 import Order from "./components/details/Order";
 import UserProfile from "./components/details/User";
+import ProductsByCategory from "./components/ProductsByCategory";
 
 function App() {
   return (
@@ -41,10 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
-        <Route
-          path="/category/:category"
-          element={<List products={products} />}
-        />
+        <Route path="/category/:category" element={<ProductsByCategory />} />
         <Route path="/register" element={<RegisterUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
