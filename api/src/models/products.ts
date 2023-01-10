@@ -19,8 +19,8 @@ const productSchema = new Schema(
       trim: true,
     },
     category: {
-      type: Array,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Category",
     },
     color: {
       type: String,
@@ -29,8 +29,9 @@ const productSchema = new Schema(
       votes: Number,
       favs: Number,
     },
-    imgUrl: {
+    image: {
       type: String,
+      public_id:{type: String},
       required: true,
     },
     desc: {
@@ -44,4 +45,6 @@ const productSchema = new Schema(
   }
 );
 
+
 export default model("Products", productSchema);
+

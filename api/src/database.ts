@@ -20,6 +20,8 @@ const dataBase = (async () => {
   }
 })();
 
+
+
 // aquí se conecta a la base de datos con las variables de entorno de config.ts
 
 //server de prueba por problemas tecnicos

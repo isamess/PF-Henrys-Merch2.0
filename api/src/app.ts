@@ -11,7 +11,7 @@ import product from "./models/products";
 const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
-const products = require("./routes/productsController");
+const products = require("./../src/Controllers/productsController");
 
 dotenv.config();
 const app = express();

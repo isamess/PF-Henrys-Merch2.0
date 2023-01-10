@@ -3,8 +3,9 @@ import mongoose, { model } from 'mongoose'
 const imgModel = new mongoose.Schema({
   name: String,
   desc: String,
-  img:
+  image:
     {
+      public_id:{type: String},
       data: Buffer,
       contentType: String
     }

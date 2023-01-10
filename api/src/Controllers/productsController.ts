@@ -9,7 +9,7 @@ const router = Router();
 //TODO: get all products
 export const getProducts: RequestHandler = async (req, res) => {
   try {
-    const products = await Products.find();
+    const products = await Products.find({}).populate('category');
     return res.json(products);
   } catch (error: any) {
     res.status(500).json({error_message: error.message})
@@ -25,7 +25,7 @@ export const getProduct: RequestHandler = async (req, res) => {
         message: "Product doesn't exist",
       });
     return res.json(product);
-  } catch (error: any) {
+  } catch (error:any) {
     res.status(500).json({error_message: error.message})
   }
 };
