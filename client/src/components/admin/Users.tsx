@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const Users = () => {
   return (
     <>
-      Usuarios
+      <div className="admin-header">Usuarios</div>
       <Outlet />
     </>
   );

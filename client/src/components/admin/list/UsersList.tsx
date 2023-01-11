@@ -2,68 +2,67 @@ import { useEffect } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  productDelete,
-  productsFetch,
-} from "../../../redux/slices/ProductsSlice";
-import EditProduct from "../summary-component/EditProduct";
+import { userDelete, usersFetch } from "../../../redux/slices/UsersSlice";
+import EditUser from "../summary-component/EditUsers";
 
-export default function ProductsList() {
+export default function UsersList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { products }: any = useSelector((state: any) => state.products);
+  const { users }: any = useSelector((state: any) => state.users);
 
   const handleDelete = (id: any) => {
-    dispatch(productDelete(id));
+    dispatch(userDelete(id));
   };
 
   const rows: any =
-    products &&
-    products.map((item: any) => {
+    users &&
+    users.map((item: any) => {
       return {
         id: item._id,
-        imageUrl: item.image,
-        pName: item.name,
-        pDesc: item.desc ? item.desc : null,
-        price: item.price.toFixed(2).toLocaleString(),
-        stock: item.stock,
+        name: item.name,
+        email: item.email,
+        address: item.address,
+        isAdmin: item.isAdmin,
       };
     });
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 220 },
     {
-      field: "imageUrl",
-      headerName: "Image",
-      width: 100,
-      renderCell: (params: any) => {
-        return (
-          <div className="list-image-container">
-            <img src={params.row.imageUrl} alt="" />
-          </div>
-        );
-      },
+      field: "id",
+      headerName: "Id",
+      width: 220,
     },
     {
-      field: "pName",
+      field: "name",
       headerName: "Nombre",
       width: 130,
     },
     {
-      field: "stock",
-      headerName: "Stock",
-      width: 80,
+      field: "email",
+      headerName: "E-mail",
+      width: 200,
     },
     {
-      field: "price",
-      headerName: "Precio",
-      width: 80,
+      field: "address",
+      headerName: "Dirección",
+      width: 200,
     },
     {
-      field: "pdesc",
-      headerName: "Descripción",
-      width: 220,
+      field: "isAdmin",
+      headerName: "Rol",
+      width: 120,
+      renderCell: (params: any) => {
+        return (
+          <div>
+            {params.row.isAdmin ? (
+              <div className="list-delivered">Administrador</div>
+            ) : (
+              <div className="list-dispatched">Cliente</div>
+            )}
+          </div>
+        );
+      },
     },
     {
       field: "actions",
@@ -79,10 +78,10 @@ export default function ProductsList() {
             >
               Eliminar
             </button>
-            <EditProduct prodId={params.row.id} />
+            <EditUser prodId={params.row.id} />
             <button
               className="bg-success text-white"
-              onClick={() => navigate(`/admin-product/${params.row.id}`)}
+              onClick={() => navigate(`/admin-user/${params.row.id}`)}
             >
               Ver
             </button>

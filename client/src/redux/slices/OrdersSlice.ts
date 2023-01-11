@@ -16,7 +16,7 @@ export const ordersFetch: any = createAsyncThunk(
   "orders/ordersFetch",
   async () => {
     try {
-      const response: any = await axios.get(`${url}/orders`, setHeaders());
+      const response: any = await axios.get(`${url}/orders/list`, setHeaders());
 
       return response.data;
     } catch (err: any) {

@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  categoryFetch,
-  productsEdit,
-} from "../../../redux/slices/ProductsSlice";
+import { productsEdit } from "../../../redux/slices/ProductsSlice";
 
 export default function EditProduct(prodId: any) {
   const dispatch = useDispatch();
@@ -25,10 +22,6 @@ export default function EditProduct(prodId: any) {
   const [desc, setDesc] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [stock, setStock] = useState<string>("");
-
-  useEffect(() => {
-    dispatch(categoryFetch());
-  }, [dispatch]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -103,11 +96,11 @@ export default function EditProduct(prodId: any) {
         fullWidth={true}
         maxWidth={"md"}
       >
-        <DialogTitle>Editar Producto</DialogTitle>
+        <DialogTitle>Editar</DialogTitle>
         <DialogContent>
           <div className="create-product">
             <form className="form" onSubmit={handleProductEdit}>
-              <h3>Crear un Producto</h3>
+              <h3>Editar Producto</h3>
               <input
                 type="file"
                 accept="image/"

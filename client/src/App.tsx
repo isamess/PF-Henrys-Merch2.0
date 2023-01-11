@@ -1,15 +1,12 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Routes, Route, BrowserRouter, useParams } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { Home } from "./components/Home";
 import { NavBar } from "./components/NavBar";
 import { Product } from "./components/Product";
-import { List } from "./components/List";
-import { products } from "./data/products";
-import { categories } from "./data/categories";
 import { Profile } from "./components/Profile";
 import { Compras } from "./components/Footer/Compras";
 import { Terminos } from "./components/Footer/Terminos";
@@ -33,6 +30,7 @@ import AdminProduct from "./components/details/Products";
 import Order from "./components/details/Order";
 import UserProfile from "./components/details/User";
 import ProductsByCategory from "./components/ProductsByCategory";
+import UsersList from "./components/admin/list/UsersList";
 
 function App() {
   return (
@@ -61,10 +59,12 @@ function App() {
             <Route path="create-product" element={<CreateProduct />} />
           </Route>
           <Route path="summary" element={<Summary />} />
-          <Route path="ordenes" element={<Orders />}>
+          <Route path="orders" element={<Orders />}>
             <Route index element={<OrdersList />} />
           </Route>
-          <Route path="usuarios" element={<Users />} />
+          <Route path="usuarios" element={<Users />}>
+            <Route index element={<UsersList />} />
+          </Route>
         </Route>
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
 

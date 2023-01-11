@@ -45,4 +45,40 @@ router.get("/find", async (req: any, res: any) => {
   }
 });
 
+router.delete("delete/:id"),
+  isAdmin,
+  async (req: any, res: any) => {
+    try {
+      const user: any = await User.findById(req.params.id);
+
+      if (user) {
+        const deleteProduct: any = await user.findByIdAndDelete(req.params.id);
+
+        res.status(200).send(deleteProduct);
+      } else {
+        console.log("Acción terminada. Falla al eliminar el producto");
+      }
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  };
+
+router.put("/:id", isAdmin, async (req, res) => {
+  try {
+    const updatedResponse: any = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          ...req.body,
+        },
+      },
+      { new: true }
+    );
+    console.log(updatedResponse);
+    res.status(200).send(updatedResponse);
+  } catch (err: any) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = router;

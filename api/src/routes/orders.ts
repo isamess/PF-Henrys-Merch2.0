@@ -1,9 +1,8 @@
 import { Router } from "express";
 
 const { Order } = require("../models/order");
-const { auth, isUser, isAdmin } = require("../middleware/auth");
+const { isAdmin } = require("../middleware/auth");
 const moment = require("moment");
-const mongoose = require("mongoose");
 
 const router = Router();
 
@@ -123,6 +122,30 @@ router.get("/", isAdmin, async (req: any, res: any) => {
       : await Order.find().sort({ _id: -1 });
 
     res.status(200).send(orders);
+  } catch (err: any) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+router.get("/list", isAdmin, async (req: any, res: any) => {
+  try {
+    const list: any = await Order.find();
+
+    res.status(200).send(list);
+  } catch (err: any) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+router.get("/list/:id", isAdmin, async (req: any, res: any) => {
+  try {
+    const list: any = await Order.filter(
+      (item: any) => item._id === req.params.id
+    );
+
+    res.status(200).send(list);
   } catch (err: any) {
     console.log(err);
     res.status(500).send(err);

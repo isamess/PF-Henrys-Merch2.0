@@ -129,7 +129,7 @@ const productsSlice = createSlice({
     [categoryCreate.pending]: (state, action: PayloadAction<any>) => {
       state.categoryStatus = "pending";
     },
-    [categoryCreate.fullfiled]: (state, action: PayloadAction<any>) => {
+    [categoryCreate.fulfilled]: (state, action: PayloadAction<any>) => {
       state.categories.push(action.payload);
       state.categoryStatus = "success";
       toast.success("Se ha creado la categoria");
@@ -160,7 +160,7 @@ const productsSlice = createSlice({
     [productsCreate.pending]: (state, action: PayloadAction<any>) => {
       state.createStatus = "pending";
     },
-    [productsCreate.fullfiled]: (state, action: PayloadAction<any>) => {
+    [productsCreate.fulfilled]: (state, action: PayloadAction<any>) => {
       state.items.push(action.payload);
       state.createStatus = "success";
       toast.success("Se ha creado el producto");
@@ -168,7 +168,7 @@ const productsSlice = createSlice({
     [productsEdit.pending]: (state, action: PayloadAction<any>) => {
       state.editStatus = "pending";
     },
-    [productsEdit.fullfiled]: (state, action: PayloadAction<any>) => {
+    [productsEdit.fulfilled]: (state, action: PayloadAction<any>) => {
       const updatedProducts = state.items.map((product: any) =>
         product._id === action.payload ? action.payload : product
       );
@@ -183,7 +183,7 @@ const productsSlice = createSlice({
     [productDelete.pending]: (state, action: PayloadAction<any>) => {
       state.deleteStatus = "pending";
     },
-    [productDelete.fullfiled]: (state, action: PayloadAction<any>) => {
+    [productDelete.fulfilled]: (state, action: PayloadAction<any>) => {
       const newList = state.items.filter(
         (item: any) => item._id !== action.payload
       );

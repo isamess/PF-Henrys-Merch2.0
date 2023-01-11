@@ -36,7 +36,7 @@ const Dashboard = () => {
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
           }
-          to={"/admin/ordenes"}
+          to={"/admin/orders"}
         >
           <FaClipboard /> Ordenes
         </NavLink>
