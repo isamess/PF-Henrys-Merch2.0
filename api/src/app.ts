@@ -12,6 +12,8 @@ const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
 const products = require("./../src/Controllers/productsController");
+const users= require('./routes/users');
+const orders= require('./routes/orders');
 
 dotenv.config();
 const app = express();
