@@ -6,6 +6,7 @@
     "axios": "^1.2.1",
     "bootstrap-icons": "^1.10.2",
     "jwt-decode": "^3.1.2",
+    "railway": "^2.0.17",
     "react-toastify": "^9.1.1"
   }
 }
