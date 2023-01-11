@@ -1,10 +1,5 @@
 import { Schema, model } from "mongoose";
 
-<<<<<<< HEAD
-const mongoose = require("mongoose");
-
-=======
->>>>>>> 2f50176e047bf2db67fa25fd0ca4ecefd081d6b0
 const orderSchema = new Schema(
   {
     userId: {
