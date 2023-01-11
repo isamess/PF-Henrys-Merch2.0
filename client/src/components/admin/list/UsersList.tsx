@@ -78,7 +78,7 @@ export default function UsersList() {
             >
               Eliminar
             </button>
-            <EditUser prodId={params.row.id} />
+            <EditUser userId={params.row.id} />
             <button
               className="bg-success text-white"
               onClick={() => navigate(`/admin-user/${params.row.id}`)}
