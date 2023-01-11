@@ -19,18 +19,11 @@ const productSchema = new Schema(
       trim: true,
     },
     category: {
-      type: Array,
+      type: String,
       required: true,
     },
-    color: {
-      type: String,
-    },
-    meta: {
-      votes: Number,
-      favs: Number,
-    },
     image: {
-      type: Object,
+      type: String,
       required: true,
     },
     desc: {
@@ -40,7 +33,6 @@ const productSchema = new Schema(
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 );
 

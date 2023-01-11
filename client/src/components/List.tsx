@@ -1,29 +1,13 @@
 import "./../css/list.css";
-import { NavLink, useParams } from "react-router-dom";
-import { getPublicPath } from "../data/products";
-import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/CartSlice";
 
-interface Props {
-  products: Array<{
-    id: number;
-    nombre: string;
-    precio: number;
-    descripcion: string;
-    imagen: string;
-    category: string;
-  }>;
-  cat?: string | undefined;
-}
-
-//PASO LAS PROPS
-const List = ({ products, cat }: Props) => {
-  const { category } = useParams();
+// PASO LAS PROPS
+const List = (category: any) => {
   const dispatch = useDispatch();
-
-  if (typeof cat === "undefined") {
-    cat = category;
-  }
+  const { products }: any = useSelector((state: any) => state.products);
+  const categoryName: any = category.category;
 
   const handleAddCart = (product: any) => {
     dispatch(addToCart(product));
@@ -36,44 +20,43 @@ const List = ({ products, cat }: Props) => {
 
   return (
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
-      {products.map((product: any) => {
-        if (product.category === cat) {
-          return (
-            <div className="d-flex justify-content-center">
-              <div className="card my-card" key={product.id}>
-                <img
-                  src={getPublicPath(product.imagen)}
-                  className="card-img-top"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{product.nombre}</h5>
-                  <p className="card-text">{product.descripcion}</p>
-                  <p className="card-text">${product.precio}</p>
-                  <button
-                    className="mx-3 btn btn-secondary text-white"
-                    onClick={() => handleAddCart(product)}
-                  >
-                    Add+
-                  </button>
+      {products.map((product: any) =>
+        product.category === categoryName ? (
+          <div className="d-flex justify-content-center" key={product._id}>
+            <div className="card my-card">
+              <img src={product.image} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.desc}</p>
+                <p className="card-text">desc</p>
+                <p className="card-text">
+                  ${product.price.toFixed(2).toLocaleString()}
+                </p>
+                <button
+                  className="mx-3 btn btn-secondary text-white"
+                  onClick={() => handleAddCart(product)}
+                >
+                  Add+
+                </button>
 
-                  <button
-                    className="btn btn-secondry"
-                    onClick={() => topFunction()}
+                <button
+                  className="btn btn-secondry"
+                  onClick={() => topFunction()}
+                >
+                  <NavLink
+                    to={`/product/${product._id}`}
+                    className="btn btn-secondary"
                   >
-                    <NavLink
-                      to={`/product/${product.id}`}
-                      className="btn btn-secondary"
-                    >
-                      Ver Producto
-                    </NavLink>
-                  </button>
-                </div>
+                    Ver Producto
+                  </NavLink>
+                </button>
               </div>
             </div>
-          );
-        } else return <></>;
-      })}
+          </div>
+        ) : (
+          <></>
+        )
+      )}
     </div>
   );
 };

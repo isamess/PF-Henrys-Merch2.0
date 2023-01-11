@@ -1,23 +1,24 @@
 import { RequestHandler, Router } from "express"; // el RequestHandler ayuda a que se reconozca el request
 import Products from "../models/products";
-import { uploadImage, deleteImage } from "../utils/cloudinary";
+import Category from "../models/categories";
+import cloudinary, { uploadImage, deleteImage } from "../utils/cloudinary";
 import { isAdmin } from "../middleware/auth";
 import fs from "fs-extra"; //fs-extra me ayuda a eliminar archivos y soporta promesas
 
 const router = Router();
 
 //TODO: get all products
-export const getProducts: RequestHandler = async (req, res) => {
+router.get("/find", async (req: any, res: any) => {
   try {
-    const products = await Products.find();
-    return res.json(products);
+    const product: any = await Products.find();
+    res.status(200).send(product);
   } catch (error) {
     return res.status(500).json(error);
   }
-};
+});
 
 //TODO: to get one product by ID
-export const getProduct: RequestHandler = async (req, res) => {
+router.get("/find/:id", async (req: any, res: any) => {
   try {
     const product = await Products.findById(req.params.id);
     if (!product)
@@ -28,34 +29,7 @@ export const getProduct: RequestHandler = async (req, res) => {
   } catch (error) {
     return res.status(500).json(error);
   }
-};
-
-// export const createProduct: RequestHandler = async (req, res) => {
-//   try {
-//     const { name, description, price, category, color } = req.body;
-//     const product = new Products({ name, description, price, category, color });
-//     const { image }: any = req.files;
-//     const fileTypes = ["image/jpeg", "image/png", "image/jpg"];
-//     if (!fileTypes.includes(image.mimetype))
-//       return res.send("Image formats supported: JPG, PNG, JPEG");
-
-//     //comprobación si lo que se sube es una imagen y la sube a Cloudinary
-//     if (req.files?.image) {
-//       const result = await uploadImage(image.tempFilePath);
-//       product.image = {
-//         public_id: result.public_id, //propiedades que me da Cloudinary
-//         secure_url: result.secure_url, //imagen que se sube a Cloudinary
-//       };
-//       //elimino los archivos temporales de uploads
-//       await fs.unlink(image.tempFilePath);
-//     }
-
-//     const savedProduct = await product.save(); // se guarda en la DB
-//     return res.json(savedProduct);
-//   } catch (error) {
-//     return res.status(500).json(error);
-//   }
-// };
+});
 
 router.post("/", isAdmin, async (req: any, res: any) => {
   const { name, category, price, desc, image } = req.body;
@@ -84,32 +58,120 @@ router.post("/", isAdmin, async (req: any, res: any) => {
   }
 });
 
-export const updateProduct: RequestHandler = async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
+  if (req.body.productImg) {
+    try {
+      const destroyResponse: any = await cloudinary.uploader.destroy(
+        req.body.product.image.public_id
+      );
+
+      if (destroyResponse) {
+        const uploadResponse = await cloudinary.uploader.upload(
+          req.body.productImg,
+          {
+            upload_preset: "online-shop",
+          }
+        );
+        if (uploadResponse) {
+          const updatedResponse: any = await Products.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: {
+                ...req.body.product,
+                image: uploadResponse,
+              },
+            },
+            { new: true }
+          );
+          res.status(200).send(updatedResponse);
+        }
+      }
+    } catch (err: any) {
+      res.status(500).send(err);
+    }
+  }
+
   try {
-    const productUpdated = await Products.findByIdAndUpdate(
+    const updatedProducts = await Products.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { $set: req.body.product },
       { new: true }
     );
-    if (!productUpdated) return res.status(204).json();
-    res.json(productUpdated);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
-};
 
-export const deleteProduct: RequestHandler = async (req, res) => {
-  try {
-    const product = await Products.findByIdAndDelete(req.params.id);
-    if (!product)
-      return res.status(404).json({ message: "Product doesn't exist" });
-    if (product.image?.public_id) {
-      await deleteImage(product.image.public_id);
+    res.status(200).send(updatedProducts);
+  } catch (err: any) {
+    return res.status(500).send(err);
+  }
+});
+
+// export const deleteProduct: RequestHandler = async (req, res) => {
+//   try {
+//     const product = await Products.findByIdAndDelete(req.params.id);
+//     if (!product)
+//       return res.status(404).json({ message: "Product doesn't exist" });
+//     if (product.image?.public_id) {
+//       await deleteImage(product.image.public_id);
+//     }
+//     return res.json(product);
+//   } catch (error) {
+//     return res.status(500).json(error);
+//   }
+// };
+
+//copia para poder borrar tambien la imagen de cloudinary y el formato para usar middlewar
+
+router.delete("delete/:id"),
+  isAdmin,
+  async (req: any, res: any) => {
+    try {
+      const product: any = await Products.findById(req.params.id);
+
+      if (!product)
+        return res.status(404).send("El producto no fue encontrado");
+      if (product.image.public_id) {
+        const destroyResponse: any = await cloudinary.uploader.destroy(
+          product.image.public_id
+        );
+
+        if (destroyResponse) {
+          const deleteProduct: any = await product.findByIdAndDelete(
+            req.params.id
+          );
+
+          res.status(200).send(deleteProduct);
+        }
+      } else {
+        console.log("Acción terminada. Falla al eliminar el producto");
+      }
+    } catch (err: any) {
+      res.status(500).send(err);
     }
-    return res.json(product);
+  };
+
+router.post("/category", isAdmin, async (req: any, res: any) => {
+  const { createCategory } = req.body;
+
+  try {
+    const category: any = new Category({
+      category: createCategory,
+    });
+
+    const savedCategory: any = await category.save();
+
+    res.status(200).send(savedCategory);
+  } catch (err: any) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
+router.get("/category/find", async (req: any, res: any) => {
+  try {
+    const category: any = await Category.find();
+    res.status(200).send(category);
   } catch (error) {
     return res.status(500).json(error);
   }
-};
+});
 
 module.exports = router;

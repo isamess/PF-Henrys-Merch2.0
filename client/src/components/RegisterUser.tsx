@@ -4,7 +4,6 @@ import Footer from "./Footer/Footer";
 import { registerUser } from "../redux/slices/AuthSlice";
 import { useAppDispatch } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function RegisterUser() {
   const dispatch = useAppDispatch();
@@ -21,20 +20,25 @@ function RegisterUser() {
     name: "",
     email: "",
     password: "",
-    adress: "",
+    address: "",
     repassword: "",
   });
 
   function handleSubmit(e: any) {
     e.preventDefault();
     if (user.password === user.repassword) {
+      const name: Array<string> = user.name.split(" ");
+      for (let i = 0; i < name.length; i++) {
+        name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1);
+      }
+
+      setUser({ ...user, name: String(name.join(" ")) });
+
       dispatch(registerUser(user));
     } else {
       alert("La claves no coinciden");
     }
   }
-
-  console.log(user);
 
   return (
     <>
@@ -76,10 +80,10 @@ function RegisterUser() {
             <input
               type="text"
               className="form-control mb-3"
-              id="adress"
+              id="address"
               placeholder="dirección"
               onChange={(e: any) =>
-                setUser({ ...user, adress: e.target.value })
+                setUser({ ...user, address: e.target.value })
               }
             />
           </div>
