@@ -17,8 +17,11 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
       user_Id: req.body.userId,
     },
   });
-  console.log(req.body.cart);
-  const line_items: any = req.body.cart.map((item: any) => {
+
+  const items = req.body.cart;
+  console.log(items);
+
+  const line_items: any = items.map((item: any) => {
     return {
       price_data: {
         currency: "usd",
@@ -35,7 +38,6 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
       quantity: item.cartQuantity,
     };
   });
-  console.log(line_items);
 
   const session: any = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -93,6 +95,7 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
+  console.log(session);
   res.send({ url: session.url });
 });
 

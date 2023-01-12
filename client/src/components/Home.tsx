@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import  Carousel  from "./Carousel";
+import Carousel from "./Carousel";
 import { List } from "./List";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ function Home() {
         <div className="d-flex my-5">
           <Carousel />
         </div>
+
         {categories
           ? categories.map((category: any) => {
               return (

@@ -68,7 +68,7 @@ export default function UsersList() {
       field: "actions",
       headerName: "Acciones",
       sortable: false,
-      width: 170,
+      width: 100,
       renderCell: (params: any) => {
         return (
           <div className="list-actions">
