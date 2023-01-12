@@ -62,6 +62,7 @@ router.delete("delete/:id"),
   isAdmin,
   async (req: any, res: any) => {
     try {
+      console.log("works");
       const user: any = await User.findById(req.params.id);
 
       if (user) {

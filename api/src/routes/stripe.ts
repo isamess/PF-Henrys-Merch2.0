@@ -1,25 +1,23 @@
-import { any } from "joi";
-
 const { Order } = require("../models/order");
 const express = require("express");
 const Stripe = require("stripe");
+const dotenv = require("dotenv");
 
-require("dotenv").config();
+dotenv.config();
 
 const stripe = Stripe(process.env.STRIPE_KEY);
 
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req: any, res: any) => {
-  const { cartItems }: any = req.body;
-
   const customer: any = await stripe.customers.create({
     metadata: {
-      user_Id: req.body.user_Id,
+      user_Id: req.body.userId,
     },
   });
 
-  const line_items: any = req.body.cartItems?.map((item: any) => {
+  const line_items: any = req.body.cart.map((item: any) => {
+    console.log(req.body.cart);
     return {
       price_data: {
         currency: "usd",
@@ -37,7 +35,7 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
     };
   });
 
-  const session: any = await stripe.checkout.sessions.create({
+  const session: any = await stripe.checkout.sessions({
     payment_method_types: ["card"],
     shipping_address_collection: {
       allowed_countries: ["US", "CA"],
