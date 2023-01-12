@@ -3,11 +3,14 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/CartSlice";
 
+
 // PASO LAS PROPS
 const List = (category: any) => {
   const dispatch = useDispatch();
   const { products }: any = useSelector((state: any) => state.products);
   const categoryName: any = category.category;
+
+  
 
   const handleAddCart = (product: any) => {
     dispatch(addToCart(product));
@@ -52,11 +55,13 @@ const List = (category: any) => {
                 </button>
               </div>
             </div>
+       
           </div>
         ) : (
           <></>
         )
       )}
+      
     </div>
   );
 };
