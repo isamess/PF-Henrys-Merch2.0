@@ -18,7 +18,7 @@ export const Pagination = ({allProducts, productsPage, setPagination, actualPage
   return (
     <nav>
         <div className="grid-container">
-            {allProducts > 10 ? (
+            {allProducts > 8 ? (
           <div> {setPagination(1)} </div>
         ) : (
           numberPage &&

@@ -5,12 +5,23 @@ import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotal } from "../redux/slices/CartSlice";
 import { Pagination } from "./Pagination";
+import { Link} from "react-router-dom"
 
 function Home() {
   const dispatch = useDispatch();
 
   const cart = useSelector((state: any) => state.cart);
   const { categories }: any = useSelector((state: any) => state.products);
+
+  const [actualPage, setActualPage] = useState<number>(1);
+  const [productsPage, setProductsPage] = useState<number>(8);
+  const last = actualPage * productsPage;
+  const first = last - productsPage;
+  const result = categories.slice(first, last);
+
+  const setPagination = (page:number) => {
+    return setActualPage(page);
+  };
 
   useEffect(() => {
     dispatch(getTotal());
@@ -23,24 +34,29 @@ function Home() {
           <Carousel />
         </div>
 
-        {categories
-          ? categories.map((category: any) => {
-              return (
-                <div
-                  className="pt-4 border-top border-secondary m-5"
-                  key={category._id}
-                >
-                  <a
-                    className="d-flex p-2 justify-content-center pb-3 text-black"
-                    href={`/category/${category.category}`}
-                  >
-                    <h3>{category.category}</h3>
-                  </a>
-                  <List category={category.category} />
-                </div>
-              );
-            })
-          : null}
+        {result?.map((e:any) => {
+          return (
+            <div key={e._id}>
+              <Link to={"/" + e._id} className='link-card'>
+                <List 
+               category = {e.category}
+                />
+              </Link>
+            </div>
+          );
+        })
+      }
+      <div>
+        {
+          <Pagination
+            productsPage={productsPage}
+            allProducts={categories.length}
+            setPagination={setPagination}
+            actualPage={actualPage}
+            
+          />
+        }
+      </div>
       </div>
       <Footer />
     </>
