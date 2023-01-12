@@ -1,12 +1,13 @@
 import "../css/navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/slices/AuthSlice";
 import { toast } from "react-toastify";
-import SearchBar from './SearchBar'
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartTotalQuantity }: any = useSelector((state: any) => state.cart);
   const auth: any = useSelector((state: any) => state.auth);
   const { categories }: any = useSelector((state: any) => state.products);
@@ -67,8 +68,8 @@ const NavBar = () => {
               </li>
 
               <li className="nav-item" key="my-account">
-                <NavLink
-                  to={"/profile"}
+                {/* <NavLink
+                  to={`/user/${auth._id}:`}
                   className={({ isActive }) =>
                     isActive
                       ? "nav-link text-black fw-bold active"
@@ -76,7 +77,13 @@ const NavBar = () => {
                   }
                 >
                   Mi Cuenta
-                </NavLink>
+                </NavLink> */}
+                <div
+                  className="btn border-none bg-none text-black"
+                  onClick={() => navigate(`/user/${auth._id}`)}
+                >
+                  Mi Perfil
+                </div>
               </li>
               <Link to="/cart">
                 <div className="nav-cart">
@@ -153,7 +160,7 @@ const NavBar = () => {
               )}
             </div>
             <div className="me-5">
-              <SearchBar/>
+              <SearchBar />
             </div>
             {/* <form className="d-flex" role="search">
               <input

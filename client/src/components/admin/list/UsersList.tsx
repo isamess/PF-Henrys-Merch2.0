@@ -81,7 +81,7 @@ export default function UsersList() {
             <EditUser userId={params.row.id} />
             <button
               className="bg-success text-white"
-              onClick={() => navigate(`/admin-user/${params.row.id}`)}
+              onClick={() => navigate(`/user/${params.row.id}`)}
             >
               Ver
             </button>

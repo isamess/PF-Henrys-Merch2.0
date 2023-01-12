@@ -3,6 +3,11 @@
 import { Link, NavLink } from "react-router-dom";
 
 export default function Footer() {
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
   return (
     <footer className="bg-black text-white pt-5 pb-4">
       <div className="container text-center text-md-left mx-100%">
@@ -17,56 +22,79 @@ export default function Footer() {
             />
             <h6 className="text-white">Invertimos en tu educación</h6>
           </div>
-        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h3 className="">Nosotros</h3>
-          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            <li className="nav-item">
-              <a href="https://www.soyhenry.com/about-us" className="nav-link">
-                ¿Quiénes somos?
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="https://www.soyhenry.com" className="nav-link">
-                Aplica a nuestras carreras
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h3 className="">Tienda Online</h3>
-          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            <li className="nav-item">
-              <Link to="/como-comprar" className="nav-link">
-                Cómo comprar
-              </Link>
-            </li>
-            <li>
-              <Link to="/terminos" className="nav-link">
-                Términos y condiciones
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h3 className="">Atención al cliente</h3>
-          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            <li>
-              <Link to="/preguntas" className="nav-link">
-                Preguntas frecuentes
-              </Link>
-            </li>
-            <li>
-              <Link to="/politicas" className="nav-link">
-                Políticas
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h3 className="">Nosotros</h3>
+            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+              <li className="nav-item">
+                <a
+                  href="https://www.soyhenry.com/about-us"
+                  className="nav-link"
+                >
+                  ¿Quiénes somos?
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="https://www.soyhenry.com" className="nav-link">
+                  Aplica a nuestras carreras
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h3 className="">Tienda Online</h3>
+            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+              <li className="nav-item">
+                <Link
+                  to="/como-comprar"
+                  className="nav-link"
+                  onClick={() => topFunction()}
+                >
+                  Cómo comprar
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/terminos"
+                  className="nav-link"
+                  onClick={() => topFunction()}
+                >
+                  Términos y condiciones
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h3 className="">Atención al cliente</h3>
+            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+              <li>
+                <Link
+                  to="/preguntas"
+                  className="nav-link"
+                  onClick={() => topFunction()}
+                >
+                  Preguntas frecuentes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/politicas"
+                  className="nav-link"
+                  onClick={() => topFunction()}
+                >
+                  Políticas
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
             <h3>Contactanos!</h3>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li>
-                <NavLink to="/contacto" className="nav-link">
+                <NavLink
+                  to="/contacto"
+                  className="nav-link"
+                  onClick={() => topFunction()}
+                >
                   Sugerencias, dudas y consultas
                 </NavLink>
               </li>

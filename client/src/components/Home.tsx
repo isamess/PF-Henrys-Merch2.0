@@ -5,7 +5,7 @@ import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotal } from "../redux/slices/CartSlice";
 import { Pagination } from "./Pagination";
-import { Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function Home() {
   const first = last - productsPage;
   const result = categories.slice(first, last);
 
-  const setPagination = (page:number) => {
+  const setPagination = (page: number) => {
     return setActualPage(page);
   };
 
@@ -34,29 +34,25 @@ function Home() {
           <Carousel />
         </div>
 
-        {result?.map((e:any) => {
+        {result?.map((e: any) => {
           return (
             <div key={e._id}>
-              <Link to={"/" + e._id} className='link-card'>
-                <List 
-               category = {e.category}
-                />
-              </Link>
+              <div className="link-card">
+                <List category={e.category} />
+              </div>
             </div>
           );
-        })
-      }
-      <div>
-        {
-          <Pagination
-            productsPage={productsPage}
-            allProducts={categories.length}
-            setPagination={setPagination}
-            actualPage={actualPage}
-            
-          />
-        }
-      </div>
+        })}
+        <div>
+          {
+            <Pagination
+              productsPage={productsPage}
+              allProducts={categories.length}
+              setPagination={setPagination}
+              actualPage={actualPage}
+            />
+          }
+        </div>
       </div>
       <Footer />
     </>

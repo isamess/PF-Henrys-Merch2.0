@@ -1,38 +1,147 @@
 const { Order } = require("../models/order");
-import express from "express";
+const express = require("express");
 const Stripe = require("stripe");
+const dotenv = require("dotenv");
 
-require("dotenv").config();
+dotenv.config();
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const router = express.Router();
 
+router.post("/create-checkout-session", async (req: any, res: any) => {
+  const line_items: any = req.body.cart.map((item: any) => {
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name,
+          images: [item.image],
+          description: item.desc,
+          metadata: {
+            id: item._id,
+          },
+        },
+        unit_amount: (item.price * 100).toFixed(0),
+      },
+      quantity: item.cartQuantity,
+    };
+  });
+
+  const session: any = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    shipping_address_collection: {
+      allowed_countries: ["US", "CA"],
+    },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 0,
+            currency: "usd",
+          },
+          display_name: "Free shipping",
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 5,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 5,
+            },
+          },
+        },
+      },
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 1500,
+            currency: "usd",
+          },
+          display_name: "Next day arrival",
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 1,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 1,
+            },
+          },
+        },
+      },
+    ],
+    phone_number_collection: {
+      enabled: true,
+    },
+    // customer: customer.id,
+    line_items,
+    mode: "payment",
+    success_url: `${process.env.CLIENT_URL}/checkout-success`,
+    cancel_url: `${process.env.CLIENT_URL}/cart`,
+  });
+
+  res.send({ url: session.url });
+});
+
 // router.post("/create-checkout-session", async (req: any, res: any) => {
-//   const customer = await stripe.customers.create({
+//   const customer: any = await stripe.customers.create({
 //     metadata: {
-//       userId: req.body.userId,
-//       cart: JSON.stringify(req.body.cart),
+//       user_Id: req.body.userId,
 //     },
 //   });
 
-//   const line_items: any = req.body.cart.map((item: any) => {
-//     return {
+//   const items: Array<any> = req.body.cart;
+
+//   // console.log(Object.entries(items));
+
+//   const line_items: Array<any> = [];
+
+//   const ent = Object.entries(req.body.cart);
+//   for (let i = 0; i < ent.length; i++) {
+//     let item = ent[i] as any;
+//     item = item[1];
+
+//     line_items.push({
 //       price_data: {
 //         currency: "usd",
 //         product_data: {
 //           name: item.name,
 //           images: [item.image],
-//           description: item.desc,
 //           metadata: {
 //             id: item._id,
 //           },
 //         },
-//         unit_amount: (item.price * 100).toFixed(0),
+//         unit_amount: item.price * 100,
 //       },
 //       quantity: item.cartQuantity,
-//     };
-//   });
+//     });
+//   }
+
+//   // const line_items: any = items.map((item: any) => {
+//   //   return {
+//   //     price_data: {
+//   //       currency: "usd",
+//   //       product_data: {
+//   //         name: item.name,
+//   //         images: [item.image],
+//   //         description: item.desc,
+//   //         metadata: {
+//   //           id: item._id,
+//   //         },
+//   //       },
+//   //       unit_amount: (item.price * 100).toFixed(0),
+//   //     },
+//   //     quantity: item.cartQuantity,
+//   //   };
+//   // });
+
+//   // console.log(items);
+//   // console.log(line_items);
 
 //   const session: any = await stripe.checkout.sessions.create({
 //     payment_method_types: ["card"],
@@ -91,240 +200,83 @@ const router = express.Router();
 //     cancel_url: `${process.env.CLIENT_URL}/cart`,
 //   });
 
-//   const endpointSecret = process.env.STRI_ENDPOINT_SECRET;
-
-//   router.post(
-//     "/webhook",
-//     express.raw({ type: "application/json" }),
-//     (req: any, res: any) => {
-//       const sig = req.headers["stripe-signature"];
-
-//       let data: any;
-//       let eventType;
-//       let event;
-
-//       try {
-//         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-//         console.log("Webhook verified");
-//       } catch (err: any) {
-//         console.log(`Webhook Error: ${err.message}`);
-//         res.status(400).send(`Webhook Error: ${err.message}`);
-//       }
-
-//       data = event.data.object;
-//       eventType = event.type;
-
-//       if (eventType === "checkout.session.completed") {
-//         stripe.customers
-//           .retrieve(data.customer)
-//           .then((customer: any) => {
-//             console.log(customer);
-//             console.log("data:", data);
-//           })
-//           .catch((err: any) => {
-//             console.log(err.message);
-//           });
-//       }
-
-//       res.send(200);
-//     }
-//   );
-
 //   res.send({ url: session.url });
 // });
 
-router.post("/create-checkout-session", async (req: any, res: any) => {
-  const { items, userId } = req.body;
-  const customer: any = await stripe.customers.create({
-    metadata: {
-      user_Id: userId,
-    },
-  });
+// //Create Order
+// const createOrder = async (customer: any, data: any, lineItems: any) => {
+//   const newOrder = new Order({
+//     userId: customer.metadata.user_Id,
+//     customerId: data.customer,
+//     paymentIntentId: data.payment_intent,
+//     products: lineItems.data,
+//     subtotal: data.amount_subtotal,
+//     total: data.amount_total,
+//     shipping: data.customer_details,
+//     payment_status: data.payment_status,
+//   });
 
-  const line_items = items[0];
+//   try {
+//     const saveOrder: any = await newOrder.save();
 
-  // const items: Array<any> = req.body.cart;
+//     console.log("Orden procesada", saveOrder);
+//   } catch (err: any) {
+//     console.log(err);
+//   }
+// };
 
-  // // console.log(Object.entries(items));
+// //Stripe webhook
 
-  // const line_items: Array<any> = [];
+// const endpointSecret: string =
+//   "whsec_e213ca11a5b195000074381413b16fafecffc92422039b118c0aeeb6b3782c23";
 
-  // const ent = Object.entries(req.body.cart);
-  // for (let i = 0; i < ent.length; i++) {
-  //   let item = ent[i] as any;
-  //   item = item[1];
+// router.post(
+//   "/webhook",
+//   express.raw({ type: "application/json" }),
+//   (req: any, res: any) => {
+//     const sig = req.headers["stripe-signature"];
 
-  //   line_items.push({
-  //     price_data: {
-  //       currency: "usd",
-  //       product_data: {
-  //         name: item.name,
-  //         images: [item.image],
-  //         metadata: {
-  //           id: item._id,
-  //         },
-  //       },
-  //       unit_amount: item.price * 100,
-  //     },
-  //     quantity: item.cartQuantity,
-  //   });
-  // }
+//     let data: any;
+//     let eventType;
 
-  // const line_items: any = req.body.cart.map((item: any) => {
-  //   return {
-  //     price_data: {
-  //       currency: "usd",
-  //       product_data: {
-  //         name: item.name,
-  //         images: [item.image],
-  //         description: item.desc,
-  //         metadata: {
-  //           id: item._id,
-  //         },
-  //       },
-  //       unit_amount: (item.price * 100).toFixed(0),
-  //     },
-  //     quantity: item.cartQuantity,
-  //   };
-  // });
+//     let event;
 
-  console.log(line_items);
-  // console.log(line_items);
+//     try {
+//       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+//       console.log("Webhook verified");
+//     } catch (err: any) {
+//       console.log(`Webhook Error: ${err.message}`);
+//       res.status(400).send(`Webhook Error: ${err.message}`);
+//       return;
+//     }
 
-  const session: any = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    shipping_address_collection: {
-      allowed_countries: ["US", "CA"],
-    },
-    shipping_options: [
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 0,
-            currency: "usd",
-          },
-          display_name: "Free shipping",
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 5,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 5,
-            },
-          },
-        },
-      },
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: {
-            amount: 1500,
-            currency: "usd",
-          },
-          display_name: "Next day arrival",
-          delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 1,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 1,
-            },
-          },
-        },
-      },
-    ],
-    phone_number_collection: {
-      enabled: true,
-    },
-    customer: customer.id,
-    line_items,
-    mode: "payment",
-    success_url: `${process.env.CLIENT_URL}/checkout-success`,
-    cancel_url: `${process.env.CLIENT_URL}/cart`,
-  });
+//     data = event.data.object;
+//     eventType = event.type;
 
-  res.send({ url: session.url });
-});
+//     //Handle the event
 
-//Create Order
-const createOrder = async (customer: any, data: any, lineItems: any) => {
-  const newOrder = new Order({
-    userId: customer.metadata.user_Id,
-    customerId: data.customer,
-    paymentIntentId: data.payment_intent,
-    products: lineItems.data,
-    subtotal: data.amount_subtotal,
-    total: data.amount_total,
-    shipping: data.customer_details,
-    payment_status: data.payment_status,
-  });
+//     if (eventType === "checkout.session.completed") {
+//       stripe.customers
+//         .retrieve(data.customer)
+//         .then((customer: any) => {
+//           stripe.checkout.sessions.listLineItems(
+//             data.id,
+//             {},
+//             function (err: any, lineItems: any) {
+//               console.log("line_items", lineItems);
 
-  try {
-    const saveOrder: any = await newOrder.save();
+//               createOrder(customer, data, lineItems);
+//             }
+//           );
+//         })
+//         .catch((err: any) => {
+//           console.log(err.message);
+//         });
+//     }
 
-    console.log("Orden procesada", saveOrder);
-  } catch (err: any) {
-    console.log(err);
-  }
-};
-
-//Stripe webhook
-
-const endpointSecret: string =
-  "whsec_e213ca11a5b195000074381413b16fafecffc92422039b118c0aeeb6b3782c23";
-
-router.post(
-  "/webhook",
-  express.raw({ type: "application/json" }),
-  (req: any, res: any) => {
-    const sig = req.headers["stripe-signature"];
-
-    let data: any;
-    let eventType;
-
-    let event;
-
-    try {
-      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-      console.log("Webhook verified");
-    } catch (err: any) {
-      console.log(`Webhook Error: ${err.message}`);
-      res.status(400).send(`Webhook Error: ${err.message}`);
-      return;
-    }
-
-    data = event.data.object;
-    eventType = event.type;
-
-    //Handle the event
-
-    if (eventType === "checkout.session.completed") {
-      stripe.customers
-        .retrieve(data.customer)
-        .then((customer: any) => {
-          stripe.checkout.sessions.listLineItems(
-            data.id,
-            {},
-            function (err: any, lineItems: any) {
-              console.log("line_items", lineItems);
-
-              createOrder(customer, data, lineItems);
-            }
-          );
-        })
-        .catch((err: any) => {
-          console.log(err.message);
-        });
-    }
-
-    // Return a 200 response to acknowledge recipt of event
-    res.send().end();
-  }
-);
+//     // Return a 200 response to acknowledge recipt of event
+//     res.send().end();
+//   }
+// );
 
 module.exports = router;
