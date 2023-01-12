@@ -49,7 +49,7 @@ export const Contacto = () => {
 
   return (
     <div className="cart-window">
-      <h1 className="d-inline-flex p-2 justify-content-center">Contáctanos!</h1>
+      <h1 className="d-inline-flex p-2 justify-content-center text-center">Contáctanos!</h1>
       <form className="cart-size" onSubmit={sendEmail}>
         {errors.user_name ? (
           <div className="col-md-6">
@@ -140,10 +140,10 @@ export const Contacto = () => {
         )}
         <hr />
         <select className="form-select" aria-label="Default select example">
-          <option selected>¿Que tipo de comentario desea realizar?</option>
+          <option selected>¿Qué tipo de comentario desea realizar?</option>
           <option value="1">Sugerencia</option>
-          <option value="2">Consultas</option>
-          <option value="3">Reclamos</option>
+          <option value="2">Consulta</option>
+          <option value="3">Reclamo</option>
         </select>
         <hr />
 

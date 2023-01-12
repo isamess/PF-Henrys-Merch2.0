@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/slices/AuthSlice";
 import { toast } from "react-toastify";
+import SearchBar from './SearchBar'
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -151,15 +152,18 @@ const NavBar = () => {
                 </div>
               )}
             </div>
-            <form className="d-flex" role="search">
+            <div className="me-5">
+              <SearchBar/>
+            </div>
+            {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-            </form>
-            <button className="mx-3 btn btn-secondary text-white">Enter</button>
+            </form> */}
+            {/* <button className="mx-3 btn btn-secondary text-white">Enter</button> */}
           </div>
         </div>
       </nav>

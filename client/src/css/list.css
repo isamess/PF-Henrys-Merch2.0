@@ -1,3 +1,6 @@
 .my-card {
-    width: 18rem;
+    width: 24rem;
+    border-radius: 5px;
+    border:4px;
+    border-color: yellow;
 }
