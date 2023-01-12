@@ -1,7 +1,7 @@
 import { Router } from "express";
 import fileUpload from "express-fileupload"; //este middleware de express nos sirve para subir archivos
 
-import * as productControllers from "../Controllers/productsController"; // de esta forma importo todos los controllers a la vez
+import * as productsControllers from "../Controllers/productsController"; // de esta forma importo todos los controllers a la vez
 
 const router = Router();
 
@@ -9,9 +9,9 @@ const router = Router();
 
 // router.get("/:id", productControllers.getProductId);
 
-router.delete("/:id", productControllers.deleteProduct);
+router.delete("/:id", productsControllers.deleteProduct);
 
-router.put("/:id", productControllers.updateProduct);
+router.put("/:id", productsControllers.updateProduct);
 
 module.exports = router;
 
