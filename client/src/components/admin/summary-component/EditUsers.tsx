@@ -1,22 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  categoryFetch,
-  productsEdit,
-} from "../../../redux/slices/ProductsSlice";
 import { userEdit } from "../../../redux/slices/UsersSlice";
 
-export default function EditUser(prodId: any) {
+export default function EditUser(userId: any) {
   const dispatch = useDispatch();
   const { users }: any = useSelector((state: any) => state.users);
 
   const [open, setOpen] = useState<boolean>(false);
-  const [currentProd, setCurrentProd] = useState<Object>({});
+  const [currentUser, setCurrentProd] = useState<Object>({});
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [address, setAddress] = useState<string>("");
@@ -25,7 +21,7 @@ export default function EditUser(prodId: any) {
   const handleClickOpen = () => {
     setOpen(true);
 
-    let selectedUser = users.filter((item: any) => item._id === prodId.prodId);
+    let selectedUser = users.filter((item: any) => item._id === userId.userId);
 
     selectedUser = selectedUser[0];
 
@@ -46,7 +42,7 @@ export default function EditUser(prodId: any) {
 
     dispatch(
       userEdit({
-        ...currentProd,
+        ...currentUser,
         name: name,
         email: email,
         address: address,

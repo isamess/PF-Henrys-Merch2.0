@@ -1,25 +1,27 @@
-import { any } from "joi";
-
 const { Order } = require("../models/order");
 const express = require("express");
 const Stripe = require("stripe");
+const dotenv = require("dotenv");
 
-require("dotenv").config();
+dotenv.config();
 
-const stripe = Stripe(process.env.STRIPE_KEY);
+const stripe = Stripe(
+  "sk_test_51MHbfIFASbr6HCsEsNhigbQ6Vi6E8TgxehmzXmmb8y8KpJ1QF9RKyX0z4PPrIP5Ihh4w2qISe7rdIJ37kD8a1lJ300eAZIY1ZL"
+);
 
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req: any, res: any) => {
-  const { cartItems }: any = req.body;
-
   const customer: any = await stripe.customers.create({
     metadata: {
-      user_Id: req.body.user_Id,
+      user_Id: req.body.userId,
     },
   });
 
-  const line_items: any = req.body.cartItems?.map((item: any) => {
+  const items = req.body.cart;
+  console.log(items);
+
+  const line_items: any = items.map((item: any) => {
     return {
       price_data: {
         currency: "usd",
@@ -93,6 +95,7 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
+  console.log(session);
   res.send({ url: session.url });
 });
 

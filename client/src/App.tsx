@@ -28,7 +28,7 @@ import ProductsList from "./components/admin/list/ProductsList";
 import OrdersList from "./components/admin/list/OrdersList";
 import AdminProduct from "./components/details/Products";
 import Order from "./components/details/Order";
-import UserProfile from "./components/details/User";
+import UserProfile from "./components/details/UserProfile";
 import ProductsByCategory from "./components/ProductsByCategory";
 import UsersList from "./components/admin/list/UsersList";
 

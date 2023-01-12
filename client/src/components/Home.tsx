@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import  Carousel  from "./Carousel";
+import Carousel from "./Carousel";
 import { List } from "./List";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,6 @@ function Home() {
   const cart = useSelector((state: any) => state.cart);
   const { categories }: any = useSelector((state: any) => state.products);
 
-
-  
-
   useEffect(() => {
     dispatch(getTotal());
   }, [cart, dispatch]);
@@ -25,6 +22,7 @@ function Home() {
         <div className="d-flex my-5">
           <Carousel />
         </div>
+
         {categories
           ? categories.map((category: any) => {
               return (
@@ -43,8 +41,6 @@ function Home() {
               );
             })
           : null}
-
-
       </div>
       <Footer />
     </>

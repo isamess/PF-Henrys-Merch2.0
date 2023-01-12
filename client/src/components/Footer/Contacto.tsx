@@ -1,17 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { validate } from "./Validaciones";
 import Footer from "./Footer";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Contacto = () => {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState<any>({});
   const [input, setInput] = useState({
     user_name: "",
     user_email: "",
   });
   const [text, setText] = useState({ user_message: "" });
-  const history = useNavigate()
 
   function handleText(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText({
@@ -39,16 +40,18 @@ export const Contacto = () => {
 
     emailjs
       .sendForm(
-        "service_iptjdll",
-        "template_opk1ecv",
+        "service_isk8o3g",
+        "template_n5cjqvq",
         e.currentTarget,
-        "DRImx5IvdrqGW5yoj"
+        "VC3_phelLlu1ZZNu8"
       )
       .then((response: any) => console.log(response))
       .catch((error: any) => console.log(error));
-    alert("Consulta enviada correctamente, te responderemos a la brevedad");
-    history("/")
+    e.currentTarget.reset();
 
+    toast.success("Mensaje creado con exito", { position: "top-right" });
+
+    navigate("/");
   };
 
   return (
