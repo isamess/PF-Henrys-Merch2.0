@@ -45,6 +45,19 @@ router.get("/find", async (req: any, res: any) => {
   }
 });
 
+router.get("/find/:id", isAdmin, async (req: any, res: any) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user)
+      return res.status(404).json({
+        message: "Usuario doesn't exist",
+      });
+    return res.json(user);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
 router.delete("delete/:id"),
   isAdmin,
   async (req: any, res: any) => {

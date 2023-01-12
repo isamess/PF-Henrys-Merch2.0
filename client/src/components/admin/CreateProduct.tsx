@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   categoryCreate,
-  categoryFetch,
   productsCreate,
 } from "../../redux/slices/ProductsSlice";
 
@@ -10,16 +9,11 @@ const CreateProduct = () => {
   const dispatch = useDispatch();
   const { categories }: any = useSelector((state: any) => state.products);
 
-  useEffect(() => {
-    dispatch(categoryFetch());
-  }, [dispatch]);
-
   const [productImg, setProductImg] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [price, setPrice] = useState<string>("");
-  // const [color, setColor] = useState<string>("");
   const [createCategory, setCreateCategory] = useState<string>("");
 
   const handleProductImageUpload = (e: any) => {
