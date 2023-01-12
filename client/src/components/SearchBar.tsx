@@ -37,10 +37,7 @@ const Searchbar = () => {
         placeholder="Buscar producto..."
         className="text-base text-gray-900 m-2 ml-2 mr-0 w-36"
       />
-      <button
-        type="submit"
-        className="text-base text-gray-900 pl-3 pr-8 hover:bg-gray-200 rounded-br-md rounded-tr-md"
-      >
+      <button type="submit" className="btn btn-secondry bg-primary">
         <BiSearchAlt className="h-6 w-6 text-gray-600" />
       </button>
     </form>

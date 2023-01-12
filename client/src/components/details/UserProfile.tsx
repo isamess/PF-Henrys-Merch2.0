@@ -12,9 +12,9 @@ import { userDelete, userEdit } from "../../redux/slices/UsersSlice";
 const UserProfile = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const auth: any = useSelector((state: any) => state.auth);
   const { users }: any = useSelector((state: any) => state.users);
 
-  const auth: any = useSelector((state: any) => state.auth);
   const [atLoad, setAtLoad] = useState<boolean>(true);
 
   const [open, setOpen] = useState<boolean>(false);
