@@ -5,7 +5,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const stripe = Stripe(process.env.STRIPE_KEY);
+const stripe = Stripe(
+  "sk_test_51MHbfIFASbr6HCsEsNhigbQ6Vi6E8TgxehmzXmmb8y8KpJ1QF9RKyX0z4PPrIP5Ihh4w2qISe7rdIJ37kD8a1lJ300eAZIY1ZL"
+);
 
 const router = express.Router();
 
@@ -15,9 +17,8 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
       user_Id: req.body.userId,
     },
   });
-
+  console.log(req.body.cart);
   const line_items: any = req.body.cart.map((item: any) => {
-    console.log(req.body.cart);
     return {
       price_data: {
         currency: "usd",
@@ -34,8 +35,9 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
       quantity: item.cartQuantity,
     };
   });
+  console.log(line_items);
 
-  const session: any = await stripe.checkout.sessions({
+  const session: any = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     shipping_address_collection: {
       allowed_countries: ["US", "CA"],

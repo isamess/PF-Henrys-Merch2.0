@@ -72,12 +72,12 @@ export default function UsersList() {
       renderCell: (params: any) => {
         return (
           <div className="list-actions">
-            <button
+            {/* <button
               className="bg-danger"
               onClick={() => handleDelete(params.row.id)}
             >
               Eliminar
-            </button>
+            </button> */}
             <EditUser userId={params.row.id} />
             <button
               className="bg-success text-white"
