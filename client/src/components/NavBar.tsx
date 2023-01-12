@@ -15,7 +15,7 @@ const NavBar = () => {
       <nav className="navbar navbar-expand-lg  py-3 px-2">
         <div className="container-fluid">
           <a className="navbar-logo" href="/">
-            SoyHenry
+            Henry's Merch
           </a>
 
           <button
@@ -49,7 +49,7 @@ const NavBar = () => {
                   key="category-list"
                 >
                   <div className="categories">
-                    {categories.map((category: any, index: any) => {
+                    {categories?.map((category: any, index: any) => {
                       return (
                         <li key={index}>
                           <Link

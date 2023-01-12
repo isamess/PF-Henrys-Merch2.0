@@ -26,8 +26,8 @@ router.get("/find/:id", async (req: any, res: any) => {
         message: "Product doesn't exist",
       });
     return res.json(product);
-  } catch (error) {
-    return res.status(500).json(error);
+  } catch (error:any) {
+    res.status(500).json({error_message: error.message})
   }
 });
 

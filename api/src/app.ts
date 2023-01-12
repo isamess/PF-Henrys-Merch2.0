@@ -3,7 +3,7 @@ import morgan from "morgan";
 import config from "./config";
 import bodyParser from "body-parser";
 import cors from "cors";
-import mongoose, { connect } from "mongoose";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 // import fs from 'fs'
 // import path, { dirname } from 'path'
@@ -11,9 +11,9 @@ import product from "./models/products";
 const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
-const products = require("./routes/productsController");
-const users = require("./routes/users");
-const orders = require("./routes/orders");
+const products = require("./../src/Controllers/productsController");
+const users= require('./routes/users');
+const orders= require('./routes/orders');
 
 dotenv.config();
 const app = express();
