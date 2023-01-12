@@ -1,11 +1,10 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useState } from "react";
 
-import { useAppDispatch, useAppSelector } from './../hooks/hooks';
-import { setFiltersAction } from '../redux/slices/FilterSlices/filterActions';
-import { productsFetch} from '../redux/slices/ProductsSlice'
+import { useAppDispatch, useAppSelector } from "./../hooks/hooks";
+import { setFiltersAction } from "../redux/slices/FilterSlices/filterActions";
+import { productsFetch } from "../redux/slices/ProductsSlice";
 import { useNavigate } from "react-router-dom";
 import { BiSearchAlt } from "react-icons/bi";
-
 
 const Searchbar = () => {
   const [search, setSearch] = useState("");
@@ -16,7 +15,7 @@ const Searchbar = () => {
   const navigate = useNavigate();
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     await dispatch(setFiltersAction({ ...filters, name: search }));
     setSearch("");
   };
@@ -28,12 +27,12 @@ const Searchbar = () => {
   return (
     <form
       onSubmit={submitHandler}
-      className="flex flex-row rounded-md shadow-lg  bg-white border-0 border-b-2 border-black border-solid justify-content-center"
+      className="flex flex-row rounded-md  border-0 border-b-2 border-black border-solid justify-content-center"
     >
       <input
         type="text"
         onChange={changeHandler}
-        name= 'search'
+        name="search"
         value={search}
         placeholder="Buscar producto..."
         className="text-base text-gray-900 m-2 ml-2 mr-0 w-36"
