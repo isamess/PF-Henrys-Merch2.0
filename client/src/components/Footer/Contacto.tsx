@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { validate } from "./Validaciones";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 export const Contacto = () => {
   const [errors, setErrors] = useState<any>({});
@@ -10,6 +11,7 @@ export const Contacto = () => {
     user_email: "",
   });
   const [text, setText] = useState({ user_message: "" });
+  const history = useNavigate()
 
   function handleText(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText({
@@ -44,7 +46,9 @@ export const Contacto = () => {
       )
       .then((response: any) => console.log(response))
       .catch((error: any) => console.log(error));
-    e.currentTarget.reset();
+    alert("Consulta enviada correctamente, te responderemos a la brevedad");
+    history("/")
+
   };
 
   return (

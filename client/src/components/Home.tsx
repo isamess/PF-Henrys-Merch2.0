@@ -1,15 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import  Carousel  from "./Carousel";
 import { List } from "./List";
 import Footer from "./Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getTotal } from "../redux/slices/CartSlice";
+import { Pagination } from "./Pagination";
 
 function Home() {
   const dispatch = useDispatch();
 
   const cart = useSelector((state: any) => state.cart);
   const { categories }: any = useSelector((state: any) => state.products);
+
+
+  
 
   useEffect(() => {
     dispatch(getTotal());
@@ -39,6 +43,8 @@ function Home() {
               );
             })
           : null}
+
+
       </div>
       <Footer />
     </>
