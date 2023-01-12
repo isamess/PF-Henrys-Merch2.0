@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "ts-node src/index.ts",
-    "start": "node src/index.ts"
+    "build": "src/app.ts",
+    "start": "ts-node --transpile-only src/app.ts"
   },
   "keywords": [],
   "author": "pf-soyhenry-g2",
