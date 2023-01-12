@@ -13,7 +13,8 @@ const dataBase = (async () => {
       pass: config.MONGO_PASSWORD,
     };
     const db = await mongoose.connect(
-      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@clusterpf-henrysmerch.wibjaod.mongodb.net/?retryWrites=true&w=majority`,
+      config.MONGO_DEPLOY!,
+      // `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@clusterpf-henrysmerch.wibjaod.mongodb.net/?retryWrites=true&w=majority`,
       mongooseOptions
     );
     console.log("Our glorious Database is connected to:", db.connection.name);

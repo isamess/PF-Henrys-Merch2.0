@@ -22,7 +22,8 @@ mongoose.set("strictQuery", true);
 require("dotenv/config");
 
 
-app.set("port", config.PORT || 3001); // quiero que se establezca este puerto
+
+app.set("port", config.PORT || '*'); // quiero que se establezca este puerto
 // app.set('Access-Control-Allow-Origin', '*')
 app.use(morgan("dev")); // me muestra la petición que hice en la terminal
 app.use(cors()); // cors me permite a cualquier servidor hacer peticiones
