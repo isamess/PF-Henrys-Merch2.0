@@ -1,43 +1,195 @@
 const { Order } = require("../models/order");
-const express = require("express");
+import express from "express";
 const Stripe = require("stripe");
-const dotenv = require("dotenv");
 
-dotenv.config();
+require("dotenv").config();
 
-const stripe = Stripe(
-  "sk_test_51MHbfIFASbr6HCsEsNhigbQ6Vi6E8TgxehmzXmmb8y8KpJ1QF9RKyX0z4PPrIP5Ihh4w2qISe7rdIJ37kD8a1lJ300eAZIY1ZL"
-);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const router = express.Router();
 
+// router.post("/create-checkout-session", async (req: any, res: any) => {
+//   const customer = await stripe.customers.create({
+//     metadata: {
+//       userId: req.body.userId,
+//       cart: JSON.stringify(req.body.cart),
+//     },
+//   });
+
+//   const line_items: any = req.body.cart.map((item: any) => {
+//     return {
+//       price_data: {
+//         currency: "usd",
+//         product_data: {
+//           name: item.name,
+//           images: [item.image],
+//           description: item.desc,
+//           metadata: {
+//             id: item._id,
+//           },
+//         },
+//         unit_amount: (item.price * 100).toFixed(0),
+//       },
+//       quantity: item.cartQuantity,
+//     };
+//   });
+
+//   const session: any = await stripe.checkout.sessions.create({
+//     payment_method_types: ["card"],
+//     shipping_address_collection: {
+//       allowed_countries: ["US", "CA"],
+//     },
+//     shipping_options: [
+//       {
+//         shipping_rate_data: {
+//           type: "fixed_amount",
+//           fixed_amount: {
+//             amount: 0,
+//             currency: "usd",
+//           },
+//           display_name: "Free shipping",
+//           delivery_estimate: {
+//             minimum: {
+//               unit: "business_day",
+//               value: 5,
+//             },
+//             maximum: {
+//               unit: "business_day",
+//               value: 5,
+//             },
+//           },
+//         },
+//       },
+//       {
+//         shipping_rate_data: {
+//           type: "fixed_amount",
+//           fixed_amount: {
+//             amount: 1500,
+//             currency: "usd",
+//           },
+//           display_name: "Next day arrival",
+//           delivery_estimate: {
+//             minimum: {
+//               unit: "business_day",
+//               value: 1,
+//             },
+//             maximum: {
+//               unit: "business_day",
+//               value: 1,
+//             },
+//           },
+//         },
+//       },
+//     ],
+//     phone_number_collection: {
+//       enabled: true,
+//     },
+//     customer: customer.id,
+//     line_items,
+//     mode: "payment",
+//     success_url: `${process.env.CLIENT_URL}/checkout-success`,
+//     cancel_url: `${process.env.CLIENT_URL}/cart`,
+//   });
+
+//   const endpointSecret = process.env.STRI_ENDPOINT_SECRET;
+
+//   router.post(
+//     "/webhook",
+//     express.raw({ type: "application/json" }),
+//     (req: any, res: any) => {
+//       const sig = req.headers["stripe-signature"];
+
+//       let data: any;
+//       let eventType;
+//       let event;
+
+//       try {
+//         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+//         console.log("Webhook verified");
+//       } catch (err: any) {
+//         console.log(`Webhook Error: ${err.message}`);
+//         res.status(400).send(`Webhook Error: ${err.message}`);
+//       }
+
+//       data = event.data.object;
+//       eventType = event.type;
+
+//       if (eventType === "checkout.session.completed") {
+//         stripe.customers
+//           .retrieve(data.customer)
+//           .then((customer: any) => {
+//             console.log(customer);
+//             console.log("data:", data);
+//           })
+//           .catch((err: any) => {
+//             console.log(err.message);
+//           });
+//       }
+
+//       res.send(200);
+//     }
+//   );
+
+//   res.send({ url: session.url });
+// });
+
 router.post("/create-checkout-session", async (req: any, res: any) => {
+  const { items, userId } = req.body;
   const customer: any = await stripe.customers.create({
     metadata: {
-      user_Id: req.body.userId,
+      user_Id: userId,
     },
   });
 
-  const items = req.body.cart;
-  console.log(items);
+  const line_items = items[0];
 
-  const line_items: any = items.map((item: any) => {
-    return {
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: item.name,
-          images: [item.image],
-          description: item.desc,
-          metadata: {
-            id: item._id,
-          },
-        },
-        unit_amount: (item.price * 100).toFixed(0),
-      },
-      quantity: item.cartQuantity,
-    };
-  });
+  // const items: Array<any> = req.body.cart;
+
+  // // console.log(Object.entries(items));
+
+  // const line_items: Array<any> = [];
+
+  // const ent = Object.entries(req.body.cart);
+  // for (let i = 0; i < ent.length; i++) {
+  //   let item = ent[i] as any;
+  //   item = item[1];
+
+  //   line_items.push({
+  //     price_data: {
+  //       currency: "usd",
+  //       product_data: {
+  //         name: item.name,
+  //         images: [item.image],
+  //         metadata: {
+  //           id: item._id,
+  //         },
+  //       },
+  //       unit_amount: item.price * 100,
+  //     },
+  //     quantity: item.cartQuantity,
+  //   });
+  // }
+
+  // const line_items: any = req.body.cart.map((item: any) => {
+  //   return {
+  //     price_data: {
+  //       currency: "usd",
+  //       product_data: {
+  //         name: item.name,
+  //         images: [item.image],
+  //         description: item.desc,
+  //         metadata: {
+  //           id: item._id,
+  //         },
+  //       },
+  //       unit_amount: (item.price * 100).toFixed(0),
+  //     },
+  //     quantity: item.cartQuantity,
+  //   };
+  // });
+
+  console.log(line_items);
+  // console.log(line_items);
 
   const session: any = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -95,7 +247,7 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
-  console.log(session);
+
   res.send({ url: session.url });
 });
 
