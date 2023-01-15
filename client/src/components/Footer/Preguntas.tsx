@@ -4,7 +4,6 @@ import Footer from "./Footer";
 export const Preguntas = () => {
   return (
     <div>
-      <div className= "container bg-white">
       <div>
         <h4>¿Es seguro comprar en el sitio?</h4>
         <p>
@@ -59,21 +58,8 @@ export const Preguntas = () => {
       </div>
       <div>
             <h4>¿Te fue útil esta información?</h4>
-
-
-            <div className="container">
-      <div className="row align-items-start w-25 ">
-          <div className="col">
-            <button className="btn btn-warning"> <p> <strong>SI</strong></p> </button>
-          </div>
-          <div className="col">
-          <button className="btn btn-warning"> <p> <strong>NO</strong></p> </button>
-            <p></p>
-          </div>
-      </div>
-          </div>
-
-        </div>
+            <button>SI</button>
+            <button>NO</button>
         </div>
         <Footer/>
       

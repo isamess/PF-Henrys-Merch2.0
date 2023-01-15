@@ -26,22 +26,17 @@ export default function EditProduct(prodId: any) {
   const handleClickOpen = () => {
     setOpen(true);
 
-    let selectedProd: any = products.filter(
+    let selectedProd = products.filter(
       (item: any) => item._id === prodId.prodId
     );
 
     selectedProd = selectedProd[0];
     setCurrentProd(selectedProd);
 
-    if (selectedProd.image) {
-      if (selectedProd.image.url) {
-        return setPreviewImg(selectedProd.image.image);
-      } else {
-        return setPreviewImg(selectedProd.image);
-      }
-    }
+    if (selectedProd.image.url) setPreviewImg(selectedProd.image.image);
+    if (selectedProd.image) setPreviewImg(selectedProd.image);
     setName(selectedProd.name);
-    setCategory(selectedProd.category);
+    setCategory(selectedProd.category[0]);
     setDesc(selectedProd.desc);
     setPrice(selectedProd.price);
     setStock(selectedProd.stock);

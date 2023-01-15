@@ -1,8 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import FilterSlices from '../slices/FilterSlices'
-
-
 import AuthReducer, { loadUser } from "../slices/AuthSlice";
 import cartReducer, { getTotal } from "../slices/CartSlice";
 import productsReducer, {
@@ -19,8 +16,6 @@ export const store = configureStore({
     products: productsReducer,
     orders: ordersReducer,
     users: UsersSlice,
-    filterState: FilterSlices,
-    
   },
 });
 
@@ -31,5 +26,4 @@ store.dispatch(categoryFetch());
 store.dispatch(usersFetch());
 store.dispatch(ordersFetch());
 
-export type RootState= ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch;

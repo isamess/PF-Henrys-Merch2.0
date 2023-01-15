@@ -7,21 +7,25 @@ const AllTimeData = () => {
   const { products }: any = useSelector((state: any) => state.products);
   const { users }: any = useSelector((state: any) => state.users);
   const { list }: any = useSelector((state: any) => state.orders);
-  const [income, setIncome] = useState<number>(0);
+  const [income, setIncome] = useState<Array<any>>([]);
 
-  useEffect(() => {
-    axios
-      .get(`${url}/orders/total-income`, setHeaders())
-      .then((res: any) => {
-        var sum = res.data.reduce((total: any, i: any) => {
-          return total + i.sales;
-        }, 0);
-        setIncome(sum);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  }, [income]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const res: any = await axios.get(
+  //         `${url}/orders/total-income`,
+  //         setHeaders()
+  //       );
+
+  //       setIncome(res.data);
+  //     } catch (err: any) {
+  //       console.log(err);
+  //     }
+  //   }
+
+  //   fetchData();
+  //   console.log(income);
+  // }, []);
 
   return (
     <div className="atd-main">
@@ -40,7 +44,7 @@ const AllTimeData = () => {
       </div>
       <div className="atd-info">
         <div className="atd-title">Ganancias</div>
-        <div className="atd-data">${income / 100}</div>
+        <div className="atd-data">${income}</div>
       </div>
     </div>
   );

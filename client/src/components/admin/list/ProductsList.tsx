@@ -69,16 +69,16 @@ export default function ProductsList() {
       field: "actions",
       headerName: "Acciones",
       sortable: false,
-      width: 100,
+      width: 170,
       renderCell: (params: any) => {
         return (
           <div className="list-actions">
-            {/* <button
+            <button
               className="bg-danger"
               onClick={() => handleDelete(params.row.id)}
             >
               Eliminar
-            </button> */}
+            </button>
             <EditProduct prodId={params.row.id} />
             <button
               className="bg-success text-white"

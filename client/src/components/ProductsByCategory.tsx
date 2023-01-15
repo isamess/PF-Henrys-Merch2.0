@@ -9,7 +9,6 @@ export default function ProductsByCategory() {
       <h3 className="d-flex p-2 justify-content-center pb-3 mt-5">
         {category}
       </h3>
-
       <List category={category} />
     </>
   ) : (

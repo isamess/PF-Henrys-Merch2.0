@@ -3,11 +3,6 @@
 import { Link, NavLink } from "react-router-dom";
 
 export default function Footer() {
-  function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
-
   return (
     <footer className="bg-black text-white pt-5 pb-4">
       <div className="container text-center text-md-left mx-100%">
@@ -30,7 +25,7 @@ export default function Footer() {
                   href="https://www.soyhenry.com/about-us"
                   className="nav-link"
                 >
-                  ¿Quiénes somos?
+                  ¿Quienes somos?
                 </a>
               </li>
               <li className="nav-item">
@@ -44,20 +39,12 @@ export default function Footer() {
             <h3 className="">Tienda Online</h3>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li className="nav-item">
-                <Link
-                  to="/como-comprar"
-                  className="nav-link"
-                  onClick={() => topFunction()}
-                >
+                <Link to="/como-comprar" className="nav-link">
                   Cómo comprar
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/terminos"
-                  className="nav-link"
-                  onClick={() => topFunction()}
-                >
+                <Link to="/terminos" className="nav-link">
                   Términos y condiciones
                 </Link>
               </li>
@@ -67,20 +54,12 @@ export default function Footer() {
             <h3 className="">Atención al cliente</h3>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li>
-                <Link
-                  to="/preguntas"
-                  className="nav-link"
-                  onClick={() => topFunction()}
-                >
+                <Link to="/preguntas" className="nav-link">
                   Preguntas frecuentes
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/politicas"
-                  className="nav-link"
-                  onClick={() => topFunction()}
-                >
+                <Link to="/politicas" className="nav-link">
                   Políticas
                 </Link>
               </li>
@@ -90,11 +69,7 @@ export default function Footer() {
             <h3>Contactanos!</h3>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
               <li>
-                <NavLink
-                  to="/contacto"
-                  className="nav-link"
-                  onClick={() => topFunction()}
-                >
+                <NavLink to="/contacto" className="nav-link">
                   Sugerencias, dudas y consultas
                 </NavLink>
               </li>

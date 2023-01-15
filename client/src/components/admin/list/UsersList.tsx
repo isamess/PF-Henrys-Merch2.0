@@ -68,20 +68,20 @@ export default function UsersList() {
       field: "actions",
       headerName: "Acciones",
       sortable: false,
-      width: 100,
+      width: 170,
       renderCell: (params: any) => {
         return (
           <div className="list-actions">
-            {/* <button
+            <button
               className="bg-danger"
               onClick={() => handleDelete(params.row.id)}
             >
               Eliminar
-            </button> */}
+            </button>
             <EditUser userId={params.row.id} />
             <button
               className="bg-success text-white"
-              onClick={() => navigate(`/user/${params.row.id}`)}
+              onClick={() => navigate(`/admin-user/${params.row.id}`)}
             >
               Ver
             </button>
