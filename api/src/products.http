@@ -10,13 +10,15 @@ GET {{url}}/products/63af64b85b6378162ac7cdde
 ###
 POST {{url}}/products
 Content-Type: application/json
-
 {
     "name": "remera de Prueba",
     "price": 1500,
     "category": "Remeras",
     "color": "amarillo",
-    "image": "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
+    "image": {
+        "public_id":
+    }
+    "https://blog.soyhenry.com/content/images/2021/05/LUCH.jpg"
 }
 
 ###
@@ -24,3 +26,7 @@ DELETE {{url}}/products/1
 
 ###
 PUT {{url}}/products/1
+
+###
+
+GET {{url}}/

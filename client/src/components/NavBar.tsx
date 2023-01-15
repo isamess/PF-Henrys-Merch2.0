@@ -1,11 +1,13 @@
 import "../css/navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/slices/AuthSlice";
 import { toast } from "react-toastify";
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartTotalQuantity }: any = useSelector((state: any) => state.cart);
   const auth: any = useSelector((state: any) => state.auth);
   const { categories }: any = useSelector((state: any) => state.products);
@@ -15,7 +17,7 @@ const NavBar = () => {
       <nav className="navbar navbar-expand-lg  py-3 px-2">
         <div className="container-fluid">
           <a className="navbar-logo" href="/">
-            SoyHenry
+            Henry's Merch
           </a>
 
           <button
@@ -49,7 +51,7 @@ const NavBar = () => {
                   key="category-list"
                 >
                   <div className="categories">
-                    {categories.map((category: any, index: any) => {
+                    {categories?.map((category: any, index: any) => {
                       return (
                         <li key={index}>
                           <Link
@@ -66,8 +68,8 @@ const NavBar = () => {
               </li>
 
               <li className="nav-item" key="my-account">
-                <NavLink
-                  to={"/profile"}
+                {/* <NavLink
+                  to={`/user/${auth._id}:`}
                   className={({ isActive }) =>
                     isActive
                       ? "nav-link text-black fw-bold active"
@@ -75,7 +77,13 @@ const NavBar = () => {
                   }
                 >
                   Mi Cuenta
-                </NavLink>
+                </NavLink> */}
+                <div
+                  className="btn border-none bg-none text-black"
+                  onClick={() => navigate(`/user/${auth._id}`)}
+                >
+                  Mi Perfil
+                </div>
               </li>
               <Link to="/cart">
                 <div className="nav-cart">
@@ -151,15 +159,18 @@ const NavBar = () => {
                 </div>
               )}
             </div>
-            <form className="d-flex" role="search">
+            <div className="me-5">
+              <SearchBar />
+            </div>
+            {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-            </form>
-            <button className="mx-3 btn btn-secondary text-white">Enter</button>
+            </form> */}
+            {/* <button className="mx-3 btn btn-secondary text-white">Enter</button> */}
           </div>
         </div>
       </nav>

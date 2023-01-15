@@ -3,11 +3,14 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/slices/CartSlice";
 
+
 // PASO LAS PROPS
 const List = (category: any) => {
   const dispatch = useDispatch();
   const { products }: any = useSelector((state: any) => state.products);
   const categoryName: any = category.category;
+
+  
 
   const handleAddCart = (product: any) => {
     dispatch(addToCart(product));
@@ -22,10 +25,11 @@ const List = (category: any) => {
     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
       {products.map((product: any) =>
         product.category === categoryName ? (
+          <div className= "container mx-10 my-10">
           <div className="d-flex justify-content-center" key={product._id}>
-            <div className="card my-card">
-              <img src={product.image} className="card-img-top" alt="..." />
-              <div className="card-body">
+            <div className="card my-card border border-warning  p-4 my-5" >
+              <img src={product.image} className="card-img-top" key={product.name} alt="..." />
+              <div className="card-body border border-warning" >
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">{product.desc}</p>
                 <p className="card-text">desc</p>
@@ -33,10 +37,11 @@ const List = (category: any) => {
                   ${product.price.toFixed(2).toLocaleString()}
                 </p>
                 <button
-                  className="mx-3 btn btn-secondary text-white"
+                  className="mx-3 btn btn-warning text-black"
                   onClick={() => handleAddCart(product)}
                 >
-                  Add+
+                  <strong> Agregar</strong>
+                 
                 </button>
 
                 <button
@@ -45,18 +50,22 @@ const List = (category: any) => {
                 >
                   <NavLink
                     to={`/product/${product._id}`}
-                    className="btn btn-secondary"
+                    className="btn btn-warning "
                   >
-                    Ver Producto
+                    <strong>Ver Producto</strong>
+                    
                   </NavLink>
                 </button>
               </div>
             </div>
+       
+          </div>
           </div>
         ) : (
           <></>
         )
       )}
+      
     </div>
   );
 };

@@ -3,7 +3,7 @@ import morgan from "morgan";
 import config from "./config";
 import bodyParser from "body-parser";
 import cors from "cors";
-import mongoose, { connect } from "mongoose";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 // import fs from 'fs'
 // import path, { dirname } from 'path'
@@ -11,9 +11,9 @@ import product from "./models/products";
 const register = require("./routes/register");
 const login = require("./routes/login");
 const stripe = require("./routes/stripe");
-const products = require("./routes/productsController");
-const users = require("./routes/users");
-const orders = require("./routes/orders");
+const products = require("./../src/Controllers/productsController");
+const users= require('./routes/users');
+const orders= require('./routes/orders');
 
 dotenv.config();
 const app = express();
@@ -22,7 +22,8 @@ mongoose.set("strictQuery", true);
 require("dotenv/config");
 
 
-app.set("port", config.PORT || 3001); // quiero que se establezca este puerto
+
+app.set("port", config.PORT || '*'); // quiero que se establezca este puerto
 // app.set('Access-Control-Allow-Origin', '*')
 app.use(morgan("dev")); // me muestra la petición que hice en la terminal
 app.use(cors()); // cors me permite a cualquier servidor hacer peticiones
