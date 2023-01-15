@@ -1,101 +1,25 @@
+import { any } from "joi";
+
 const { Order } = require("../models/order");
 const express = require("express");
 const Stripe = require("stripe");
-const dotenv = require("dotenv");
 
-dotenv.config();
+require("dotenv").config();
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.STRIPE_KEY);
 
 const router = express.Router();
 
-// router.post("/create-checkout-session", async (req: any, res: any) => {
-//   const line_items: any = req.body.cart.map((item: any) => {
-//     return {
-//       price_data: {
-//         currency: "usd",
-//         product_data: {
-//           name: item.name,
-//           images: [item.image],
-//           description: item.desc,
-//           metadata: {
-//             id: item._id,
-//           },
-//         },
-//         unit_amount: (item.price * 100).toFixed(0),
-//       },
-//       quantity: item.cartQuantity,
-//     };
-//   });
-
-//   const session: any = await stripe.checkout.sessions.create({
-//     payment_method_types: ["card"],
-//     shipping_address_collection: {
-//       allowed_countries: ["US", "CA"],
-//     },
-//     shipping_options: [
-//       {
-//         shipping_rate_data: {
-//           type: "fixed_amount",
-//           fixed_amount: {
-//             amount: 0,
-//             currency: "usd",
-//           },
-//           display_name: "Free shipping",
-//           delivery_estimate: {
-//             minimum: {
-//               unit: "business_day",
-//               value: 5,
-//             },
-//             maximum: {
-//               unit: "business_day",
-//               value: 5,
-//             },
-//           },
-//         },
-//       },
-//       {
-//         shipping_rate_data: {
-//           type: "fixed_amount",
-//           fixed_amount: {
-//             amount: 1500,
-//             currency: "usd",
-//           },
-//           display_name: "Next day arrival",
-//           delivery_estimate: {
-//             minimum: {
-//               unit: "business_day",
-//               value: 1,
-//             },
-//             maximum: {
-//               unit: "business_day",
-//               value: 1,
-//             },
-//           },
-//         },
-//       },
-//     ],
-//     phone_number_collection: {
-//       enabled: true,
-//     },
-//     // customer: customer.id,
-//     line_items,
-//     mode: "payment",
-//     success_url: `${process.env.CLIENT_URL}/checkout-success`,
-//     cancel_url: `${process.env.CLIENT_URL}/cart`,
-//   });
-
-//   res.send({ url: session.url });
-// });
-
 router.post("/create-checkout-session", async (req: any, res: any) => {
+  const { cartItems }: any = req.body;
+
   const customer: any = await stripe.customers.create({
     metadata: {
-      user_Id: req.body.userId,
+      user_Id: req.body.user_Id,
     },
   });
 
-  const line_items: any = req.body.cart.map((item: any) => {
+  const line_items: any = req.body.cartItems?.map((item: any) => {
     return {
       price_data: {
         currency: "usd",
@@ -112,9 +36,6 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
       quantity: item.cartQuantity,
     };
   });
-
-  console.log(req.body.cart);
-  console.log(line_items);
 
   const session: any = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -172,7 +93,6 @@ router.post("/create-checkout-session", async (req: any, res: any) => {
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
-
   res.send({ url: session.url });
 });
 

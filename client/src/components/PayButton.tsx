@@ -2,15 +2,13 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { url } from "../redux/slices/api";
 
-const PayButton = (cartItems: any) => {
+const PayButton = ({ cartItems }: any) => {
   const user: any = useSelector((state: any) => state.auth);
-
-  const cart: any = cartItems.cartItems;
 
   const handleCheckout = () => {
     axios
       .post(`${url}/stripe/create-checkout-session`, {
-        cart,
+        cartItems,
         userId: user._id,
       })
       .then((res) => {

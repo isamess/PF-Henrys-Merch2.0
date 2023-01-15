@@ -1,24 +1,15 @@
 const categories = [
   {
-    name: "Agendas",
+    name: "home",
   },
   {
-    name: "Fundas dispositivos",
+    name: "top",
   },
   {
-    name: "Gorros",
+    name: "bottom",
   },
   {
-    name: "Mates y Termos",
-  },
-  {
-    name: "Pads",
-  },
-  {
-    name: "Remeras",
-  },
-  {
-    name: "Stickers",
+    name: "tools",
   },
 ];
 

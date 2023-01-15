@@ -10,7 +10,7 @@ type InitialState = {
   email: string;
   _id: string;
   isAdmin: string;
-  user: Array<any>;
+  users: Array<any>;
   registerStatus: string;
   registerError: string;
   userStatus: string;
@@ -25,7 +25,7 @@ const initialState: InitialState = {
   email: "",
   _id: "",
   isAdmin: "",
-  user: [],
+  users: [],
   registerStatus: "",
   registerError: "",
   userStatus: "",
@@ -78,7 +78,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loadUser(state: any, action: PayloadAction<any>) {
+    loadUser(state, action: PayloadAction<any>) {
       const token = state.token;
       if (token) {
         const user: any = jwtDecode(token);
@@ -95,7 +95,7 @@ const authSlice = createSlice({
         };
       }
     },
-    logoutUser(state: any, action: PayloadAction<any>) {
+    logoutUser(state, action: PayloadAction<any>) {
       localStorage.removeItem("token");
 
       return {
